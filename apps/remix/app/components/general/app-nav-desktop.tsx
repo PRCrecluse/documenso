@@ -4,7 +4,7 @@ import { Button } from '@documenso/ui/primitives/button';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Search } from 'lucide-react';
 import type { HTMLAttributes } from 'react';
 import { useEffect, useMemo, useState } from 'react';
@@ -18,6 +18,7 @@ export type AppNavDesktopProps = HTMLAttributes<HTMLDivElement> & {
 
 export const AppNavDesktop = ({ className, setIsCommandMenuOpen, ...props }: AppNavDesktopProps) => {
   const { _ } = useLingui();
+  const shouldReduceMotion = useReducedMotion();
   const { organisations } = useSession();
 
   const { pathname } = useLocation();
@@ -57,38 +58,42 @@ export const AppNavDesktop = ({ className, setIsCommandMenuOpen, ...props }: App
   }, [currentTeam, organisations]);
 
   return (
-    <div className={cn('ml-8 hidden flex-1 items-center gap-x-12 md:flex md:justify-between', className)} {...props}>
-      <div>
+    <div
+      className={cn('ml-4 hidden min-w-0 flex-1 items-center gap-x-4 md:flex md:justify-between', className)}
+      {...props}
+    >
+      <div className="min-w-0">
         <AnimatePresence>
           {menuNavigationLinks.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
+            <motion.nav
+              aria-label={_(msg`Primary`)}
+              initial={shouldReduceMotion ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="flex items-baseline gap-x-6"
+              exit={shouldReduceMotion ? undefined : { opacity: 0 }}
+              className="flex items-center gap-1 rounded-full bg-muted p-1"
             >
               {menuNavigationLinks.map(({ href, label }) => (
                 <Link
                   key={href}
                   to={href}
                   className={cn(
-                    'rounded-md font-medium text-muted-foreground leading-5 ring-offset-background hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring dark:text-muted-foreground/60',
+                    'rounded-full px-3.5 py-1.5 font-medium text-muted-foreground text-sm leading-5 ring-offset-background hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
                     {
-                      'text-foreground dark:text-muted-foreground': pathname?.startsWith(href),
+                      'bg-foreground text-background shadow-sm hover:text-background': pathname?.startsWith(href),
                     },
                   )}
                 >
                   {_(label)}
                 </Link>
               ))}
-            </motion.div>
+            </motion.nav>
           )}
         </AnimatePresence>
       </div>
 
       <Button
         variant="outline"
-        className="flex w-full max-w-96 items-center justify-between rounded-lg text-muted-foreground"
+        className="flex w-full max-w-80 items-center justify-between text-muted-foreground"
         onClick={() => setIsCommandMenuOpen(true)}
       >
         <div className="flex items-center">

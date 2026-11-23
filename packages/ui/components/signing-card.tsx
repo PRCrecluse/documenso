@@ -1,5 +1,5 @@
 import type { Signature } from '@prisma/client';
-import { animate, motion, useMotionTemplate, useMotionValue, useTransform } from 'framer-motion';
+import { animate, motion, useMotionTemplate, useMotionValue, useReducedMotion, useTransform } from 'framer-motion';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { match, P } from 'ts-pattern';
 
@@ -20,6 +20,7 @@ export const SigningCard3D = ({ className, name, signature, signingCelebrationIm
   // Should use % based dimensions by calculating the window height/width.
   const boundary = 400;
 
+  const shouldReduceMotion = useReducedMotion();
   const [trackMouse, setTrackMouse] = useState(false);
 
   const timeoutRef = useRef<number | undefined>(undefined);
@@ -90,6 +91,10 @@ export const SigningCard3D = ({ className, name, signature, signingCelebrationIm
   );
 
   useEffect(() => {
+    if (shouldReduceMotion) {
+      return;
+    }
+
     window.addEventListener('mousemove', onMouseMove);
 
     return () => {
@@ -98,7 +103,7 @@ export const SigningCard3D = ({ className, name, signature, signingCelebrationIm
         window.clearTimeout(timeoutRef.current);
       }
     };
-  }, [onMouseMove]);
+  }, [onMouseMove, shouldReduceMotion]);
 
   return (
     <div className={cn('relative w-full max-w-sm md:max-w-md', className)} style={{ perspective: 800 }}>
@@ -174,21 +179,36 @@ type SigningCardImageProps = {
 };
 
 const SigningCardImage = ({ signingCelebrationImage }: SigningCardImageProps) => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <motion.div
       className="pointer-events-none absolute -inset-32 -z-50 flex items-center justify-center md:-inset-44 xl:-inset-60 2xl:-inset-80"
-      initial={{
-        opacity: 0,
-        scale: 0.6,
-      }}
+      initial={
+        shouldReduceMotion
+          ? {
+              opacity: 0.6,
+              scale: 1,
+            }
+          : {
+              opacity: 0,
+              scale: 0.6,
+            }
+      }
       animate={{
         scale: 1,
         opacity: 0.6,
       }}
-      transition={{
-        delay: 0.5,
-        duration: 0.5,
-      }}
+      transition={
+        shouldReduceMotion
+          ? {
+              duration: 0,
+            }
+          : {
+              delay: 0.5,
+              duration: 0.5,
+            }
+      }
     >
       <img
         src={signingCelebrationImage}

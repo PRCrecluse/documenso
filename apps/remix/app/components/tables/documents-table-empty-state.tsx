@@ -52,7 +52,7 @@ export const DocumentsTableEmptyState = ({ status }: DocumentsTableEmptyStatePro
 
   return (
     <div
-      className="flex h-60 flex-col items-center justify-center gap-y-4 text-muted-foreground/60"
+      className="flex h-60 flex-col items-center justify-center gap-y-4 rounded-2xl border border-border border-dashed bg-muted/40 px-6 text-muted-foreground"
       data-testid="empty-document-state"
     >
       <Icon className="h-12 w-12" strokeWidth={1.5} />

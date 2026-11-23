@@ -4,6 +4,7 @@ import { InboxIcon } from 'lucide-react';
 
 import { DocumentSearch } from '~/components/general/document/document-search';
 import { OrganisationInvitations } from '~/components/general/organisations/organisation-invitations';
+import { WorkspacePageHeader } from '~/components/general/workspace-page-header';
 import { DocumentsTableStatusFilter } from '~/components/tables/documents-table-status-filter';
 import { InboxTable } from '~/components/tables/inbox-table';
 import { INBOX_SELECTABLE_STATUSES } from '~/utils/inbox-search-params';
@@ -16,28 +17,30 @@ export function meta() {
 export default function InboxPage() {
   return (
     <div className="mx-auto w-full max-w-screen-xl px-4 md:px-8">
-      <div className="mb-8">
-        <h1 className="flex flex-row items-center gap-2 font-bold text-3xl">
-          <InboxIcon className="h-8 w-8 text-muted-foreground" />
+      <WorkspacePageHeader
+        eyebrow={<Trans>Waiting on you</Trans>}
+        title={
+          <span className="flex items-center gap-3">
+            <InboxIcon className="h-8 w-8 text-primary" />
+            <Trans>Personal Inbox</Trans>
+          </span>
+        }
+        description={<Trans>Any documents that you have been invited to will appear here</Trans>}
+      />
 
-          <Trans>Personal Inbox</Trans>
-        </h1>
-        <p className="mt-1 text-muted-foreground">
-          <Trans>Any documents that you have been invited to will appear here</Trans>
-        </p>
+      <OrganisationInvitations className="mt-6" />
 
-        <OrganisationInvitations className="mt-4" />
-      </div>
+      <div className="mt-8 rounded-3xl border border-border bg-background p-4 shadow-[0_18px_50px_-32px_hsl(230_45%_20%/0.55)] md:p-6">
+        <div className="mb-6 flex flex-wrap items-center gap-x-2 gap-y-4">
+          <div className="w-full sm:w-56">
+            <DocumentSearch />
+          </div>
 
-      <div className="mb-8 flex flex-wrap items-center gap-x-2 gap-y-4">
-        <div className="w-56">
-          <DocumentSearch />
+          <DocumentsTableStatusFilter statuses={INBOX_SELECTABLE_STATUSES} />
         </div>
 
-        <DocumentsTableStatusFilter statuses={INBOX_SELECTABLE_STATUSES} />
+        <InboxTable />
       </div>
-
-      <InboxTable />
     </div>
   );
 }

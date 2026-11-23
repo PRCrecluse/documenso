@@ -246,9 +246,9 @@ export const SignUpForm = ({
         </div>
       </div>
 
-      <div className="relative z-10 flex min-h-[min(850px,80vh)] w-full max-w-lg flex-col rounded-xl border border-border bg-neutral-100 p-6 dark:bg-background">
-        <div className="h-20">
-          <h1 className="font-semibold text-xl md:text-2xl">
+      <div className="relative z-10 flex min-h-[min(850px,80vh)] w-full max-w-lg flex-col rounded-[1.75rem] border border-border bg-background p-6 shadow-[0_24px_60px_-36px_hsl(230_45%_20%/0.65)]">
+        <div>
+          <h1 className="font-semibold text-3xl tracking-tight">
             <Trans>Create a new account</Trans>
           </h1>
 
@@ -406,7 +406,10 @@ export const SignUpForm = ({
               <p className="mt-4 text-muted-foreground text-sm">
                 <Trans>
                   Already have an account?{' '}
-                  <Link to="/signin" className="text-documenso-700 duration-200 hover:opacity-70">
+                  <Link
+                    to="/signin"
+                    className="text-documenso-700 duration-200 hover:opacity-70 dark:text-documenso-300"
+                  >
                     Sign in instead
                   </Link>
                 </Trans>
@@ -436,7 +439,7 @@ export const SignUpForm = ({
                     to={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-documenso-700 duration-200 hover:opacity-70"
+                    className="text-documenso-700 duration-200 hover:opacity-70 dark:text-documenso-300"
                   >
                     {link.label}
                   </Link>

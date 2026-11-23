@@ -20,6 +20,7 @@ import { EnvelopesBulkMoveDialog } from '~/components/dialogs/envelopes-bulk-mov
 import { EnvelopeDropZoneWrapper } from '~/components/general/envelope/envelope-drop-zone-wrapper';
 import { FolderGrid } from '~/components/general/folder/folder-grid';
 import { TemplateSearch } from '~/components/general/template/template-search';
+import { WorkspacePageHeader } from '~/components/general/workspace-page-header';
 import { EnvelopesTableBulkActionBar } from '~/components/tables/envelopes-table-bulk-action-bar';
 import { TemplatesTable } from '~/components/tables/templates-table';
 import { TemplatesTableOwnerFilter } from '~/components/tables/templates-table-owner-filter';
@@ -111,65 +112,70 @@ export default function TemplatesPage() {
         {!isOrgView && <FolderGrid type={FolderType.TEMPLATE} parentId={folderId ?? null} />}
 
         <div className="mt-8">
-          <div className="flex flex-row items-center">
-            <Avatar className="mr-3 h-12 w-12 border-2 border-white border-solid dark:border-border">
-              {team.avatarImageId && <AvatarImage src={formatAvatarUrl(team.avatarImageId)} />}
-              <AvatarFallback className="text-muted-foreground text-xs">{team.name.slice(0, 1)}</AvatarFallback>
-            </Avatar>
+          <WorkspacePageHeader
+            eyebrow={team.name}
+            title={
+              <span className="flex items-center gap-3">
+                <Avatar className="h-11 w-11 border-2 border-background dark:border-border">
+                  {team.avatarImageId && <AvatarImage src={formatAvatarUrl(team.avatarImageId)} />}
+                  <AvatarFallback className="text-muted-foreground text-xs">{team.name.slice(0, 1)}</AvatarFallback>
+                </Avatar>
+                <Trans>Templates</Trans>
+              </span>
+            }
+            description={<Trans>Reusable documents your team can send without starting from a blank file.</Trans>}
+          />
 
-            <h1 className="font-semibold text-2xl leading-tight tracking-tight md:text-3xl">
-              <Trans>Templates</Trans>
-            </h1>
-          </div>
+          <div className="mt-8 rounded-3xl border border-border bg-background p-4 shadow-[0_18px_50px_-32px_hsl(230_45%_20%/0.55)] md:p-6">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-4">
+              <div className="w-full sm:w-56">
+                <TemplateSearch />
+              </div>
 
-          <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-4">
-            <div className="w-56">
-              <TemplateSearch />
+              {showOrgFilter && <TemplatesTableViewFilter />}
+
+              {!isOrgView && <TemplatesTableOwnerFilter teamId={team.id} />}
+
+              {hasActiveFilters && (
+                <Button variant="ghost" className="px-2 text-muted-foreground lg:px-3" onClick={onResetFilters}>
+                  <Trans>Reset</Trans>
+                  <XIcon className="ml-1 h-4 w-4" />
+                </Button>
+              )}
             </div>
 
-            {showOrgFilter && <TemplatesTableViewFilter />}
+            <div className="mt-6">
+              {activeQuery.data && activeQuery.data.count === 0 && !isSearchingOrFiltering ? (
+                <div className="flex h-72 flex-col items-center justify-center gap-y-4 rounded-2xl border border-border border-dashed bg-muted/40 px-6 text-muted-foreground">
+                  <Bird className="h-12 w-12" strokeWidth={1.5} />
 
-            {!isOrgView && <TemplatesTableOwnerFilter teamId={team.id} />}
+                  <div className="text-center">
+                    <h3 className="font-semibold text-foreground text-lg">
+                      <Trans>We're all empty</Trans>
+                    </h3>
 
-            {hasActiveFilters && (
-              <Button variant="ghost" className="px-2 text-muted-foreground lg:px-3" onClick={onResetFilters}>
-                <Trans>Reset</Trans>
-                <XIcon className="ml-1 h-4 w-4" />
-              </Button>
-            )}
-          </div>
-
-          <div className="mt-8">
-            {activeQuery.data && activeQuery.data.count === 0 && !isSearchingOrFiltering ? (
-              <div className="flex h-96 flex-col items-center justify-center gap-y-4 text-muted-foreground/60">
-                <Bird className="h-12 w-12" strokeWidth={1.5} />
-
-                <div className="text-center">
-                  <h3 className="font-semibold text-foreground text-lg">
-                    <Trans>We're all empty</Trans>
-                  </h3>
-
-                  <p className="mt-2 max-w-[50ch] text-muted-foreground [text-wrap:pretty]">
-                    {isOrgView ? (
-                      <Trans>No organisation templates are shared with your team yet.</Trans>
-                    ) : (
-                      <Trans>You have not yet created any templates. To create a template please upload one.</Trans>
-                    )}
-                  </p>
+                    <p className="mt-2 max-w-[50ch] text-muted-foreground [text-wrap:pretty]">
+                      {isOrgView ? (
+                        <Trans>No organisation templates are shared with your team yet.</Trans>
+                      ) : (
+                        <Trans>You have not yet created any templates. To create a template please upload one.</Trans>
+                      )}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <TemplatesTable
-                data={activeQuery.data}
-                isLoading={activeQuery.isLoading}
-                isLoadingError={activeQuery.isLoadingError}
-                documentRootPath={documentRootPath}
-                templateRootPath={templateRootPath}
-                enableSelection={!isOrgView}
-                rowSelection={isOrgView ? {} : rowSelection}
-                onRowSelectionChange={isOrgView ? undefined : setRowSelection}
-              />
-            )}
+              ) : (
+                <TemplatesTable
+                  data={activeQuery.data}
+                  isLoading={activeQuery.isLoading}
+                  isLoadingError={activeQuery.isLoadingError}
+                  documentRootPath={documentRootPath}
+                  templateRootPath={templateRootPath}
+                  enableSelection={!isOrgView}
+                  rowSelection={isOrgView ? {} : rowSelection}
+                  onRowSelectionChange={isOrgView ? undefined : setRowSelection}
+                />
+              )}
+            </div>
           </div>
         </div>
 

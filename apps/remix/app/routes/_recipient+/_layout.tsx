@@ -35,7 +35,7 @@ export default function RecipientLayout({ matches }: Route.ComponentProps) {
   );
 
   return (
-    <div className="min-h-screen">
+    <div className="surface-wash min-h-screen">
       {!hideHeader && sessionData?.user && <AuthenticatedHeader />}
 
       <main

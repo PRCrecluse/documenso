@@ -1,4 +1,5 @@
 import { useSessionStorage } from '@documenso/lib/client-only/hooks/use-session-storage';
+import { useSession } from '@documenso/lib/client-only/providers/session';
 import { SKIP_QUERY_BATCH_META } from '@documenso/lib/constants/trpc';
 import { formatAvatarUrl } from '@documenso/lib/utils/avatars';
 import { formatDocumentsPath } from '@documenso/lib/utils/teams';
@@ -13,7 +14,7 @@ import { Trans } from '@lingui/react/macro';
 import { EnvelopeType, FolderType, type DocumentStatus as PrismaDocumentStatus } from '@prisma/client';
 import { XIcon } from 'lucide-react';
 import { useQueryStates } from 'nuqs';
-import { useEffect, useMemo, useState } from 'react';
+import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
 import { EnvelopesBulkCancelDialog } from '~/components/dialogs/envelopes-bulk-cancel-dialog';
@@ -26,6 +27,7 @@ import { EnvelopesBulkMoveDialog } from '~/components/dialogs/envelopes-bulk-mov
 import { DocumentSearch } from '~/components/general/document/document-search';
 import { EnvelopeDropZoneWrapper } from '~/components/general/envelope/envelope-drop-zone-wrapper';
 import { FolderGrid } from '~/components/general/folder/folder-grid';
+import { WorkspacePageHeader } from '~/components/general/workspace-page-header';
 import { DocumentsTable } from '~/components/tables/documents-table';
 import { DocumentsTableEmptyState } from '~/components/tables/documents-table-empty-state';
 import { DocumentsTablePeriodFilter } from '~/components/tables/documents-table-period-filter';
@@ -50,6 +52,8 @@ const EMPTY_ENVELOPE_META_CACHE: EnvelopeMetaCache = {};
 
 export default function DocumentsPage() {
   const team = useCurrentTeam();
+  const { user } = useSession();
+  const teamName = team.name;
 
   const { folderId } = useParams();
   const navigate = useNavigate();
@@ -181,38 +185,44 @@ export default function DocumentsPage() {
       <div className="mx-auto w-full max-w-screen-xl px-4 md:px-8">
         <FolderGrid type={FolderType.DOCUMENT} parentId={folderId ?? null} />
 
-        <div className="mt-8 flex flex-row items-center">
-          <Avatar className="mr-3 h-12 w-12 border-2 border-white border-solid dark:border-border">
-            {team.avatarImageId && <AvatarImage src={formatAvatarUrl(team.avatarImageId)} />}
-            <AvatarFallback className="text-muted-foreground text-xs">{team.name.slice(0, 1)}</AvatarFallback>
-          </Avatar>
-
-          <h1 className="font-semibold text-2xl leading-tight tracking-tight md:text-3xl">
-            <Trans>Documents</Trans>
-          </h1>
+        <div className="mt-8">
+          <WorkspacePageHeader
+            eyebrow={<DocumentsGreeting name={user.name} />}
+            title={
+              <span className="flex items-center gap-3">
+                <Avatar className="h-11 w-11 border-2 border-background dark:border-border">
+                  {team.avatarImageId && <AvatarImage src={formatAvatarUrl(team.avatarImageId)} />}
+                  <AvatarFallback className="text-muted-foreground text-xs">{team.name.slice(0, 1)}</AvatarFallback>
+                </Avatar>
+                <Trans>Documents</Trans>
+              </span>
+            }
+            description={<Trans>Drafts, signatures in progress, and completed agreements for {teamName}.</Trans>}
+            aside={<DocumentCountSummary stats={stats} />}
+          />
         </div>
 
-        <div className="mt-8 flex flex-wrap items-center gap-x-2 gap-y-4">
-          <div className="w-56">
-            <DocumentSearch />
+        <div className="mt-8 rounded-3xl border border-border bg-background p-4 shadow-[0_18px_50px_-32px_hsl(230_45%_20%/0.55)] md:p-6">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-4">
+            <div className="w-full sm:w-56">
+              <DocumentSearch />
+            </div>
+
+            <DocumentsTableStatusFilter stats={stats} />
+
+            {team && <DocumentsTableSenderFilter teamId={team.id} />}
+
+            <DocumentsTablePeriodFilter />
+
+            {hasActiveFilters && (
+              <Button variant="ghost" className="px-2 text-muted-foreground lg:px-3" onClick={onResetFilters}>
+                <Trans>Reset</Trans>
+                <XIcon className="ml-1 h-4 w-4" />
+              </Button>
+            )}
           </div>
 
-          <DocumentsTableStatusFilter stats={stats} />
-
-          {team && <DocumentsTableSenderFilter teamId={team.id} />}
-
-          <DocumentsTablePeriodFilter />
-
-          {hasActiveFilters && (
-            <Button variant="ghost" className="px-2 text-muted-foreground lg:px-3" onClick={onResetFilters}>
-              <Trans>Reset</Trans>
-              <XIcon className="ml-1 h-4 w-4" />
-            </Button>
-          )}
-        </div>
-
-        <div className="mt-8">
-          <div>
+          <div className="mt-6">
             {data && data.count === 0 ? (
               <DocumentsTableEmptyState status={findDocumentSearchParams.status ?? ExtendedDocumentStatus.ALL} />
             ) : (
@@ -302,3 +312,52 @@ export default function DocumentsPage() {
     </EnvelopeDropZoneWrapper>
   );
 }
+
+const DocumentsGreeting = ({ name }: { name: string | null }) => {
+  const hour = new Date().getHours();
+  const displayName = name?.trim() ?? '';
+
+  if (!displayName) {
+    if (hour < 12) {
+      return <Trans>Good morning</Trans>;
+    }
+
+    if (hour < 18) {
+      return <Trans>Good afternoon</Trans>;
+    }
+
+    return <Trans>Good evening</Trans>;
+  }
+
+  if (hour < 12) {
+    return <Trans>Good morning, {displayName}</Trans>;
+  }
+
+  if (hour < 18) {
+    return <Trans>Good afternoon, {displayName}</Trans>;
+  }
+
+  return <Trans>Good evening, {displayName}</Trans>;
+};
+
+const DocumentCountSummary = ({ stats }: { stats: TFindDocumentsInternalResponse['stats'] }) => {
+  return (
+    <dl className="grid grid-cols-2 gap-3">
+      <DocumentCountStat label={<Trans>Pending</Trans>} value={stats[ExtendedDocumentStatus.PENDING]} />
+      <DocumentCountStat label={<Trans>Completed</Trans>} value={stats[ExtendedDocumentStatus.COMPLETED]} />
+      <DocumentCountStat label={<Trans>Drafts</Trans>} value={stats[ExtendedDocumentStatus.DRAFT]} />
+      <DocumentCountStat label={<Trans>All</Trans>} value={stats[ExtendedDocumentStatus.ALL]} />
+    </dl>
+  );
+};
+
+const DocumentCountStat = ({ label, value }: { label: ReactNode; value: number }) => {
+  return (
+    <div className="rounded-2xl border border-border bg-card px-4 py-3">
+      <dt className="font-medium text-muted-foreground text-xs">{label}</dt>
+      <dd className="mt-1 font-semibold text-2xl text-foreground tabular-nums tracking-tight">
+        {value.toLocaleString()}
+      </dd>
+    </div>
+  );
+};

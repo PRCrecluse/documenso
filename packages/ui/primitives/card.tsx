@@ -27,15 +27,12 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
           } as React.CSSProperties
         }
         className={cn(
-          'group relative rounded-lg border-2 bg-background text-foreground',
+          'group relative rounded-2xl border border-border bg-card text-card-foreground shadow-[0_1px_2px_hsl(230_40%_20%/0.05),0_16px_40px_-24px_hsl(230_45%_25%/0.45)]',
           {
             'backdrop-blur-[2px]': backdropBlur,
-            'gradient-border-mask before:pointer-events-none before:absolute before:-inset-[2px] before:rounded-lg before:p-[2px] before:[background:linear-gradient(var(--card-gradient-degrees),theme(colors.primary.DEFAULT/50%)_5%,theme(colors.border/80%)_30%)]':
+            'gradient-border-mask before:pointer-events-none before:absolute before:-inset-px before:rounded-2xl before:p-px before:[background:linear-gradient(var(--card-gradient-degrees),theme(colors.primary.DEFAULT/70%)_0%,theme(colors.border/80%)_42%)]':
               gradient,
-            'dark:gradient-border-mask before:pointer-events-none before:absolute before:-inset-[2px] before:rounded-lg before:p-[2px] before:[background:linear-gradient(var(--card-gradient-degrees),theme(colors.primary.DEFAULT/70%)_5%,theme(colors.border/80%)_30%)]':
-              gradient,
-            'shadow-[0_0_0_4px_theme(colors.gray.100/70%),0_0_0_1px_theme(colors.gray.100/70%),0_0_0_0.5px_var(colors.primary.DEFAULT/70%)]': true,
-            'dark:shadow-[0]': true,
+            'dark:shadow-[0_1px_2px_hsl(0_0%_0%/0.45)]': true,
           },
           className,
         )}

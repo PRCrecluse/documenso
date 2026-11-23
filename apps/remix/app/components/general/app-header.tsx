@@ -2,6 +2,8 @@ import { getRootHref } from '@documenso/lib/utils/params';
 import { trpc } from '@documenso/trpc/react';
 import { cn } from '@documenso/ui/lib/utils';
 import { Button } from '@documenso/ui/primitives/button';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { ReadStatus } from '@prisma/client';
 import { InboxIcon, MenuIcon, SearchIcon } from 'lucide-react';
 import { type HTMLAttributes, useEffect, useState } from 'react';
@@ -20,6 +22,7 @@ export type HeaderProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 export const Header = ({ className, fullWidth = false, ...props }: HeaderProps) => {
+  const { _ } = useLingui();
   const params = useParams();
 
   const [isCommandMenuOpen, setIsCommandMenuOpen] = useState(false);
@@ -48,31 +51,31 @@ export const Header = ({ className, fullWidth = false, ...props }: HeaderProps) 
   return (
     <header
       className={cn(
-        'sticky top-0 z-[60] flex h-16 w-full items-center border-b border-b-transparent bg-background/95 backdrop-blur duration-200 supports-backdrop-blur:bg-background/60',
-        (scrollY > 5 || fullWidth) && 'border-b-border',
+        'sticky top-0 z-[60] bg-gradient-to-b from-background via-background/85 to-transparent px-3 pt-3 pb-2 md:px-6',
         className,
       )}
       {...props}
     >
       <div
         className={cn(
-          'mx-auto flex w-full items-center justify-between gap-x-4 px-4 md:justify-normal',
-          fullWidth ? 'md:px-6' : 'max-w-screen-xl md:px-8',
+          'mx-auto flex h-14 w-full items-center justify-between gap-x-3 rounded-full border border-border bg-background/90 px-3 shadow-[0_10px_30px_-18px_hsl(230_45%_20%/0.55)] backdrop-blur-md md:px-4',
+          scrollY > 5 && 'shadow-[0_16px_40px_-20px_hsl(230_45%_20%/0.65)]',
+          fullWidth ? '' : 'max-w-screen-xl',
         )}
         data-testid="app-header-container"
       >
         <Link
           to={getRootHref(params)}
-          className="hidden rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:inline"
+          className="hidden shrink-0 rounded-full ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:inline"
         >
           <BrandingLogo className="h-6 w-auto" />
         </Link>
 
         <AppNavDesktop setIsCommandMenuOpen={setIsCommandMenuOpen} />
 
-        <Button asChild variant="outline" className="relative hidden h-10 w-10 rounded-lg md:flex">
-          <Link to="/inbox" className="relative block h-10 w-10">
-            <InboxIcon className="h-5 w-5 flex-shrink-0 text-muted-foreground transition-colors hover:text-foreground" />
+        <Button asChild variant="outline" className="relative hidden h-10 w-10 shrink-0 md:flex">
+          <Link to="/inbox" className="relative block h-10 w-10" aria-label={_(msg`Inbox`)}>
+            <InboxIcon className="h-5 w-5 flex-shrink-0 text-muted-foreground" />
 
             {unreadCountData && unreadCountData.count > 0 && (
               <span className="absolute -top-1.5 -right-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1 font-semibold text-primary-foreground text-xs tabular-nums leading-none">
@@ -82,23 +85,33 @@ export const Header = ({ className, fullWidth = false, ...props }: HeaderProps) 
           </Link>
         </Button>
 
-        <div className="md:ml-4">
+        <div className="md:ml-1">
           <OrgMenuSwitcher />
         </div>
 
-        <div className="flex flex-row items-center space-x-4 md:hidden">
-          <button onClick={() => setIsCommandMenuOpen(true)}>
-            <SearchIcon className="h-6 w-6 text-muted-foreground" />
+        <div className="flex flex-row items-center gap-1 md:hidden">
+          <button
+            type="button"
+            className="rounded-full p-2 text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            aria-label={_(msg`Search`)}
+            onClick={() => setIsCommandMenuOpen(true)}
+          >
+            <SearchIcon className="h-5 w-5" />
           </button>
 
-          <button onClick={() => setIsHamburgerMenuOpen(true)}>
-            <MenuIcon className="h-6 w-6 text-muted-foreground" />
+          <button
+            type="button"
+            className="rounded-full p-2 text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            aria-label={_(msg`Open menu`)}
+            onClick={() => setIsHamburgerMenuOpen(true)}
+          >
+            <MenuIcon className="h-5 w-5" />
           </button>
-
-          <AppCommandMenu open={isCommandMenuOpen} onOpenChange={setIsCommandMenuOpen} />
-
-          <AppNavMobile isMenuOpen={isHamburgerMenuOpen} onMenuOpenChange={setIsHamburgerMenuOpen} />
         </div>
+
+        <AppCommandMenu open={isCommandMenuOpen} onOpenChange={setIsCommandMenuOpen} />
+
+        <AppNavMobile isMenuOpen={isHamburgerMenuOpen} onMenuOpenChange={setIsHamburgerMenuOpen} />
       </div>
     </header>
   );
