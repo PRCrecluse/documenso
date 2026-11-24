@@ -56,6 +56,18 @@ msgstr "\"{title}\" has been successfully deleted"
 msgid "\"{title}\" has been successfully hidden"
 msgstr "\"{title}\" has been successfully hidden"
 
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "“Documenso has streamlined our digital signing process, making it faster, secure, and incredibly user-friendly. It's been a game-changer for our team, partners, and customers!”"
+msgstr "“Documenso has streamlined our digital signing process, making it faster, secure, and incredibly user-friendly. It's been a game-changer for our team, partners, and customers!”"
+
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "“Documenso is awesome - easy to use & understand. The source code is open!! If I'm confused by any documentation, I can directly read the code to understand what is happening underneath. The team ships fast and feature improvements are always coming!”"
+msgstr "“Documenso is awesome - easy to use & understand. The source code is open!! If I'm confused by any documentation, I can directly read the code to understand what is happening underneath. The team ships fast and feature improvements are always coming!”"
+
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "“It has been great working with Documenso! The team built an amazing product fitting our needs. They really get what it means to build for enterprise and keep shipping amazing stuff that makes our life easier.”"
+msgstr "“It has been great working with Documenso! The team built an amazing product fitting our needs. They really get what it means to build for enterprise and keep shipping amazing stuff that makes our life easier.”"
+
 #: apps/remix/app/components/forms/email-preferences-form.tsx
 msgid "\"Team Name\" has invited you to sign \"example document\"."
 msgstr "\"Team Name\" has invited you to sign \"example document\"."
@@ -1022,6 +1034,14 @@ msgstr "1 month"
 msgid "12 months"
 msgstr "12 months"
 
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "21 CFR Part 11"
+msgstr "21 CFR Part 11"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "21 CFR Part 11 controls require an Enterprise license and configuration."
+msgstr "21 CFR Part 11 controls require an Enterprise license and configuration."
+
 #: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
 msgid "2FA"
 msgstr "2FA"
@@ -1120,6 +1140,10 @@ msgstr "6 months"
 msgid "7 days"
 msgstr "7 days"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "A clear signing experience"
+msgstr "A clear signing experience"
+
 #: apps/remix/app/components/forms/password.tsx
 msgid "A code is required"
 msgstr "A code is required"
@@ -1206,6 +1230,14 @@ msgstr "A new member has joined your organization {organisationName}"
 #: apps/remix/app/routes/_unauthenticated+/check-email.tsx
 msgid "A password reset email has been sent, if you have an account you should see it in your inbox shortly."
 msgstr "A password reset email has been sent, if you have an account you should see it in your inbox shortly."
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "A planned community store for finding and sharing document templates."
+msgstr "A planned community store for finding and sharing document templates."
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "A planned Stripe integration for collecting payments alongside signing."
+msgstr "A planned Stripe integration for collecting payments alongside signing."
 
 #: packages/email/template-components/template-recipient-removed-by-admin.tsx
 #: packages/lib/jobs/definitions/emails/send-admin-recipient-removed-emails.handler.ts
@@ -2755,6 +2787,10 @@ msgstr "Branding URL"
 msgid "Browser"
 msgstr "Browser"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Build on top"
+msgstr "Build on top"
+
 #: apps/remix/app/components/general/document/document-recipient-link-copy-dialog.tsx
 msgid "Bulk Copy"
 msgstr "Bulk Copy"
@@ -2818,6 +2854,14 @@ msgstr "By proceeding, you agree to our {0}."
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
 msgid "By using the electronic signature feature, you are consenting to conduct transactions and receive disclosures electronically. You acknowledge that your electronic signature on documents is binding and that you accept the terms outlined in the documents you are signing."
 msgstr "By using the electronic signature feature, you are consenting to conduct transactions and receive disclosures electronically. You acknowledge that your electronic signature on documents is binding and that you accept the terms outlined in the documents you are signing."
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Can I cancel a document after sending it?"
+msgstr "Can I cancel a document after sending it?"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Can I connect Documenso to my other tools?"
+msgstr "Can I connect Documenso to my other tools?"
 
 #: packages/ui/components/recipient/recipient-role-select.tsx
 msgid "Can prepare"
@@ -3057,6 +3101,10 @@ msgstr "Character Limit"
 msgid "Charts"
 msgstr "Charts"
 
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Check a completed PDF’s digital signature in a compatible reader and review the signing audit trail."
+msgstr "Check a completed PDF’s digital signature in a compatible reader and review the signing audit trail."
+
 #: apps/remix/app/components/forms/password-setup-request-button.tsx
 #: apps/remix/app/components/forms/password-setup-request.tsx
 msgid "Check your email"
@@ -3234,6 +3282,14 @@ msgstr "Client secret is required"
 msgid "Close"
 msgstr "Close"
 
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "Co-Founder & CEO, Vial Inc."
+msgstr "Co-Founder & CEO, Vial Inc."
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Collaborate in shared teams and control who can see sensitive documents with roles and visibility settings."
+msgstr "Collaborate in shared teams and control who can see sensitive documents with roles and visibility settings."
+
 #: apps/remix/app/components/general/document-signing/document-signing-page-view-v2.tsx
 msgid "Collapse sidebar"
 msgstr "Collapse sidebar"
@@ -3246,6 +3302,10 @@ msgstr "Collect signatures and keep an audit trail in one workspace, open source
 msgid "Color"
 msgstr "Color"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Coming soon"
+msgstr "Coming soon"
+
 #: apps/remix/app/components/general/admin-email-blocklist-section.tsx
 msgid "Comma-separated list of email domains to block from signing up."
 msgstr "Comma-separated list of email domains to block from signing up."
@@ -3253,6 +3313,10 @@ msgstr "Comma-separated list of email domains to block from signing up."
 #: apps/remix/app/components/embed/authoring/configure-document-advanced-settings.tsx
 msgid "Communication"
 msgstr "Communication"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Community support is available through GitHub and Discord. Hosted plans and enterprise licenses may include direct support."
+msgstr "Community support is available through GitHub and Discord. Hosted plans and enterprise licenses may include direct support."
 
 #: apps/remix/app/components/general/settings-upsell/branding-upsell.tsx
 msgid "Company details"
@@ -3456,6 +3520,10 @@ msgstr "Confirm email"
 msgid "Confirmation email sent"
 msgstr "Confirmation email sent"
 
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "Connect your existing workflows through Zapier, or embed signing in the framework you already use."
+msgstr "Connect your existing workflows through Zapier, or embed signing in the framework you already use."
+
 #: apps/remix/app/routes/embed+/auth+/popup.tsx
 msgid "Connecting to the embed..."
 msgstr "Connecting to the embed..."
@@ -3609,6 +3677,10 @@ msgstr "Controls which signatures are allowed to be used when signing a document
 #: packages/ui/components/document/document-visibility-select.tsx
 msgid "Controls which team members can view and access this document. The document owner and assigned recipients will always have access."
 msgstr "Controls which team members can view and access this document. The document owner and assigned recipients will always have access."
+
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "COO, Prisma Inc."
+msgstr "COO, Prisma Inc."
 
 #: apps/remix/app/components/general/document/document-recipient-link-copy-dialog.tsx
 #: packages/ui/primitives/document-flow/add-subject.tsx
@@ -3770,9 +3842,17 @@ msgstr "Create an organization to get started."
 msgid "Create and manage API tokens. See our <0>documentation</0> for more information."
 msgstr "Create and manage API tokens. See our <0>documentation</0> for more information."
 
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Create and manage teams"
+msgstr "Create and manage teams"
+
 #: apps/remix/app/components/dialogs/template-use-dialog.tsx
 msgid "Create and send"
 msgstr "Create and send"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Create and send documents, track signing progress, and retrieve signed PDFs from your application."
+msgstr "Create and send documents, track signing progress, and retrieve signed PDFs from your application."
 
 #: apps/remix/app/components/dialogs/token-create-dialog.tsx
 msgid "Create API token"
@@ -3922,6 +4002,10 @@ msgstr "Create your account and start using state-of-the-art document signing."
 #: apps/remix/app/components/forms/signup.tsx
 msgid "Create your account and start using state-of-the-art document signing. Open and beautiful signing is within your grasp."
 msgstr "Create your account and start using state-of-the-art document signing. Open and beautiful signing is within your grasp."
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Create, send, and sign documents"
+msgstr "Create, send, and sign documents"
 
 #: apps/remix/app/components/dialogs/public-profile-template-manage-dialog.tsx
 #: apps/remix/app/components/general/document/document-page-view-information.tsx
@@ -4556,6 +4640,10 @@ msgstr "Direct link templates contain one dynamic recipient placeholder. Anyone 
 msgid "Direct links associated with templates will be removed"
 msgstr "Direct links associated with templates will be removed"
 
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Direct Links guide"
+msgstr "Direct Links guide"
+
 #: apps/remix/app/components/dialogs/template-direct-link-dialog.tsx
 msgid "Direct template link deleted"
 msgstr "Direct template link deleted"
@@ -4653,6 +4741,14 @@ msgstr "DNS Records"
 #: apps/remix/app/routes/_unauthenticated+/team.verify.email.$token.tsx
 msgid "Do not proceed if you are unsure about this request."
 msgstr "Do not proceed if you are unsure about this request."
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Documenso API"
+msgstr "Documenso API"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Documenso digitally signs PDFs with certificates and records signing activity in an audit trail. You can also configure how recipients authenticate before accessing or signing a document."
+msgstr "Documenso digitally signs PDFs with certificates and records signing activity in an audit trail. You can also configure how recipients authenticate before accessing or signing a document."
 
 #: apps/remix/app/components/general/admin-license-card.tsx
 msgid "Documenso License"
@@ -5739,6 +5835,10 @@ msgstr "Emails the organisation owner to let them know their limits have been up
 msgid "Embed sessions"
 msgstr "Embed sessions"
 
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "Embedded signing"
+msgstr "Embedded signing"
+
 #: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
 msgid "Embedding, 5 members included and more"
 msgstr "Embedding, 5 members included and more"
@@ -6238,6 +6338,18 @@ msgstr "Expires in"
 msgid "Expires in {0}"
 msgstr "Expires in {0}"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Explore integrations"
+msgstr "Explore integrations"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Explore team permissions"
+msgstr "Explore team permissions"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Explore templates"
+msgstr "Explore templates"
+
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-settings-dialog.tsx
 #: packages/ui/primitives/document-flow/add-settings.tsx
 #: packages/ui/primitives/template-flow/add-template-settings.tsx
@@ -6394,6 +6506,10 @@ msgstr "Failed: {failedCount}"
 msgid "Fair use limit exceeded"
 msgstr "Fair use limit exceeded"
 
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "FAQ"
+msgstr "FAQ"
+
 #: apps/remix/app/components/forms/subscription-claim-form.tsx
 #: apps/remix/app/components/tables/admin-claims-table.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
@@ -6518,6 +6634,10 @@ msgstr "Filter by document status"
 msgid "Filter by status"
 msgstr "Filter by status"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Find out how Documenso handles signing, data, integrations, and support."
+msgstr "Find out how Documenso handles signing, data, integrations, and support."
+
 #: apps/remix/app/components/forms/branding-preferences-form.tsx
 msgid "Focus ring colour."
 msgstr "Focus ring color."
@@ -6580,6 +6700,10 @@ msgstr "Font size"
 #: packages/ui/primitives/document-flow/field-items-advanced-settings/text-field.tsx
 msgid "Font Size"
 msgstr "Font Size"
+
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Footer navigation"
+msgstr "Footer navigation"
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
 msgid "For any questions regarding this disclosure, electronic signatures, or any related process, please contact us at: <0>{SUPPORT_EMAIL}</0>"
@@ -6644,6 +6768,10 @@ msgstr "Free Signature Settings"
 msgid "French"
 msgstr "French"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Frequently asked questions"
+msgstr "Frequently asked questions"
+
 #: apps/remix/app/components/tables/admin-email-transports-table.tsx
 msgid "From"
 msgstr "From"
@@ -6655,6 +6783,14 @@ msgstr "From address"
 #: apps/remix/app/components/forms/email-transport-form.tsx
 msgid "From name"
 msgstr "From name"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "From the first draft to the final signature"
+msgstr "From the first draft to the final signature"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Full name"
+msgstr "Full name"
 
 #: apps/remix/app/components/embed/embed-direct-template-client-page.tsx
 #: apps/remix/app/components/embed/embed-document-signing-page-v1.tsx
@@ -6698,9 +6834,17 @@ msgstr "Generate Links"
 msgid "German"
 msgstr "German"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Get paid"
+msgstr "Get paid"
+
 #: apps/remix/app/components/general/landing-page.tsx
 msgid "Get started"
 msgstr "Get started"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Give recipients a straightforward path from reviewing a document to signing it."
+msgstr "Give recipients a straightforward path from reviewing a document to signing it."
 
 #: apps/remix/app/components/general/settings-upsell/sso-portal-upsell.tsx
 msgid "Give your members a dedicated single sign-on portal. The SSO portal is available on the Enterprise plan."
@@ -7001,9 +7145,25 @@ msgstr "Horizontal"
 msgid "Host"
 msgstr "Host"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Host it your way"
+msgstr "Host it your way"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "How does Documenso protect personal data?"
+msgstr "How does Documenso protect personal data?"
+
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-settings-dialog.tsx
 msgid "How long recipients have to complete this document after it is sent. Uses the team default when set to inherit."
 msgstr "How long recipients have to complete this document after it is sent. Uses the team default when set to inherit."
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "How PDF verification works"
+msgstr "How PDF verification works"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "How secure is Documenso?"
+msgstr "How secure is Documenso?"
 
 #: apps/remix/app/components/forms/signin.tsx
 #: apps/remix/app/components/forms/signup.tsx
@@ -7278,6 +7438,10 @@ msgstr "Inserted"
 #: apps/remix/app/routes/_authenticated+/admin+/stats.tsx
 msgid "Instance Stats"
 msgstr "Instance Stats"
+
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "Integrations"
+msgstr "Integrations"
 
 #: apps/remix/app/components/forms/2fa/view-recovery-codes-dialog.tsx
 msgid "Invalid code. Please try again."
@@ -7590,6 +7754,10 @@ msgstr "Last Verified"
 msgid "Last Year"
 msgstr "Last Year"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Learn about data protection"
+msgstr "Learn about data protection"
+
 #: apps/remix/app/components/forms/subscription-claim-form.tsx
 #: apps/remix/app/components/general/admin-license-card.tsx
 #: apps/remix/app/components/general/organisations/organisation-quota-banner.tsx
@@ -7625,6 +7793,14 @@ msgstr "Left"
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
 msgid "Legality of Electronic Signatures"
 msgstr "Legality of Electronic Signatures"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Let people open and sign a reusable document from a direct link."
+msgstr "Let people open and sign a reusable document from a direct link."
+
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "Let users sign without leaving your application."
+msgstr "Let users sign without leaving your application."
 
 #: apps/remix/app/components/forms/editor/editor-field-generic-field-forms.tsx
 msgid "Letter spacing"
@@ -7726,6 +7902,10 @@ msgstr "Linked At"
 #: apps/remix/app/components/general/document/document-edit-form.tsx
 msgid "Links Generated"
 msgstr "Links Generated"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "List templates"
+msgstr "List templates"
 
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.webhooks._index.tsx
 msgid "Listening to"
@@ -7850,6 +8030,10 @@ msgstr "Manage drafts, track signatures, and find completed agreements."
 #: apps/remix/app/routes/_authenticated+/settings+/security._index.tsx
 msgid "Manage linked accounts"
 msgstr "Manage linked accounts"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Manage members"
+msgstr "Manage members"
 
 #: apps/remix/app/routes/_authenticated+/admin+/organisation-insights.$id.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
@@ -8836,6 +9020,14 @@ msgstr "Open"
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl._index.tsx
 msgid "Open menu"
 msgstr "Open menu"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Open source by design"
+msgstr "Open source by design"
+
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Open-source document signing."
+msgstr "Open-source document signing."
 
 #: apps/remix/app/components/general/landing-page.tsx
 msgid "Open-source e-signatures"
@@ -9871,9 +10063,33 @@ msgstr "Read our documentation to get started with Documenso."
 msgid "Read Status"
 msgstr "Read Status"
 
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Read the API reference"
+msgstr "Read the API reference"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Read the document sending guide"
+msgstr "Read the document sending guide"
+
 #: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
 msgid "Read the full <0>signature disclosure</0>."
 msgstr "Read the full <0>signature disclosure</0>."
+
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "Read the Prisma story"
+msgstr "Read the Prisma story"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Read the security policy"
+msgstr "Read the security policy"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Read the source, follow changes in public, and contribute to the project."
+msgstr "Read the source, follow changes in public, and contribute to the project."
+
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "Read the Vial story"
+msgstr "Read the Vial story"
 
 #: apps/remix/app/components/dialogs/ai-field-detection-dialog.tsx
 #: apps/remix/app/components/dialogs/ai-recipient-detection-dialog.tsx
@@ -9883,6 +10099,10 @@ msgstr "Reading your document"
 #: apps/remix/app/components/general/document/document-page-view-recipients.tsx
 msgid "Ready"
 msgstr "Ready"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Ready to send your next agreement?"
+msgstr "Ready to send your next agreement?"
 
 #: apps/remix/app/components/dialogs/admin-recipient-delete-dialog.tsx
 #: apps/remix/app/routes/_internal+/[__htmltopdf]+/certificate.tsx
@@ -10625,6 +10845,10 @@ msgstr "Return to sign in"
 msgid "Return to templates"
 msgstr "Return to templates"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Reusable templates"
+msgstr "Reusable templates"
+
 #: apps/remix/app/routes/_authenticated+/inbox.tsx
 msgid "Review and respond to documents people have sent you."
 msgstr "Review and respond to documents people have sent you."
@@ -10693,6 +10917,10 @@ msgstr "Row {0}: <0>{1}</0> must be a valid email or empty"
 msgid "Rows per page"
 msgstr "Rows per page"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Run Documenso on your own infrastructure or use the hosted service."
+msgstr "Run Documenso on your own infrastructure or use the hosted service."
+
 #: apps/remix/app/components/forms/editor/editor-field-initials-form.tsx
 msgid "Sans-Serif"
 msgstr "Sans-Serif"
@@ -10728,9 +10956,17 @@ msgstr "Save changes"
 msgid "Save failed"
 msgstr "Save failed"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Save frequently used documents, fields, and recipient roles so the next agreement is ready faster."
+msgstr "Save frequently used documents, fields, and recipient roles so the next agreement is ready faster."
+
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/templates._index.tsx
 msgid "Save reusable documents for agreements you send often."
 msgstr "Save reusable documents for agreements you send often."
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Save signing roles and fields in a reusable template. Share a Direct Link to collect signatures without knowing recipient emails in advance."
+msgstr "Save signing roles and fields in a reusable template. Share a Direct Link to collect signatures without knowing recipient emails in advance."
 
 #: packages/ui/primitives/template-flow/add-template-fields.tsx
 msgid "Save Template"
@@ -10881,9 +11117,21 @@ msgstr "Security activity"
 msgid "See Documentation"
 msgstr "See Documentation"
 
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "See how signing works"
+msgstr "See how signing works"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "See support options"
+msgstr "See support options"
+
 #: apps/remix/app/routes/_authenticated+/admin+/documents.$id.tsx
 msgid "See the background jobs tab for the status"
 msgstr "See the background jobs tab for the status"
+
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "See the original testimonial"
+msgstr "See the original testimonial"
 
 #: apps/remix/app/components/general/landing-page.tsx
 msgid "See the workspace"
@@ -11135,6 +11383,14 @@ msgstr "Send a test email using this transport to verify the configuration."
 msgid "Send a test webhook with sample data to verify your integration is working correctly."
 msgstr "Send a test webhook with sample data to verify your integration is working correctly."
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Send agreements faster and choose how signing fits into your product or team."
+msgstr "Send agreements faster and choose how signing fits into your product or team."
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Send agreements quickly"
+msgstr "Send agreements quickly"
+
 #: apps/remix/app/components/forms/send-confirmation-email.tsx
 msgid "Send confirmation email"
 msgstr "Send confirmation email"
@@ -11280,6 +11536,10 @@ msgstr "Set a password"
 msgid "Set Password"
 msgstr "Set Password"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Set up digital signing for your team or build it into your own product."
+msgstr "Set up digital signing for your team or build it into your own product."
+
 #: apps/remix/app/routes/_unauthenticated+/signup.tsx
 msgid "Set up your account to send and sign documents."
 msgstr "Set up your account to send and sign documents."
@@ -11329,6 +11589,10 @@ msgstr "Shape Settings"
 msgid "Share"
 msgstr "Share"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Share a signing link"
+msgstr "Share a signing link"
+
 #: apps/remix/app/components/general/document/document-page-view-dropdown.tsx
 #: apps/remix/app/components/tables/documents-table-action-dropdown.tsx
 msgid "Share Signing Card"
@@ -11341,6 +11605,10 @@ msgstr "Share the Link"
 #: packages/ui/components/document/document-share-button.tsx
 msgid "Share your signing experience!"
 msgstr "Share your signing experience!"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Shared documents"
+msgstr "Shared documents"
 
 #: apps/remix/app/components/tables/admin-document-recipient-item-table.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.public-profile.tsx
@@ -12267,6 +12535,10 @@ msgstr "System Requirements"
 msgid "System Theme"
 msgstr "System Theme"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Talk to us"
+msgstr "Talk to us"
+
 #: apps/remix/app/components/dialogs/admin-swap-subscription-dialog.tsx
 msgid "Target Organisation"
 msgstr "Target Organization"
@@ -12415,6 +12687,10 @@ msgstr "Team role"
 msgid "Team Role"
 msgstr "Team Role"
 
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Team settings"
+msgstr "Team settings"
+
 #: apps/remix/app/components/general/settings-scope-breadcrumb.tsx
 #: apps/remix/app/components/general/unified-settings-sidebar.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings._layout.tsx
@@ -12538,6 +12814,10 @@ msgstr "Template saved"
 msgid "Template Settings"
 msgstr "Template Settings"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Template Store"
+msgstr "Template Store"
+
 #: packages/ui/primitives/template-flow/add-template-settings.tsx
 msgid "Template title"
 msgstr "Template title"
@@ -12574,6 +12854,10 @@ msgstr "Template usage"
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/templates.folders._index.tsx
 msgid "Templates"
 msgstr "Templates"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Templates and Direct Links"
+msgstr "Templates and Direct Links"
 
 #: apps/remix/app/components/dialogs/envelopes-bulk-delete-dialog.tsx
 msgid "Templates deleted"
@@ -13924,6 +14208,10 @@ msgstr "Transport type cannot be changed after creation."
 msgid "Transport updated."
 msgstr "Transport updated."
 
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "Trigger automations when documents are sent, signed, or completed."
+msgstr "Trigger automations when documents are sent, signed, or completed."
+
 #: apps/remix/app/components/dialogs/webhook-create-dialog.tsx
 #: apps/remix/app/components/dialogs/webhook-edit-dialog.tsx
 msgid "Triggers"
@@ -14402,6 +14690,14 @@ msgstr "Upload a custom document to use instead of the template's default docume
 msgid "Upload a custom document to use its file name."
 msgstr "Upload a custom document to use its file name."
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Upload a document, add recipients, and send it for signing in a few steps."
+msgstr "Upload a document, add recipients, and send it for signing in a few steps."
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Upload a PDF, place signature fields, and send a signing link. Track each recipient’s progress and download the completed PDF."
+msgstr "Upload a PDF, place signature fields, and send a signing link. Track each recipient’s progress and download the completed PDF."
+
 #: apps/remix/app/components/dialogs/template-bulk-send-dialog.tsx
 msgid "Upload and Process"
 msgstr "Upload and Process"
@@ -14519,6 +14815,10 @@ msgstr "Use a unique window for each rate limit"
 msgid "Use API tokens to authenticate with the Documenso API."
 msgstr "Use API tokens to authenticate with the Documenso API."
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Use APIs, webhooks, and embeds to make signing part of your own product."
+msgstr "Use APIs, webhooks, and embeds to make signing part of your own product."
+
 #: apps/remix/app/components/forms/2fa/disable-authenticator-app-dialog.tsx
 #: apps/remix/app/components/forms/2fa/two-factor-code-dialog.tsx
 #: apps/remix/app/components/forms/signin.tsx
@@ -14539,6 +14839,10 @@ msgstr "Use Template"
 #: apps/remix/app/components/dialogs/template-use-dialog.tsx
 msgid "Use template name"
 msgstr "Use template name"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Use the API, webhooks, embedded authoring and signing, or Zapier to connect Documenso to your workflow."
+msgstr "Use the API, webhooks, embedded authoring and signing, or Zapier to connect Documenso to your workflow."
 
 #: apps/remix/app/components/dialogs/template-use-dialog.tsx
 msgid "Use uploaded file name"
@@ -14661,6 +14965,10 @@ msgstr "Verify Email"
 #: apps/remix/app/components/general/verify-email-banner.tsx
 msgid "Verify Now"
 msgstr "Verify Now"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Verify signed documents"
+msgstr "Verify signed documents"
 
 #: apps/remix/app/routes/_unauthenticated+/team.verify.email.$token.tsx
 msgid "Verify team email"
@@ -15476,6 +15784,10 @@ msgstr "Well-known URL is required"
 msgid "Were you trying to edit this document instead?"
 msgstr "Were you trying to edit this document instead?"
 
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "What our customers say"
+msgstr "What our customers say"
+
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl._index.tsx
 msgid "What you can do with teams:"
 msgstr "What you can do with teams:"
@@ -15503,6 +15815,10 @@ msgstr "When you sign a document, we can automatically fill in and sign the foll
 msgid "When you use our platform to affix your electronic signature to documents, you are consenting to do so under the Electronic Signatures in Global and National Commerce Act (E-Sign Act) and other applicable laws. This action indicates your agreement to use electronic means to sign documents and receive notifications."
 msgstr "When you use our platform to affix your electronic signature to documents, you are consenting to do so under the Electronic Signatures in Global and National Commerce Act (E-Sign Act) and other applicable laws. This action indicates your agreement to use electronic means to sign documents and receive notifications."
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Where can I get support?"
+msgstr "Where can I get support?"
+
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.sso.tsx
 msgid "Whether to enable the SSO portal for your organisation"
 msgstr "Whether to enable the SSO portal for your organization"
@@ -15514,6 +15830,10 @@ msgstr "While waiting for them to do so you can create your own Documenso accoun
 #: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
 msgid "Whitelabeling, unlimited members and more"
 msgstr "Whitelabeling, unlimited members and more"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Why use Documenso?"
+msgstr "Why use Documenso?"
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-fields-page.tsx
 #: packages/ui/primitives/document-flow/field-item.tsx
@@ -15787,6 +16107,10 @@ msgstr "You can also copy and paste this link into your browser: {confirmationLi
 msgid "You can also copy and paste this link into your browser: {resetPasswordLink} (link expires in 24 hours)"
 msgstr "You can also copy and paste this link into your browser: {resetPasswordLink} (link expires in 24 hours)"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "You can cancel a pending document from the workspace. This stops further signing and notifies recipients that the request was cancelled."
+msgstr "You can cancel a pending document from the workspace. This stops further signing and notifies recipients that the request was cancelled."
+
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.public-profile.tsx
 msgid "You can choose to enable or disable the profile for public view."
 msgstr "You can choose to enable or disable the profile for public view."
@@ -15811,6 +16135,10 @@ msgstr "You can manage your email preferences here."
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-fields-page.tsx
 msgid "You can only detect fields in draft envelopes"
 msgstr "You can only detect fields in draft envelopes"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "You can review the hosted service’s data handling policies or self-host Documenso to control your infrastructure and storage. Your obligations depend on your deployment and how you use it."
+msgstr "You can review the hosted service’s data handling policies or self-host Documenso to control your infrastructure and storage. Your obligations depend on your deployment and how you use it."
 
 #: packages/email/templates/confirm-team-email.tsx
 msgid "You can revoke access at any time in your team settings on Documenso <0>here</0>."
@@ -16616,6 +16944,10 @@ msgstr "Your envelope has been distributed successfully."
 #: apps/remix/app/components/dialogs/envelope-redistribute-dialog.tsx
 msgid "Your envelope has been resent successfully."
 msgstr "Your envelope has been resent successfully."
+
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "Your favorite tools work with Documenso"
+msgstr "Your favorite tools work with Documenso"
 
 #: apps/remix/app/components/general/settings-upsell/branding-upsell.tsx
 msgid "Your logo on signing pages and emails"

@@ -10,15 +10,20 @@ import { ArrowDownIcon, ArrowUpRightIcon, MenuIcon } from 'lucide-react';
 import { Link } from 'react-router';
 
 import { BrandingLogo } from './branding-logo';
+import { LandingBenefits, LandingClosingSection, LandingFaq } from './landing-about-sections';
+import { LandingProductFeatures } from './landing-product-features';
+import { LandingIntegrations, LandingTestimonials } from './landing-social-sections';
 import { LandingWorkspacePreview } from './landing-workspace-preview';
 import { PublicLegalLinks } from './public-legal-links';
 
 const WORKSPACE_ANCHOR = '#workspace-preview';
 const SOURCE_URL = 'https://github.com/documenso/documenso';
+const DOCS_URL = 'https://docs.documenso.com';
 const landingLinks = [
-  { href: WORKSPACE_ANCHOR, label: msg`Product` },
-  { href: 'https://docs.documenso.com', label: msg`Documentation` },
-  { href: SOURCE_URL, label: msg`Source code` },
+  { href: '#features', label: msg`Product` },
+  { href: '#integrations', label: msg`Integrations` },
+  { href: '#faq', label: msg`FAQ` },
+  { href: DOCS_URL, label: msg`Documentation` },
 ];
 
 export const LandingPage = ({ isSignupEnabled }: { isSignupEnabled: boolean }) => {
@@ -107,9 +112,44 @@ export const LandingPage = ({ isSignupEnabled }: { isSignupEnabled: boolean }) =
             <LandingWorkspacePreview />
           </div>
         </div>
+
+        <LandingTestimonials />
+        <LandingProductFeatures />
+        <LandingIntegrations />
+        <LandingFaq />
+        <LandingBenefits />
+        <LandingClosingSection isSignupEnabled={isSignupEnabled} />
       </main>
 
-      <PublicLegalLinks className="mx-auto max-w-7xl px-5 pb-8" />
+      <footer className="landing-footer">
+        <div className="mx-auto flex max-w-[73rem] flex-col justify-between gap-6 px-5 py-8 sm:flex-row sm:items-center sm:px-6">
+          <div>
+            <Link to="/" aria-label="Documenso" className="inline-block rounded-sm text-[var(--landing-ink)]">
+              <BrandingLogo aria-hidden="true" className="h-5 w-auto" />
+            </Link>
+            <p className="mt-2 text-sm">
+              <Trans>Open-source document signing.</Trans>
+            </p>
+          </div>
+
+          <nav aria-label={t`Footer navigation`} className="flex flex-wrap gap-x-5 gap-y-3 text-sm">
+            <a href={DOCS_URL} className="hover:text-[var(--landing-ink)] hover:underline">
+              <Trans>Documentation</Trans>
+            </a>
+            <a
+              href="https://docs.documenso.com/docs/policies/support"
+              className="hover:text-[var(--landing-ink)] hover:underline"
+            >
+              <Trans>Support</Trans>
+            </a>
+            <a href={SOURCE_URL} className="hover:text-[var(--landing-ink)] hover:underline">
+              <Trans>Source code</Trans>
+            </a>
+          </nav>
+        </div>
+
+        <PublicLegalLinks className="mx-auto max-w-7xl px-5 pb-8" />
+      </footer>
     </div>
   );
 };
