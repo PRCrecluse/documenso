@@ -6703,6 +6703,10 @@ msgstr "生成链接"
 msgid "German"
 msgstr "德语"
 
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Get started"
+msgstr "开始使用"
+
 #: apps/remix/app/components/general/settings-upsell/sso-portal-upsell.tsx
 msgid "Give your members a dedicated single sign-on portal. The SSO portal is available on the Enterprise plan."
 msgstr ""
@@ -8191,6 +8195,10 @@ msgstr "移动到文件夹"
 msgid "Multiple access methods can be selected."
 msgstr "可以选择多种访问方式。"
 
+#: apps/remix/app/components/general/landing-workspace-preview.tsx
+msgid "Mutual NDA"
+msgstr "双向保密协议"
+
 #: apps/remix/app/components/dialogs/folder-create-dialog.tsx
 msgid "My Folder"
 msgstr "我的文件夹"
@@ -8833,6 +8841,10 @@ msgstr ""
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl._index.tsx
 msgid "Open menu"
 msgstr "打开菜单"
+
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Open-source e-signatures"
+msgstr "开源电子签名"
 
 #: apps/remix/app/components/general/stack-avatars-with-tooltip.tsx
 msgid "Opened"
@@ -9665,6 +9677,10 @@ msgstr "带示例数据的预格式化 CSV 模板。"
 msgid "Preferences"
 msgstr "偏好设置"
 
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Prepare agreements, collect signatures, and track every document from one workspace."
+msgstr "在同一个工作区准备协议、收集签名，并跟踪每份文档。"
+
 #: apps/remix/app/components/forms/email-preferences-form.tsx
 #: apps/remix/app/components/general/envelope-editor/envelope-editor.tsx
 msgid "Preview"
@@ -9732,6 +9748,11 @@ msgstr "继续"
 msgid "Processing document"
 msgstr "正在处理文档"
 
+#: apps/remix/app/components/general/landing-page.tsx
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Product"
+msgstr "产品"
+
 #: apps/remix/app/components/general/app-command-menu.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/profile.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/profile.tsx
@@ -9756,6 +9777,10 @@ msgstr "个人资料已更新"
 #: apps/remix/app/components/embed/multisign/multi-sign-document-list.tsx
 msgid "Progress"
 msgstr "进度"
+
+#: apps/remix/app/components/general/landing-workspace-preview.tsx
+msgid "Project scope"
+msgstr "项目范围"
 
 #: apps/remix/app/routes/_authenticated+/settings+/security.linked-accounts.tsx
 msgid "Provider"
@@ -10865,6 +10890,10 @@ msgstr "查看文档"
 msgid "See the background jobs tab for the status"
 msgstr "状态请查看后台作业选项卡"
 
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "See the workspace"
+msgstr "查看工作区"
+
 #: apps/remix/app/components/general/document-signing/document-signing-dropdown-field.tsx
 #: packages/ui/primitives/document-flow/field-content.tsx
 #: packages/ui/primitives/document-flow/field-items-advanced-settings/dropdown-field.tsx
@@ -11125,6 +11154,10 @@ msgstr "发送文档"
 #: packages/ui/primitives/document-flow/send-document-action-dialog.tsx
 msgid "Send Document"
 msgstr "发送文档"
+
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Send documents for signing."
+msgstr "发送待签文档。"
 
 #: apps/remix/app/components/general/settings-upsell/email-domains-upsell.tsx
 msgid "Send documents from your own domain. Email domains are available on the Enterprise plan."
@@ -11438,6 +11471,11 @@ msgstr "签署字段"
 #: apps/remix/app/components/forms/signup.tsx
 msgid "Sign Here"
 msgstr "在此签名"
+
+#: apps/remix/app/components/general/landing-page.tsx
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Sign in"
+msgstr "登录"
 
 #: apps/remix/app/components/forms/signin.tsx
 #: apps/remix/app/components/forms/signin.tsx
@@ -11945,6 +11983,11 @@ msgstr "按<0>最早优先</0>排序"
 #: apps/remix/app/components/tables/team-members-table.tsx
 msgid "Source"
 msgstr "来源"
+
+#: apps/remix/app/components/general/landing-page.tsx
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Source code"
+msgstr "源代码"
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.sso.tsx
 msgid "Space-separated list of domains. Leave empty to allow all domains."
@@ -13857,6 +13900,10 @@ msgstr "注册为 Documenso 用户的签署人总数"
 #: apps/remix/app/routes/_authenticated+/admin+/stats.tsx
 msgid "Total Users"
 msgstr "用户总数"
+
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Track every agreement."
+msgstr "跟踪每份协议。"
 
 #: apps/remix/app/components/dialogs/team-delete-dialog.tsx
 msgid "Transfer documents to a different team"

@@ -109,7 +109,7 @@ export default function Layout({ loaderData, params, matches }: Route.ComponentP
     <OrganisationProvider organisation={currentOrganisation}>
       <TeamProvider team={currentTeam || null}>
         <div
-          className={cn('surface-wash min-h-dvh', {
+          className={cn('min-h-dvh bg-background', {
             'md:flex md:h-dvh md:flex-col md:overflow-hidden': layoutMode === 'settings',
           })}
         >
@@ -125,7 +125,7 @@ export default function Layout({ loaderData, params, matches }: Route.ComponentP
 
           <main
             className={cn({
-              'mt-4 pb-8 md:mt-6 md:pb-12': !hideHeader && layoutMode !== 'settings',
+              'mt-3 pb-8 md:mt-4 md:pb-12': !hideHeader && layoutMode !== 'settings',
               'md:flex md:min-h-0 md:flex-1 md:flex-col': layoutMode === 'settings',
             })}
           >

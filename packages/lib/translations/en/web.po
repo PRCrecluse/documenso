@@ -6698,6 +6698,10 @@ msgstr "Generate Links"
 msgid "German"
 msgstr "German"
 
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Get started"
+msgstr "Get started"
+
 #: apps/remix/app/components/general/settings-upsell/sso-portal-upsell.tsx
 msgid "Give your members a dedicated single sign-on portal. The SSO portal is available on the Enterprise plan."
 msgstr "Give your members a dedicated single sign-on portal. The SSO portal is available on the Enterprise plan."
@@ -8186,6 +8190,10 @@ msgstr "Move to Folder"
 msgid "Multiple access methods can be selected."
 msgstr "Multiple access methods can be selected."
 
+#: apps/remix/app/components/general/landing-workspace-preview.tsx
+msgid "Mutual NDA"
+msgstr "Mutual NDA"
+
 #: apps/remix/app/components/dialogs/folder-create-dialog.tsx
 msgid "My Folder"
 msgstr "My Folder"
@@ -8828,6 +8836,10 @@ msgstr "Open"
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl._index.tsx
 msgid "Open menu"
 msgstr "Open menu"
+
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Open-source e-signatures"
+msgstr "Open-source e-signatures"
 
 #: apps/remix/app/components/general/stack-avatars-with-tooltip.tsx
 msgid "Opened"
@@ -9660,6 +9672,10 @@ msgstr "Pre-formatted CSV template with example data."
 msgid "Preferences"
 msgstr "Preferences"
 
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Prepare agreements, collect signatures, and track every document from one workspace."
+msgstr "Prepare agreements, collect signatures, and track every document from one workspace."
+
 #: apps/remix/app/components/forms/email-preferences-form.tsx
 #: apps/remix/app/components/general/envelope-editor/envelope-editor.tsx
 msgid "Preview"
@@ -9727,6 +9743,11 @@ msgstr "Proceed"
 msgid "Processing document"
 msgstr "Processing document"
 
+#: apps/remix/app/components/general/landing-page.tsx
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Product"
+msgstr "Product"
+
 #: apps/remix/app/components/general/app-command-menu.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/profile.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/profile.tsx
@@ -9751,6 +9772,10 @@ msgstr "Profile updated"
 #: apps/remix/app/components/embed/multisign/multi-sign-document-list.tsx
 msgid "Progress"
 msgstr "Progress"
+
+#: apps/remix/app/components/general/landing-workspace-preview.tsx
+msgid "Project scope"
+msgstr "Project scope"
 
 #: apps/remix/app/routes/_authenticated+/settings+/security.linked-accounts.tsx
 msgid "Provider"
@@ -10860,6 +10885,10 @@ msgstr "See Documentation"
 msgid "See the background jobs tab for the status"
 msgstr "See the background jobs tab for the status"
 
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "See the workspace"
+msgstr "See the workspace"
+
 #: apps/remix/app/components/general/document-signing/document-signing-dropdown-field.tsx
 #: packages/ui/primitives/document-flow/field-content.tsx
 #: packages/ui/primitives/document-flow/field-items-advanced-settings/dropdown-field.tsx
@@ -11120,6 +11149,10 @@ msgstr "Send document"
 #: packages/ui/primitives/document-flow/send-document-action-dialog.tsx
 msgid "Send Document"
 msgstr "Send Document"
+
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Send documents for signing."
+msgstr "Send documents for signing."
 
 #: apps/remix/app/components/general/settings-upsell/email-domains-upsell.tsx
 msgid "Send documents from your own domain. Email domains are available on the Enterprise plan."
@@ -11433,6 +11466,11 @@ msgstr "Sign field"
 #: apps/remix/app/components/forms/signup.tsx
 msgid "Sign Here"
 msgstr "Sign Here"
+
+#: apps/remix/app/components/general/landing-page.tsx
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Sign in"
+msgstr "Sign in"
 
 #: apps/remix/app/components/forms/signin.tsx
 #: apps/remix/app/components/forms/signin.tsx
@@ -11940,6 +11978,11 @@ msgstr "Sort by <0>Oldest first</0>"
 #: apps/remix/app/components/tables/team-members-table.tsx
 msgid "Source"
 msgstr "Source"
+
+#: apps/remix/app/components/general/landing-page.tsx
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Source code"
+msgstr "Source code"
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.sso.tsx
 msgid "Space-separated list of domains. Leave empty to allow all domains."
@@ -13852,6 +13895,10 @@ msgstr "Total Signers that Signed Up"
 #: apps/remix/app/routes/_authenticated+/admin+/stats.tsx
 msgid "Total Users"
 msgstr "Total Users"
+
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Track every agreement."
+msgstr "Track every agreement."
 
 #: apps/remix/app/components/dialogs/team-delete-dialog.tsx
 msgid "Transfer documents to a different team"

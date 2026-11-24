@@ -2,6 +2,7 @@ import { getRootHref } from '@documenso/lib/utils/params';
 import { trpc } from '@documenso/trpc/react';
 import { cn } from '@documenso/ui/lib/utils';
 import { Button } from '@documenso/ui/primitives/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@documenso/ui/primitives/tooltip';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { ReadStatus } from '@prisma/client';
@@ -27,7 +28,7 @@ export const Header = ({ className, fullWidth = false, ...props }: HeaderProps) 
 
   const [isCommandMenuOpen, setIsCommandMenuOpen] = useState(false);
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const { data: unreadCountData } = trpc.document.inbox.getCount.useQuery(
     {
@@ -40,74 +41,85 @@ export const Header = ({ className, fullWidth = false, ...props }: HeaderProps) 
 
   useEffect(() => {
     const onScroll = () => {
-      setScrollY(window.scrollY);
+      setIsScrolled(window.scrollY > 5);
     };
 
-    window.addEventListener('scroll', onScroll);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
-    <header
-      className={cn(
-        'sticky top-0 z-[60] bg-gradient-to-b from-background via-background/85 to-transparent px-3 pt-3 pb-2 md:px-6',
-        className,
-      )}
-      {...props}
-    >
+    <header className={cn('sticky top-0 z-[60] px-3 pt-3 md:px-6', className)} {...props}>
       <div
         className={cn(
-          'mx-auto flex min-h-14 w-full items-center justify-between gap-2 rounded-2xl border bg-popover/95 px-3 backdrop-blur-md md:min-h-16 md:gap-3 md:px-4',
-          scrollY > 5 && 'shadow-sm',
+          'mx-auto flex min-h-14 w-full items-center justify-between gap-2 rounded-2xl border border-border/70 bg-popover px-3 md:grid md:min-h-16 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-4 md:px-8 lg:px-10',
+          isScrolled && 'shadow-sm',
           !fullWidth && 'max-w-[77rem]',
         )}
         data-testid="app-header-container"
       >
-        <Link
-          to={getRootHref(params)}
-          aria-label="Documenso"
-          className="shrink-0 rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-        >
-          <BrandingLogo aria-hidden="true" className="h-4 w-auto sm:h-5 md:h-6" />
+        <Link to={getRootHref(params)} aria-label="Documenso" className="shrink-0 justify-self-start rounded-md">
+          <BrandingLogo aria-hidden="true" className="h-4 w-auto sm:h-5" />
         </Link>
 
-        <AppNavDesktop setIsCommandMenuOpen={setIsCommandMenuOpen} />
+        <AppNavDesktop />
 
-        <Button asChild variant="outline" className="relative hidden h-10 w-10 shrink-0 p-0 md:flex">
-          <NavLink to="/inbox" className="aria-[current=page]:bg-accent" aria-label={_(msg`Inbox`)}>
-            <InboxIcon aria-hidden="true" className="h-4 w-4 text-muted-foreground" />
+        <div className="col-start-3 flex min-w-0 items-center justify-end gap-1.5">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                type="button"
+                variant="ghost"
+                className={utilityButtonClassName}
+                aria-label={_(msg`Search`)}
+                aria-keyshortcuts="Control+K Meta+K"
+                aria-haspopup="dialog"
+                onClick={() => setIsCommandMenuOpen(true)}
+              >
+                <SearchIcon aria-hidden="true" className="size-[1.125rem] shrink-0" />
+              </Button>
+            </TooltipTrigger>
+
+            <TooltipContent side="bottom" className="flex items-center gap-2">
+              {_(msg`Search`)}
+              <kbd className="rounded bg-muted px-1 py-0.5 font-sans text-xs">Ctrl / ⌘ + K</kbd>
+            </TooltipContent>
+          </Tooltip>
+
+          <NavLink
+            to="/inbox"
+            className={cn(
+              utilityButtonClassName,
+              'relative hidden items-center justify-center transition-colors hover:bg-accent aria-[current=page]:bg-accent md:flex',
+            )}
+            aria-label={_(msg`Inbox`)}
+          >
+            <InboxIcon aria-hidden="true" className="size-[1.125rem]" />
 
             {unreadCountData && unreadCountData.count > 0 && (
-              <span className="absolute -top-1.5 -right-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1 font-semibold text-primary-foreground text-xs tabular-nums leading-none">
+              <span className="absolute -end-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 font-semibold text-[0.625rem] text-primary-foreground tabular-nums leading-none">
                 {unreadCountData.count > 99 ? '99+' : unreadCountData.count}
               </span>
             )}
           </NavLink>
-        </Button>
 
-        <div className="md:ml-1">
-          <OrgMenuSwitcher />
-        </div>
+          <div className="min-w-0 rounded-xl [&:has(:focus-visible)]:ring-2 [&:has(:focus-visible)]:ring-ring [&>button]:max-w-full">
+            <OrgMenuSwitcher />
+          </div>
 
-        <div className="flex flex-row items-center gap-1 md:hidden">
-          <button
+          <Button
             type="button"
-            className="rounded-full p-2 text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-            aria-label={_(msg`Search`)}
-            onClick={() => setIsCommandMenuOpen(true)}
-          >
-            <SearchIcon className="h-5 w-5" />
-          </button>
-
-          <button
-            type="button"
-            className="rounded-full p-2 text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            variant="ghost"
+            className={cn(utilityButtonClassName, 'md:hidden')}
             aria-label={_(msg`Open menu`)}
+            aria-expanded={isHamburgerMenuOpen}
+            aria-haspopup="dialog"
             onClick={() => setIsHamburgerMenuOpen(true)}
           >
-            <MenuIcon className="h-5 w-5" />
-          </button>
+            <MenuIcon aria-hidden="true" className="size-5 shrink-0" />
+          </Button>
         </div>
 
         <AppCommandMenu open={isCommandMenuOpen} onOpenChange={setIsCommandMenuOpen} />
@@ -117,3 +129,5 @@ export const Header = ({ className, fullWidth = false, ...props }: HeaderProps) 
     </header>
   );
 };
+
+const utilityButtonClassName = 'h-9 w-9 shrink-0 rounded-full bg-muted/80 p-0 text-foreground';
