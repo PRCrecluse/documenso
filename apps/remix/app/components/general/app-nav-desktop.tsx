@@ -5,10 +5,10 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { Search } from 'lucide-react';
+import { FilesIcon, FileTextIcon, SearchIcon } from 'lucide-react';
 import type { HTMLAttributes } from 'react';
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useLocation } from 'react-router';
+import { NavLink } from 'react-router';
 
 import { useOptionalCurrentTeam } from '~/providers/team';
 
@@ -20,8 +20,6 @@ export const AppNavDesktop = ({ className, setIsCommandMenuOpen, ...props }: App
   const { _ } = useLingui();
   const shouldReduceMotion = useReducedMotion();
   const { organisations } = useSession();
-
-  const { pathname } = useLocation();
 
   const [modifierKey, setModifierKey] = useState(() => 'Ctrl');
 
@@ -49,42 +47,44 @@ export const AppNavDesktop = ({ className, setIsCommandMenuOpen, ...props }: App
       {
         href: `/t/${teamUrl}/documents`,
         label: msg`Documents`,
+        icon: FileTextIcon,
       },
       {
         href: `/t/${teamUrl}/templates`,
         label: msg`Templates`,
+        icon: FilesIcon,
       },
     ];
   }, [currentTeam, organisations]);
 
   return (
-    <div
-      className={cn('ml-4 hidden min-w-0 flex-1 items-center gap-x-4 md:flex md:justify-between', className)}
-      {...props}
-    >
+    <div className={cn('ml-2 hidden min-w-0 flex-1 items-center gap-2 md:flex lg:ml-5 lg:gap-4', className)} {...props}>
       <div className="min-w-0">
         <AnimatePresence>
           {menuNavigationLinks.length > 0 && (
             <motion.nav
-              aria-label={_(msg`Primary`)}
+              aria-label={_(msg`Primary navigation`)}
               initial={shouldReduceMotion ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={shouldReduceMotion ? undefined : { opacity: 0 }}
-              className="flex items-center gap-1 rounded-full bg-muted p-1"
+              className="flex items-center gap-1 rounded-xl border bg-muted/50 p-1"
             >
-              {menuNavigationLinks.map(({ href, label }) => (
-                <Link
+              {menuNavigationLinks.map(({ href, label, icon: Icon }) => (
+                <NavLink
                   key={href}
                   to={href}
-                  className={cn(
-                    'rounded-full px-3.5 py-1.5 font-medium text-muted-foreground text-sm leading-5 ring-offset-background hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-                    {
-                      'bg-foreground text-background shadow-sm hover:text-background': pathname?.startsWith(href),
-                    },
-                  )}
+                  className={({ isActive }) =>
+                    cn(
+                      'flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-medium text-sm leading-5 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+                      isActive
+                        ? 'bg-foreground text-background shadow-sm'
+                        : 'text-muted-foreground hover:text-foreground',
+                    )
+                  }
                 >
+                  <Icon aria-hidden="true" className="hidden h-4 w-4 shrink-0 lg:block" />
                   {_(label)}
-                </Link>
+                </NavLink>
               ))}
             </motion.nav>
           )}
@@ -93,19 +93,15 @@ export const AppNavDesktop = ({ className, setIsCommandMenuOpen, ...props }: App
 
       <Button
         variant="outline"
-        className="flex w-full max-w-80 items-center justify-between text-muted-foreground"
+        className="ml-auto gap-2 px-3 text-muted-foreground"
         onClick={() => setIsCommandMenuOpen(true)}
       >
-        <div className="flex items-center">
-          <Search className="mr-2 h-5 w-5" />
-          <Trans>Search</Trans>
-        </div>
+        <SearchIcon aria-hidden="true" className="h-4 w-4 shrink-0" />
+        <Trans>Search</Trans>
 
-        <div>
-          <div className="flex items-center rounded-md bg-muted px-1.5 py-0.5 text-muted-foreground text-xs tracking-wider">
-            {modifierKey}+K
-          </div>
-        </div>
+        <kbd className="hidden whitespace-nowrap rounded-md bg-muted px-1.5 py-0.5 font-sans text-xs lg:inline">
+          {modifierKey}+K
+        </kbd>
       </Button>
     </div>
   );

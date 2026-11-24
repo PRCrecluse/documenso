@@ -97,7 +97,7 @@ export const AppNavMobile = ({ isMenuOpen, onMenuOpenChange }: AppNavMobileProps
           <img src={LogoImage} alt="Documenso Logo" className="dark:invert" width={170} height={25} />
         </Link>
 
-        <nav className="mt-8 flex w-full flex-col items-stretch gap-y-2" aria-label={t`Primary`}>
+        <nav className="mt-8 flex w-full flex-col items-stretch gap-y-2" aria-label={t`Primary navigation`}>
           {menuNavigationLinks.map(({ href, text }) => (
             <Link
               key={href}

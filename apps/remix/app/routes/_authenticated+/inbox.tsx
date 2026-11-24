@@ -1,6 +1,5 @@
 import { msg } from '@lingui/core/macro';
 import { Trans } from '@lingui/react/macro';
-import { InboxIcon } from 'lucide-react';
 
 import { DocumentSearch } from '~/components/general/document/document-search';
 import { OrganisationInvitations } from '~/components/general/organisations/organisation-invitations';
@@ -16,30 +15,32 @@ export function meta() {
 
 export default function InboxPage() {
   return (
-    <div className="mx-auto w-full max-w-screen-xl px-4 md:px-8">
-      <WorkspacePageHeader
-        eyebrow={<Trans>Waiting on you</Trans>}
-        title={
-          <span className="flex items-center gap-3">
-            <InboxIcon className="h-8 w-8 text-primary" />
-            <Trans>Personal Inbox</Trans>
-          </span>
-        }
-        description={<Trans>Any documents that you have been invited to will appear here</Trans>}
-      />
+    <div className="mx-auto w-full max-w-screen-xl px-3 md:px-6">
+      <div className="workspace-frame rounded-2xl border sm:rounded-3xl">
+        <WorkspacePageHeader
+          title={<Trans>Personal Inbox</Trans>}
+          description={<Trans>Review and respond to documents people have sent you.</Trans>}
+        />
 
-      <OrganisationInvitations className="mt-6" />
+        <div className="space-y-6 px-5 py-6 sm:px-8 sm:py-8 lg:px-10">
+          <OrganisationInvitations />
 
-      <div className="mt-8 rounded-3xl border border-border bg-background p-4 shadow-[0_18px_50px_-32px_hsl(230_45%_20%/0.55)] md:p-6">
-        <div className="mb-6 flex flex-wrap items-center gap-x-2 gap-y-4">
-          <div className="w-full sm:w-56">
-            <DocumentSearch />
-          </div>
+          <section aria-labelledby="inbox-list-heading">
+            <h2 id="inbox-list-heading" className="mb-3 font-semibold text-lg tracking-tight">
+              <Trans>Received documents</Trans>
+            </h2>
 
-          <DocumentsTableStatusFilter statuses={INBOX_SELECTABLE_STATUSES} />
+            <div className="mb-4 flex flex-wrap items-center gap-2">
+              <div className="w-full sm:w-56">
+                <DocumentSearch />
+              </div>
+
+              <DocumentsTableStatusFilter statuses={INBOX_SELECTABLE_STATUSES} />
+            </div>
+
+            <InboxTable />
+          </section>
         </div>
-
-        <InboxTable />
       </div>
     </div>
   );

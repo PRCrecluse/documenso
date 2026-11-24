@@ -1,4 +1,3 @@
-import signingCelebration from '@documenso/assets/images/signing-celebration.png';
 import { getOptionalSession } from '@documenso/auth/server/lib/utils/get-session';
 import {
   expiredCscBlockingErrorCookieHeader,
@@ -30,10 +29,11 @@ import { isTspEnvelope } from '@documenso/lib/types/signature-level';
 import { extractDocumentAuthMethods } from '@documenso/lib/utils/document-auth';
 import { isRecipientExpired } from '@documenso/lib/utils/recipients';
 import { prisma } from '@documenso/prisma';
-import { SigningCard3D } from '@documenso/ui/components/signing-card';
+import { SigningCard3D, type SigningCardProps } from '@documenso/ui/components/signing-card';
+import { Button } from '@documenso/ui/primitives/button';
 import { Trans } from '@lingui/react/macro';
 import { DocumentSigningOrder, DocumentStatus, RecipientRole, SigningStatus } from '@prisma/client';
-import { Clock8 } from 'lucide-react';
+import { CircleXIcon } from 'lucide-react';
 import { Link, redirect } from 'react-router';
 import { getOptionalLoaderContext } from 'server/utils/get-loader-session';
 import { match } from 'ts-pattern';
@@ -48,6 +48,7 @@ import { DocumentSigningPageViewV2 } from '~/components/general/document-signing
 import { DocumentSigningProvider } from '~/components/general/document-signing/document-signing-provider';
 import { DocumentSigningSenderDisabledPage } from '~/components/general/document-signing/document-signing-sender-disabled-page';
 import { EnvelopeSigningProvider } from '~/components/general/document-signing/envelope-signing-provider';
+import { SigningStatusPanel } from '~/components/general/document-signing/signing-status-panel';
 import { RecipientBranding } from '~/components/general/recipient-branding';
 import { useCspNonce } from '~/utils/nonce';
 import { superLoaderJson, useSuperLoaderData } from '~/utils/super-json-loader';
@@ -446,54 +447,12 @@ const SigningPageV1 = ({ data }: { data: Awaited<ReturnType<typeof handleV1Loade
 
   if (document.deletedAt || document.status === DocumentStatus.REJECTED) {
     return (
-      <div className="-mx-4 flex max-w-[100vw] flex-col items-center overflow-x-hidden px-4 pt-16 md:-mx-8 md:px-8 lg:pt-16 xl:pt-24">
-        <SigningCard3D
-          name={recipient.name}
-          signature={recipientSignature}
-          signingCelebrationImage={signingCelebration}
-        />
-
-        <div className="relative mt-2 flex w-full flex-col items-center">
-          <div className="mt-8 flex items-center text-center text-red-600">
-            <Clock8 className="mr-2 h-5 w-5" />
-            <span className="text-sm">
-              <Trans>Document Cancelled</Trans>
-            </span>
-          </div>
-
-          <h2 className="mt-6 max-w-[35ch] text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
-            <Trans>
-              <span className="mt-1.5 block">"{document.title}"</span> is no longer available to sign
-            </Trans>
-          </h2>
-
-          <p className="mt-2.5 max-w-[60ch] text-center font-medium text-muted-foreground/60 text-sm md:text-base">
-            <Trans>This document has been cancelled by the owner.</Trans>
-          </p>
-
-          {user ? (
-            <Link
-              to="/"
-              className="mt-36 text-documenso-700 hover:text-documenso-600 dark:text-documenso-300 dark:hover:text-documenso-200"
-            >
-              <Trans>Go Back Home</Trans>
-            </Link>
-          ) : (
-            <p className="mt-36 text-muted-foreground/60 text-sm">
-              <Trans>
-                Want to send slick signing links like this one?{' '}
-                <Link
-                  to="https://documenso.com"
-                  className="text-documenso-700 hover:text-documenso-600 dark:text-documenso-300 dark:hover:text-documenso-200"
-                >
-                  Check out Documenso
-                </Link>
-                .
-              </Trans>
-            </p>
-          )}
-        </div>
-      </div>
+      <CancelledSigningPage
+        documentTitle={document.title}
+        recipientName={recipient.name}
+        signature={recipientSignature}
+        isSignedIn={Boolean(user)}
+      />
     );
   }
 
@@ -552,54 +511,12 @@ const SigningPageV2 = ({ data }: { data: Awaited<ReturnType<typeof handleV2Loade
 
   if (envelope.deletedAt || envelope.status === DocumentStatus.REJECTED) {
     return (
-      <div className="-mx-4 flex max-w-[100vw] flex-col items-center overflow-x-hidden px-4 pt-16 md:-mx-8 md:px-8 lg:pt-16 xl:pt-24">
-        <SigningCard3D
-          name={recipient.name}
-          signature={recipientSignature || undefined}
-          signingCelebrationImage={signingCelebration}
-        />
-
-        <div className="relative mt-2 flex w-full flex-col items-center">
-          <div className="mt-8 flex items-center text-center text-red-600">
-            <Clock8 className="mr-2 h-5 w-5" />
-            <span className="text-sm">
-              <Trans>Document Cancelled</Trans>
-            </span>
-          </div>
-
-          <h2 className="mt-6 max-w-[35ch] text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
-            <Trans>
-              <span className="mt-1.5 block">"{envelope.title}"</span> is no longer available to sign
-            </Trans>
-          </h2>
-
-          <p className="mt-2.5 max-w-[60ch] text-center font-medium text-muted-foreground/60 text-sm md:text-base">
-            <Trans>This document has been cancelled by the owner.</Trans>
-          </p>
-
-          {user ? (
-            <Link
-              to="/"
-              className="mt-36 text-documenso-700 hover:text-documenso-600 dark:text-documenso-300 dark:hover:text-documenso-200"
-            >
-              <Trans>Go Back Home</Trans>
-            </Link>
-          ) : (
-            <p className="mt-36 text-muted-foreground/60 text-sm">
-              <Trans>
-                Want to send slick signing links like this one?{' '}
-                <Link
-                  to="https://documenso.com"
-                  className="text-documenso-700 hover:text-documenso-600 dark:text-documenso-300 dark:hover:text-documenso-200"
-                >
-                  Check out Documenso
-                </Link>
-                .
-              </Trans>
-            </p>
-          )}
-        </div>
-      </div>
+      <CancelledSigningPage
+        documentTitle={envelope.title}
+        recipientName={recipient.name}
+        signature={recipientSignature ?? undefined}
+        isSignedIn={Boolean(user)}
+      />
     );
   }
 
@@ -624,3 +541,56 @@ const SigningPageV2 = ({ data }: { data: Awaited<ReturnType<typeof handleV2Loade
     </EnvelopeSigningProvider>
   );
 };
+
+const CancelledSigningPage = ({
+  documentTitle,
+  recipientName,
+  signature,
+  isSignedIn,
+}: {
+  documentTitle: string;
+  recipientName: string;
+  signature?: SigningCardProps['signature'];
+  isSignedIn: boolean;
+}) => (
+  <div className="px-4 py-12 sm:py-20">
+    <SigningStatusPanel
+      title={<Trans>Document Cancelled</Trans>}
+      icon={<CircleXIcon className="size-6 text-destructive" />}
+    >
+      <p className="mt-4 max-w-lg break-words text-muted-foreground text-sm leading-relaxed">
+        <Trans>
+          <span className="font-medium text-foreground">"{documentTitle}"</span> is no longer available to sign
+        </Trans>
+      </p>
+
+      <p className="mt-2 max-w-lg text-muted-foreground text-sm leading-relaxed">
+        <Trans>This document has been cancelled by the owner.</Trans>
+      </p>
+
+      {(recipientName || signature) && (
+        <div className="mt-6 flex w-full max-w-sm justify-center rounded-2xl border bg-muted/65 p-2.5 sm:p-4">
+          <SigningCard3D name={recipientName} signature={signature} />
+        </div>
+      )}
+
+      {isSignedIn ? (
+        <Button asChild className="mt-6">
+          <Link to="/">
+            <Trans>Go Back Home</Trans>
+          </Link>
+        </Button>
+      ) : (
+        <p className="mt-6 text-muted-foreground text-sm">
+          <Trans>
+            Want to send slick signing links like this one?{' '}
+            <Link to="https://documenso.com" className="font-medium text-foreground underline underline-offset-4">
+              Check out Documenso
+            </Link>
+            .
+          </Trans>
+        </p>
+      )}
+    </SigningStatusPanel>
+  </div>
+);

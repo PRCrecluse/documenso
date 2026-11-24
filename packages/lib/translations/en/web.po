@@ -1319,6 +1319,10 @@ msgstr "Access disabled"
 msgid "Access enabled"
 msgstr "Access enabled"
 
+#: apps/remix/app/routes/_unauthenticated+/signin.tsx
+msgid "Access your documents and pending signatures."
+msgstr "Access your documents and pending signatures."
+
 #: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
 #: apps/remix/app/components/general/org-menu-switcher.tsx
 #: apps/remix/app/components/general/unified-settings-layout.tsx
@@ -2552,6 +2556,10 @@ msgstr "Avatar Updated"
 msgid "Awaiting email confirmation"
 msgstr "Awaiting email confirmation"
 
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Awaiting signature"
+msgstr "Awaiting signature"
+
 #: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
 #: apps/remix/app/components/dialogs/team-group-create-dialog.tsx
 #: apps/remix/app/components/dialogs/team-member-create-dialog.tsx
@@ -3229,6 +3237,10 @@ msgstr "Close"
 #: apps/remix/app/components/general/document-signing/document-signing-page-view-v2.tsx
 msgid "Collapse sidebar"
 msgstr "Collapse sidebar"
+
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Collect signatures and keep an audit trail in one workspace, open source under AGPL-3.0."
+msgstr "Collect signatures and keep an audit trail in one workspace, open source under AGPL-3.0."
 
 #: apps/remix/app/components/forms/editor/editor-content-generic-field-forms.tsx
 msgid "Color"
@@ -4875,6 +4887,10 @@ msgstr "Document language"
 msgid "Document Limit Exceeded!"
 msgstr "Document Limit Exceeded!"
 
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents._index.tsx
+msgid "Document list"
+msgstr "Document list"
+
 #: apps/remix/app/routes/_authenticated+/admin+/stats.tsx
 msgid "Document metrics"
 msgstr "Document metrics"
@@ -5305,6 +5321,10 @@ msgstr "Draft documents"
 #: apps/remix/app/routes/_authenticated+/admin+/stats.tsx
 msgid "Drafted Documents"
 msgstr "Drafted Documents"
+
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents._index.tsx
+msgid "Drafts"
+msgstr "Drafts"
 
 #: packages/ui/primitives/document-dropzone.tsx
 msgid "Drag & drop your document here."
@@ -6163,6 +6183,10 @@ msgstr "Everyone has signed"
 msgid "Everyone has signed! You will receive an email copy of the signed document."
 msgstr "Everyone has signed! You will receive an email copy of the signed document."
 
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Example agreement with a completed signature and a pending signature request"
+msgstr "Example agreement with a completed signature and a pending signature request"
+
 #: packages/ui/components/document/document-visibility-select.tsx
 msgid "Examples"
 msgstr "Examples"
@@ -6485,6 +6509,10 @@ msgstr "Fill in the details to create a new subscription claim."
 #: apps/remix/app/components/forms/editor/editor-content-shape-form.tsx
 msgid "Fill Opacity"
 msgstr "Fill Opacity"
+
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents._index.tsx
+msgid "Filter by document status"
+msgstr "Filter by document status"
 
 #: apps/remix/app/routes/_authenticated+/admin+/email-domains._index.tsx
 msgid "Filter by status"
@@ -6929,6 +6957,11 @@ msgstr "Hide fields"
 msgid "Hide license key"
 msgstr "Hide license key"
 
+#: apps/remix/app/components/general/document-signing/document-signing-mobile-widget.tsx
+#: apps/remix/app/components/general/document-signing/document-signing-page-view-v1.tsx
+msgid "Hide signing details"
+msgstr "Hide signing details"
+
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-content-drag-drop.tsx
 #: packages/lib/utils/envelope-content-translations.ts
 msgid "Highlight"
@@ -7105,6 +7138,10 @@ msgstr "Important: What This Means"
 #: apps/remix/app/components/general/public-legal-links.tsx
 msgid "Imprint"
 msgstr "Imprint"
+
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "In progress"
+msgstr "In progress"
 
 #: apps/remix/app/components/tables/user-billing-organisations-table.tsx
 #: packages/lib/constants/billing.ts
@@ -7801,6 +7838,10 @@ msgstr "Manage Direct Link"
 #: apps/remix/app/routes/_authenticated+/admin+/documents._index.tsx
 msgid "Manage documents"
 msgstr "Manage documents"
+
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents._index.tsx
+msgid "Manage drafts, track signatures, and find completed agreements."
+msgstr "Manage drafts, track signatures, and find completed agreements."
 
 #: apps/remix/app/routes/_authenticated+/settings+/security._index.tsx
 msgid "Manage linked accounts"
@@ -8556,6 +8597,10 @@ msgstr "No teams match your search"
 msgid "No teams yet"
 msgstr "No teams yet"
 
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/templates._index.tsx
+msgid "No templates yet"
+msgstr "No templates yet"
+
 #: apps/remix/app/components/general/webhook-multiselect-combobox.tsx
 msgid "No triggers available"
 msgstr "No triggers available"
@@ -9087,6 +9132,10 @@ msgstr "Paid"
 msgctxt "Partially signed document (adjective)"
 msgid "Partial"
 msgstr "Partial"
+
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Partnership agreement"
+msgstr "Partnership agreement"
 
 #: apps/remix/app/components/forms/signin.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
@@ -9646,6 +9695,11 @@ msgstr "Primary action color."
 msgid "Primary Foreground"
 msgstr "Primary Foreground"
 
+#: apps/remix/app/components/general/app-nav-desktop.tsx
+#: apps/remix/app/components/general/app-nav-mobile.tsx
+msgid "Primary navigation"
+msgstr "Primary navigation"
+
 #: apps/remix/app/components/forms/signup.tsx
 #: apps/remix/app/components/general/public-legal-links.tsx
 msgid "Privacy Policy"
@@ -9840,6 +9894,10 @@ msgstr "Reauthentication is required to sign this field"
 #: apps/remix/app/components/general/envelope-signing/envelope-signing-csc-status.tsx
 msgid "Reauthorise and retry"
 msgstr "Reauthorize and retry"
+
+#: apps/remix/app/routes/_authenticated+/inbox.tsx
+msgid "Received documents"
+msgstr "Received documents"
 
 #: packages/ui/components/recipient/recipient-role-select.tsx
 msgid "Receives copy"
@@ -10542,6 +10600,10 @@ msgstr "Return to sign in"
 msgid "Return to templates"
 msgstr "Return to templates"
 
+#: apps/remix/app/routes/_authenticated+/inbox.tsx
+msgid "Review and respond to documents people have sent you."
+msgstr "Review and respond to documents people have sent you."
+
 #: packages/email/templates/organisation-account-link-confirmation.tsx
 msgid "Review request"
 msgstr "Review request"
@@ -10641,6 +10703,10 @@ msgstr "Save changes"
 msgid "Save failed"
 msgstr "Save failed"
 
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/templates._index.tsx
+msgid "Save reusable documents for agreements you send often."
+msgstr "Save reusable documents for agreements you send often."
+
 #: packages/ui/primitives/template-flow/add-template-fields.tsx
 msgid "Save Template"
 msgstr "Save Template"
@@ -10702,6 +10768,10 @@ msgstr "Search by organization name"
 msgid "Search by organisation name, URL or ID"
 msgstr "Search by organization name, URL or ID"
 
+#: apps/remix/app/components/general/document/document-search.tsx
+msgid "Search documents"
+msgstr "Search documents"
+
 #: apps/remix/app/components/general/app-command-menu.tsx
 msgid "Search documents, users, organisations…"
 msgstr "Search documents, users, organizations…"
@@ -10753,6 +10823,10 @@ msgstr "Search teams"
 #: apps/remix/app/components/general/settings-team-switcher.tsx
 msgid "Search teams…"
 msgstr "Search teams…"
+
+#: apps/remix/app/components/general/template/template-search.tsx
+msgid "Search templates"
+msgstr "Search templates"
 
 #: apps/remix/app/components/general/template/template-search.tsx
 msgid "Search templates..."
@@ -11100,6 +11174,10 @@ msgstr "Send test"
 msgid "Send Test Email"
 msgstr "Send Test Email"
 
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Send, sign, and track your documents"
+msgstr "Send, sign, and track your documents"
+
 #: apps/remix/app/components/tables/documents-table-sender-filter.tsx
 #: apps/remix/app/components/tables/documents-table.tsx
 #: apps/remix/app/components/tables/inbox-table.tsx
@@ -11168,6 +11246,10 @@ msgstr "Set a password"
 #: packages/email/template-components/template-admin-user-created.tsx
 msgid "Set Password"
 msgstr "Set Password"
+
+#: apps/remix/app/routes/_unauthenticated+/signup.tsx
+msgid "Set up your account to send and sign documents."
+msgstr "Set up your account to send and sign documents."
 
 #: apps/remix/app/components/embed/authoring/configure-document-view.tsx
 msgid "Set up your document properties and recipient information"
@@ -11261,6 +11343,11 @@ msgstr "Show last 12 months"
 #: apps/remix/app/components/general/admin-license-card.tsx
 msgid "Show license key"
 msgstr "Show license key"
+
+#: apps/remix/app/components/general/document-signing/document-signing-mobile-widget.tsx
+#: apps/remix/app/components/general/document-signing/document-signing-page-view-v1.tsx
+msgid "Show signing details"
+msgstr "Show signing details"
 
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.public-profile.tsx
 msgid "Show templates in your public profile for your audience to sign and get started quickly"
@@ -11450,6 +11537,10 @@ msgstr "Sign Up with OIDC"
 msgid "Signature"
 msgstr "Signature"
 
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Signature collected"
+msgstr "Signature collected"
+
 #: apps/remix/app/routes/_internal+/[__htmltopdf]+/certificate.tsx
 #: packages/lib/server-only/pdf/render-certificate.ts
 msgid "Signature ID"
@@ -11589,6 +11680,10 @@ msgstr "Signing Order"
 #: packages/ui/primitives/template-flow/add-template-placeholder-recipients.tsx
 msgid "Signing order is enabled."
 msgstr "Signing order is enabled."
+
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Signing preview"
+msgstr "Signing preview"
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-settings-dialog.tsx
 msgid "Signing Reminders"
@@ -12379,6 +12474,10 @@ msgstr "Template ID (Legacy)"
 #: apps/remix/app/components/general/legacy-field-warning-popover.tsx
 msgid "Template is using legacy field insertion"
 msgstr "Template is using legacy field insertion"
+
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/templates._index.tsx
+msgid "Template library"
+msgstr "Template library"
 
 #: apps/remix/app/components/dialogs/envelope-rename-dialog.tsx
 msgid "Template Renamed"

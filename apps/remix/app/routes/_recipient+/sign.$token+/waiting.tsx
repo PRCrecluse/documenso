@@ -9,8 +9,10 @@ import { Button } from '@documenso/ui/primitives/button';
 import { Trans } from '@lingui/react/macro';
 import type { Team } from '@prisma/client';
 import { DocumentStatus, EnvelopeType } from '@prisma/client';
+import { ClockIcon } from 'lucide-react';
 import { Link, redirect } from 'react-router';
 
+import { SigningStatusPanel } from '~/components/general/document-signing/signing-status-panel';
 import { RecipientBranding } from '~/components/general/recipient-branding';
 import { useCspNonce } from '~/utils/nonce';
 
@@ -80,40 +82,32 @@ export default function WaitingForTurnToSignPage({ loaderData }: Route.Component
   return (
     <>
       <RecipientBranding branding={branding} cspNonce={cspNonce} />
-      <div className="relative flex flex-col items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-        <div className="w-full max-w-md text-center">
-          <h2 className="font-bold text-3xl tracking-tight">
-            <Trans>Waiting for Your Turn</Trans>
-          </h2>
+      <SigningStatusPanel
+        title={<Trans>Waiting for Your Turn</Trans>}
+        icon={<ClockIcon className="size-6 text-foreground" />}
+        className="my-8 sm:my-16"
+      >
+        <p className="mt-4 max-w-lg text-muted-foreground text-sm leading-relaxed">
+          <Trans>
+            It's currently not your turn to sign. You will receive an email with instructions once it's your turn to
+            sign the document.
+          </Trans>
+        </p>
 
-          <p className="mt-2 text-muted-foreground text-sm">
-            <Trans>
-              It's currently not your turn to sign. You will receive an email with instructions once it's your turn to
-              sign the document.
-            </Trans>
-          </p>
+        <p className="mt-2 text-muted-foreground text-sm">
+          <Trans>Please check your email for updates.</Trans>
+        </p>
 
-          <p className="mt-4 text-muted-foreground text-sm">
-            <Trans>Please check your email for updates.</Trans>
-          </p>
-
-          <div className="mt-4">
+        <Button variant="outline" asChild className="mt-6 h-auto max-w-full whitespace-normal py-2">
+          <Link to={documentPathForEditing ?? '/'}>
             {documentPathForEditing ? (
-              <Button variant="link" asChild>
-                <Link to={documentPathForEditing}>
-                  <Trans>Were you trying to edit this document instead?</Trans>
-                </Link>
-              </Button>
+              <Trans>Were you trying to edit this document instead?</Trans>
             ) : (
-              <Button variant="link" asChild>
-                <Link to="/">
-                  <Trans>Return Home</Trans>
-                </Link>
-              </Button>
+              <Trans>Return Home</Trans>
             )}
-          </div>
-        </div>
-      </div>
+          </Link>
+        </Button>
+      </SigningStatusPanel>
     </>
   );
 }

@@ -1324,6 +1324,10 @@ msgstr "访问已禁用"
 msgid "Access enabled"
 msgstr "访问已启用"
 
+#: apps/remix/app/routes/_unauthenticated+/signin.tsx
+msgid "Access your documents and pending signatures."
+msgstr "查看您的文档和待签署事项。"
+
 #: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
 #: apps/remix/app/components/general/org-menu-switcher.tsx
 #: apps/remix/app/components/general/unified-settings-layout.tsx
@@ -1466,7 +1470,7 @@ msgstr "有效订阅"
 
 #: apps/remix/app/components/tables/admin-document-recipient-item-table.tsx
 msgid "Activity"
-msgstr ""
+msgstr "活动记录"
 
 #: apps/remix/app/components/dialogs/team-email-add-dialog.tsx
 #: apps/remix/app/components/general/document/document-attachments-popover.tsx
@@ -2557,6 +2561,10 @@ msgstr "头像已更新"
 msgid "Awaiting email confirmation"
 msgstr "正在等待邮箱确认"
 
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Awaiting signature"
+msgstr "待签署"
+
 #: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
 #: apps/remix/app/components/dialogs/team-group-create-dialog.tsx
 #: apps/remix/app/components/dialogs/team-member-create-dialog.tsx
@@ -3234,6 +3242,10 @@ msgstr "关闭"
 #: apps/remix/app/components/general/document-signing/document-signing-page-view-v2.tsx
 msgid "Collapse sidebar"
 msgstr "折叠侧边栏"
+
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Collect signatures and keep an audit trail in one workspace, open source under AGPL-3.0."
+msgstr "在同一个工作区收集签名并保留审计记录。Documenso 按 AGPL-3.0 许可证开源。"
 
 #: apps/remix/app/components/forms/editor/editor-content-generic-field-forms.tsx
 msgid "Color"
@@ -4880,6 +4892,10 @@ msgstr "文档语言"
 msgid "Document Limit Exceeded!"
 msgstr "文档数量超出限制！"
 
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents._index.tsx
+msgid "Document list"
+msgstr "文档列表"
+
 #: apps/remix/app/routes/_authenticated+/admin+/stats.tsx
 msgid "Document metrics"
 msgstr "文档指标"
@@ -5310,6 +5326,10 @@ msgstr "草稿文档"
 #: apps/remix/app/routes/_authenticated+/admin+/stats.tsx
 msgid "Drafted Documents"
 msgstr "草稿文档数量"
+
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents._index.tsx
+msgid "Drafts"
+msgstr "草稿"
 
 #: packages/ui/primitives/document-dropzone.tsx
 msgid "Drag & drop your document here."
@@ -6168,6 +6188,10 @@ msgstr "所有人都已签署"
 msgid "Everyone has signed! You will receive an email copy of the signed document."
 msgstr "所有人都已签署！您将收到一份已签署文档的电子邮件副本。"
 
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Example agreement with a completed signature and a pending signature request"
+msgstr "示例协议，一处签名已完成，另一处等待签署"
+
 #: packages/ui/components/document/document-visibility-select.tsx
 msgid "Examples"
 msgstr ""
@@ -6491,6 +6515,10 @@ msgstr "填写详细信息以创建新的订阅声明。"
 msgid "Fill Opacity"
 msgstr ""
 
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents._index.tsx
+msgid "Filter by document status"
+msgstr "按文档状态筛选"
+
 #: apps/remix/app/routes/_authenticated+/admin+/email-domains._index.tsx
 msgid "Filter by status"
 msgstr "按状态筛选"
@@ -6537,7 +6565,7 @@ msgstr "文件夹更新成功"
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents.folders._index.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/templates.folders._index.tsx
 msgid "Folders"
-msgstr ""
+msgstr "文件夹"
 
 #: apps/remix/app/components/forms/editor/editor-field-initials-form.tsx
 msgid "Font Family"
@@ -6934,6 +6962,11 @@ msgstr ""
 msgid "Hide license key"
 msgstr "隐藏许可证密钥"
 
+#: apps/remix/app/components/general/document-signing/document-signing-mobile-widget.tsx
+#: apps/remix/app/components/general/document-signing/document-signing-page-view-v1.tsx
+msgid "Hide signing details"
+msgstr "隐藏签署详情"
+
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-content-drag-drop.tsx
 #: packages/lib/utils/envelope-content-translations.ts
 msgid "Highlight"
@@ -7110,6 +7143,10 @@ msgstr "重要：这意味着什么"
 #: apps/remix/app/components/general/public-legal-links.tsx
 msgid "Imprint"
 msgstr ""
+
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "In progress"
+msgstr "进行中"
 
 #: apps/remix/app/components/tables/user-billing-organisations-table.tsx
 #: packages/lib/constants/billing.ts
@@ -7807,6 +7844,10 @@ msgstr "管理直接链接"
 msgid "Manage documents"
 msgstr "管理文档"
 
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents._index.tsx
+msgid "Manage drafts, track signatures, and find completed agreements."
+msgstr "管理草稿、跟踪签署进度并查找已完成的协议。"
+
 #: apps/remix/app/routes/_authenticated+/settings+/security._index.tsx
 msgid "Manage linked accounts"
 msgstr "管理关联账户"
@@ -8206,11 +8247,11 @@ msgstr "姓名"
 
 #: apps/remix/app/components/general/folder/folder-sort-dropdown.tsx
 msgid "Name (A-Z)"
-msgstr ""
+msgstr "名称（A–Z）"
 
 #: apps/remix/app/components/general/folder/folder-sort-dropdown.tsx
 msgid "Name (Z-A)"
-msgstr ""
+msgstr "名称（Z–A）"
 
 #: apps/remix/app/components/dialogs/sign-field-name-dialog.tsx
 msgid "Name is required"
@@ -8282,7 +8323,7 @@ msgstr "新密码"
 
 #: apps/remix/app/components/general/folder/folder-sort-dropdown.tsx
 msgid "Newest first"
-msgstr ""
+msgstr "最新优先"
 
 #: apps/remix/app/components/dialogs/team-group-create-dialog.tsx
 #: apps/remix/app/components/dialogs/team-member-create-dialog.tsx
@@ -8561,6 +8602,10 @@ msgstr ""
 msgid "No teams yet"
 msgstr "还没有团队"
 
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/templates._index.tsx
+msgid "No templates yet"
+msgstr "暂无模板"
+
 #: apps/remix/app/components/general/webhook-multiselect-combobox.tsx
 msgid "No triggers available"
 msgstr "没有可用的触发器"
@@ -8679,7 +8724,7 @@ msgstr "关闭"
 
 #: apps/remix/app/components/general/folder/folder-sort-dropdown.tsx
 msgid "Oldest first"
-msgstr ""
+msgstr "最早优先"
 
 #: apps/remix/app/components/general/admin-global-settings-section.tsx
 msgid "On"
@@ -9092,6 +9137,10 @@ msgstr "已付费"
 msgctxt "Partially signed document (adjective)"
 msgid "Partial"
 msgstr "部分签署"
+
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Partnership agreement"
+msgstr "合作协议"
 
 #: apps/remix/app/components/forms/signin.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
@@ -9651,6 +9700,11 @@ msgstr "主要操作颜色。"
 msgid "Primary Foreground"
 msgstr "主前景色"
 
+#: apps/remix/app/components/general/app-nav-desktop.tsx
+#: apps/remix/app/components/general/app-nav-mobile.tsx
+msgid "Primary navigation"
+msgstr "主导航"
+
 #: apps/remix/app/components/forms/signup.tsx
 #: apps/remix/app/components/general/public-legal-links.tsx
 msgid "Privacy Policy"
@@ -9845,6 +9899,10 @@ msgstr "签署此字段需要重新验证身份"
 #: apps/remix/app/components/general/envelope-signing/envelope-signing-csc-status.tsx
 msgid "Reauthorise and retry"
 msgstr "重新授权并重试"
+
+#: apps/remix/app/routes/_authenticated+/inbox.tsx
+msgid "Received documents"
+msgstr "收到的文档"
 
 #: packages/ui/components/recipient/recipient-role-select.tsx
 msgid "Receives copy"
@@ -10547,6 +10605,10 @@ msgstr "返回登录"
 msgid "Return to templates"
 msgstr "返回模板列表"
 
+#: apps/remix/app/routes/_authenticated+/inbox.tsx
+msgid "Review and respond to documents people have sent you."
+msgstr "查看并处理他人发送给您的文档。"
+
 #: packages/email/templates/organisation-account-link-confirmation.tsx
 msgid "Review request"
 msgstr "审查请求"
@@ -10646,6 +10708,10 @@ msgstr "保存更改"
 msgid "Save failed"
 msgstr "保存失败"
 
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/templates._index.tsx
+msgid "Save reusable documents for agreements you send often."
+msgstr "将经常发送的协议保存为可重复使用的模板。"
+
 #: packages/ui/primitives/template-flow/add-template-fields.tsx
 msgid "Save Template"
 msgstr "保存模板"
@@ -10707,6 +10773,10 @@ msgstr "按组织名称搜索"
 msgid "Search by organisation name, URL or ID"
 msgstr "按组织名称、URL 或 ID 搜索"
 
+#: apps/remix/app/components/general/document/document-search.tsx
+msgid "Search documents"
+msgstr "搜索文档"
+
 #: apps/remix/app/components/general/app-command-menu.tsx
 msgid "Search documents, users, organisations…"
 msgstr ""
@@ -10760,8 +10830,12 @@ msgid "Search teams…"
 msgstr ""
 
 #: apps/remix/app/components/general/template/template-search.tsx
+msgid "Search templates"
+msgstr "搜索模板"
+
+#: apps/remix/app/components/general/template/template-search.tsx
 msgid "Search templates..."
-msgstr ""
+msgstr "搜索模板..."
 
 #: apps/remix/app/components/general/app-command-menu.tsx
 msgid "Search themes…"
@@ -11105,6 +11179,10 @@ msgstr "发送测试"
 msgid "Send Test Email"
 msgstr "发送测试邮件"
 
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Send, sign, and track your documents"
+msgstr "发送、签署和跟踪您的文档"
+
 #: apps/remix/app/components/tables/documents-table-sender-filter.tsx
 #: apps/remix/app/components/tables/documents-table.tsx
 #: apps/remix/app/components/tables/inbox-table.tsx
@@ -11173,6 +11251,10 @@ msgstr "设置密码"
 #: packages/email/template-components/template-admin-user-created.tsx
 msgid "Set Password"
 msgstr "设置密码"
+
+#: apps/remix/app/routes/_unauthenticated+/signup.tsx
+msgid "Set up your account to send and sign documents."
+msgstr "创建账号以发送和签署文档。"
 
 #: apps/remix/app/components/embed/authoring/configure-document-view.tsx
 msgid "Set up your document properties and recipient information"
@@ -11266,6 +11348,11 @@ msgstr ""
 #: apps/remix/app/components/general/admin-license-card.tsx
 msgid "Show license key"
 msgstr "显示许可证密钥"
+
+#: apps/remix/app/components/general/document-signing/document-signing-mobile-widget.tsx
+#: apps/remix/app/components/general/document-signing/document-signing-page-view-v1.tsx
+msgid "Show signing details"
+msgstr "显示签署详情"
 
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.public-profile.tsx
 msgid "Show templates in your public profile for your audience to sign and get started quickly"
@@ -11455,6 +11542,10 @@ msgstr "使用 OIDC 注册"
 msgid "Signature"
 msgstr "签名"
 
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Signature collected"
+msgstr "已收到签名"
+
 #: apps/remix/app/routes/_internal+/[__htmltopdf]+/certificate.tsx
 #: packages/lib/server-only/pdf/render-certificate.ts
 msgid "Signature ID"
@@ -11594,6 +11685,10 @@ msgstr ""
 #: packages/ui/primitives/template-flow/add-template-placeholder-recipients.tsx
 msgid "Signing order is enabled."
 msgstr "签署顺序已启用。"
+
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Signing preview"
+msgstr "签署预览"
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-settings-dialog.tsx
 msgid "Signing Reminders"
@@ -11828,23 +11923,23 @@ msgstr "抱歉，我们未能下载证书。请稍后再试。"
 
 #: apps/remix/app/components/general/folder/folder-sort-dropdown.tsx
 msgid "Sort"
-msgstr ""
+msgstr "排序"
 
 #: apps/remix/app/components/general/folder/folder-sort-dropdown.tsx
 msgid "Sort by <0>Name (A-Z)</0>"
-msgstr ""
+msgstr "按<0>名称（A–Z）</0>排序"
 
 #: apps/remix/app/components/general/folder/folder-sort-dropdown.tsx
 msgid "Sort by <0>Name (Z-A)</0>"
-msgstr ""
+msgstr "按<0>名称（Z–A）</0>排序"
 
 #: apps/remix/app/components/general/folder/folder-sort-dropdown.tsx
 msgid "Sort by <0>Newest first</0>"
-msgstr ""
+msgstr "按<0>最新优先</0>排序"
 
 #: apps/remix/app/components/general/folder/folder-sort-dropdown.tsx
 msgid "Sort by <0>Oldest first</0>"
-msgstr ""
+msgstr "按<0>最早优先</0>排序"
 
 #: apps/remix/app/components/general/template/template-page-view-documents-table.tsx
 #: apps/remix/app/components/tables/team-members-table.tsx
@@ -12384,6 +12479,10 @@ msgstr "模板 ID（旧版）"
 #: apps/remix/app/components/general/legacy-field-warning-popover.tsx
 msgid "Template is using legacy field insertion"
 msgstr "模板正在使用旧版字段插入方式"
+
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/templates._index.tsx
+msgid "Template library"
+msgstr "模板库"
 
 #: apps/remix/app/components/dialogs/envelope-rename-dialog.tsx
 msgid "Template Renamed"

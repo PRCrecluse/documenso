@@ -146,6 +146,7 @@ export const DocumentsTable = ({
   return (
     <div className="relative">
       <DataTable
+        className="workspace-table rounded-xl"
         columns={columns}
         data={results.data}
         perPage={results.perPage}

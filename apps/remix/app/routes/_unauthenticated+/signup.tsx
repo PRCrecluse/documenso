@@ -6,9 +6,11 @@ import {
 } from '@documenso/lib/constants/auth';
 import { isValidReturnTo, normalizeReturnTo } from '@documenso/lib/utils/is-valid-return-to';
 import { msg } from '@lingui/core/macro';
-import { redirect } from 'react-router';
+import { Trans } from '@lingui/react/macro';
+import { Link, redirect } from 'react-router';
 
 import { SignUpForm } from '~/components/forms/signup';
+import { AuthPage } from '~/components/general/auth-page';
 import { appMetaTags } from '~/utils/meta';
 
 import type { Route } from './+types/signup';
@@ -53,13 +55,29 @@ export default function SignUp({ loaderData }: Route.ComponentProps) {
   } = loaderData;
 
   return (
-    <SignUpForm
-      className="w-screen max-w-screen-2xl px-4 md:px-16 lg:-mt-16"
-      isEmailPasswordSignupEnabled={isEmailPasswordSignupEnabled}
-      isGoogleSignupEnabled={isGoogleSignupEnabled}
-      isMicrosoftSignupEnabled={isMicrosoftSignupEnabled}
-      isOidcSignupEnabled={isOidcSignupEnabled}
-      returnTo={returnTo}
-    />
+    <AuthPage
+      title={<Trans>Create a new account</Trans>}
+      description={<Trans>Set up your account to send and sign documents.</Trans>}
+    >
+      <SignUpForm
+        isEmailPasswordSignupEnabled={isEmailPasswordSignupEnabled}
+        isGoogleSignupEnabled={isGoogleSignupEnabled}
+        isMicrosoftSignupEnabled={isMicrosoftSignupEnabled}
+        isOidcSignupEnabled={isOidcSignupEnabled}
+        returnTo={returnTo}
+      />
+
+      <p className="mt-6 border-t pt-5 text-center text-muted-foreground text-sm">
+        <Trans>
+          Already have an account?{' '}
+          <Link
+            to={returnTo ? `/signin?returnTo=${encodeURIComponent(returnTo)}` : '/signin'}
+            className="rounded-sm font-medium text-documenso-700 underline-offset-4 hover:underline dark:text-documenso-300"
+          >
+            Sign in instead
+          </Link>
+        </Trans>
+      </p>
+    </AuthPage>
   );
 }

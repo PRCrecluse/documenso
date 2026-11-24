@@ -7,7 +7,7 @@ import { useLingui } from '@lingui/react';
 import { ReadStatus } from '@prisma/client';
 import { InboxIcon, MenuIcon, SearchIcon } from 'lucide-react';
 import { type HTMLAttributes, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router';
+import { Link, NavLink, useParams } from 'react-router';
 
 import { BrandingLogo } from '~/components/general/branding-logo';
 
@@ -58,31 +58,32 @@ export const Header = ({ className, fullWidth = false, ...props }: HeaderProps) 
     >
       <div
         className={cn(
-          'mx-auto flex h-14 w-full items-center justify-between gap-x-3 rounded-full border border-border bg-background/90 px-3 shadow-[0_10px_30px_-18px_hsl(230_45%_20%/0.55)] backdrop-blur-md md:px-4',
-          scrollY > 5 && 'shadow-[0_16px_40px_-20px_hsl(230_45%_20%/0.65)]',
-          fullWidth ? '' : 'max-w-screen-xl',
+          'mx-auto flex min-h-14 w-full items-center justify-between gap-2 rounded-2xl border bg-popover/95 px-3 backdrop-blur-md md:min-h-16 md:gap-3 md:px-4',
+          scrollY > 5 && 'shadow-sm',
+          !fullWidth && 'max-w-[77rem]',
         )}
         data-testid="app-header-container"
       >
         <Link
           to={getRootHref(params)}
-          className="hidden shrink-0 rounded-full ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:inline"
+          aria-label="Documenso"
+          className="shrink-0 rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         >
-          <BrandingLogo className="h-6 w-auto" />
+          <BrandingLogo aria-hidden="true" className="h-4 w-auto sm:h-5 md:h-6" />
         </Link>
 
         <AppNavDesktop setIsCommandMenuOpen={setIsCommandMenuOpen} />
 
-        <Button asChild variant="outline" className="relative hidden h-10 w-10 shrink-0 md:flex">
-          <Link to="/inbox" className="relative block h-10 w-10" aria-label={_(msg`Inbox`)}>
-            <InboxIcon className="h-5 w-5 flex-shrink-0 text-muted-foreground" />
+        <Button asChild variant="outline" className="relative hidden h-10 w-10 shrink-0 p-0 md:flex">
+          <NavLink to="/inbox" className="aria-[current=page]:bg-accent" aria-label={_(msg`Inbox`)}>
+            <InboxIcon aria-hidden="true" className="h-4 w-4 text-muted-foreground" />
 
             {unreadCountData && unreadCountData.count > 0 && (
               <span className="absolute -top-1.5 -right-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1 font-semibold text-primary-foreground text-xs tabular-nums leading-none">
                 {unreadCountData.count > 99 ? '99+' : unreadCountData.count}
               </span>
             )}
-          </Link>
+          </NavLink>
         </Button>
 
         <div className="md:ml-1">
