@@ -3777,6 +3777,10 @@ msgstr ""
 msgid "Could not connect to the Documenso embed. Close this window and try again."
 msgstr ""
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Couldn't find your answer?"
+msgstr "还没找到答案？"
+
 #: apps/remix/app/components/general/organisation-usage-reset-button.tsx
 msgid "Counter reset."
 msgstr "计数器已重置。"

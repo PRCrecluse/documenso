@@ -1,3 +1,4 @@
+import { formatPath } from '@documenso/lib/constants/app';
 import { msg } from '@lingui/core/macro';
 import { Trans, useLingui } from '@lingui/react/macro';
 import {
@@ -30,10 +31,25 @@ export const LandingFaq = () => {
           <Trans>Find out how Documenso handles signing, data, integrations, and support.</Trans>
         </p>
 
-        <a href="https://documen.so/question-cta" className="landing-text-link mt-5">
-          <Trans>Talk to us</Trans>
-          <ArrowUpRightIcon aria-hidden="true" className="size-4 shrink-0" />
-        </a>
+        <div className="landing-support-card">
+          <img
+            src={formatPath('/landing/support-workspace.jpg')}
+            alt=""
+            width={1200}
+            height={800}
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="landing-support-content">
+            <p>
+              <Trans>Couldn't find your answer?</Trans>
+            </p>
+            <a href="https://documen.so/question-cta" className="landing-text-link">
+              <Trans>Talk to us</Trans>
+              <ArrowUpRightIcon aria-hidden="true" className="size-4 shrink-0" />
+            </a>
+          </div>
+        </div>
       </div>
 
       <div className="landing-faq-list">
@@ -77,7 +93,7 @@ export const LandingBenefits = () => {
             <li key={title.id} className="landing-benefit">
               <div className="flex items-center justify-between gap-2.5">
                 <span className="landing-benefit-icon">
-                  <Icon aria-hidden="true" className="size-5" />
+                  <Icon aria-hidden="true" strokeWidth={1.45} className="size-10" />
                 </span>
                 {isRoadmap && (
                   <span className="landing-roadmap-label">

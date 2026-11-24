@@ -3772,6 +3772,10 @@ msgstr "Copy your token now. For security reasons you will not be able to see it
 msgid "Could not connect to the Documenso embed. Close this window and try again."
 msgstr "Could not connect to the Documenso embed. Close this window and try again."
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Couldn't find your answer?"
+msgstr "Couldn't find your answer?"
+
 #: apps/remix/app/components/general/organisation-usage-reset-button.tsx
 msgid "Counter reset."
 msgstr "Counter reset."

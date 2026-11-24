@@ -113,19 +113,21 @@ export const LandingPage = ({ isSignupEnabled }: { isSignupEnabled: boolean }) =
           </div>
         </div>
 
+        <div className="landing-product-band">
+          <LandingProductFeatures />
+        </div>
+        <LandingBenefits />
         <LandingTestimonials />
-        <LandingProductFeatures />
         <LandingIntegrations />
         <LandingFaq />
-        <LandingBenefits />
         <LandingClosingSection isSignupEnabled={isSignupEnabled} />
       </main>
 
       <footer className="landing-footer">
-        <div className="mx-auto flex max-w-[73rem] flex-col justify-between gap-6 px-5 py-8 sm:flex-row sm:items-center sm:px-6">
+        <div className="landing-footer-inner">
           <div>
-            <Link to="/" aria-label="Documenso" className="inline-block rounded-sm text-[var(--landing-ink)]">
-              <BrandingLogo aria-hidden="true" className="h-5 w-auto" />
+            <Link to="/" aria-label="Documenso" className="landing-footer-brand rounded-sm">
+              <BrandingLogo aria-hidden="true" className="h-auto w-full" />
             </Link>
             <p className="mt-2 text-sm">
               <Trans>Open-source document signing.</Trans>
