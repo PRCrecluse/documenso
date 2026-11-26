@@ -5,14 +5,14 @@ import { getDocumentAndSenderByToken } from '@documenso/lib/server-only/document
 import { isRecipientAuthorized } from '@documenso/lib/server-only/document/is-recipient-authorized';
 import { getFieldsForToken } from '@documenso/lib/server-only/field/get-fields-for-token';
 import { getRecipientByToken } from '@documenso/lib/server-only/recipient/get-recipient-by-token';
-import { Badge } from '@documenso/ui/primitives/badge';
 import { Button } from '@documenso/ui/primitives/button';
 import { Trans } from '@lingui/react/macro';
 import { FieldType } from '@prisma/client';
-import { XCircle } from 'lucide-react';
+import { CircleXIcon } from 'lucide-react';
 import { Link } from 'react-router';
 
 import { DocumentSigningAuthPageView } from '~/components/general/document-signing/document-signing-auth-page';
+import { SigningStatusPanel } from '~/components/general/document-signing/signing-status-panel';
 import { RecipientBranding } from '~/components/general/recipient-branding';
 import { useCspNonce } from '~/utils/nonce';
 import { truncateTitle } from '~/utils/truncate-title';
@@ -96,44 +96,35 @@ export default function RejectedSigningPage({ loaderData }: Route.ComponentProps
   return (
     <>
       <RecipientBranding branding={branding} cspNonce={cspNonce} />
-      <div className="flex flex-col items-center pt-24 lg:pt-36 xl:pt-44">
-        <Badge variant="neutral" size="default" className="mb-6 rounded-xl border bg-transparent">
-          {truncatedTitle}
-        </Badge>
+      <SigningStatusPanel
+        title={<Trans>Document Rejected</Trans>}
+        documentTitle={truncatedTitle}
+        icon={<CircleXIcon className="size-6 text-destructive" />}
+        className="my-8 sm:my-16"
+      >
+        <p className="mt-4 font-medium text-destructive text-sm">
+          <Trans>You have rejected this document</Trans>
+        </p>
 
-        <div className="flex flex-col items-center">
-          <div className="flex items-center gap-x-4">
-            <XCircle className="h-10 w-10 text-destructive" />
+        <p className="mt-3 max-w-lg text-muted-foreground text-sm leading-relaxed">
+          <Trans>
+            The document owner has been notified of your decision. They may contact you with further instructions if
+            necessary.
+          </Trans>
+        </p>
 
-            <h2 className="max-w-[35ch] text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
-              <Trans>Document Rejected</Trans>
-            </h2>
-          </div>
+        <p className="mt-2 max-w-lg text-muted-foreground text-sm leading-relaxed">
+          <Trans>No further action is required from you at this time.</Trans>
+        </p>
 
-          <div className="mt-4 flex items-center text-center text-destructive text-sm">
-            <Trans>You have rejected this document</Trans>
-          </div>
-
-          <p className="mt-6 max-w-[60ch] text-center text-muted-foreground text-sm">
-            <Trans>
-              The document owner has been notified of your decision. They may contact you with further instructions if
-              necessary.
-            </Trans>
-          </p>
-
-          <p className="mt-2 max-w-[60ch] text-center text-muted-foreground text-sm">
-            <Trans>No further action is required from you at this time.</Trans>
-          </p>
-
-          {user && (
-            <Button className="mt-6" asChild>
-              <Link to={`/`}>
-                <Trans>Return Home</Trans>
-              </Link>
-            </Button>
-          )}
-        </div>
-      </div>
+        {user && (
+          <Button className="mt-6" asChild>
+            <Link to="/">
+              <Trans>Return Home</Trans>
+            </Link>
+          </Button>
+        )}
+      </SigningStatusPanel>
     </>
   );
 }

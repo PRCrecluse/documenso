@@ -1,10 +1,11 @@
+import { cn } from '@documenso/ui/lib/utils';
 import { Button } from '@documenso/ui/primitives/button';
 
-import { Plural, Trans } from '@lingui/react/macro';
+import { Plural, Trans, useLingui } from '@lingui/react/macro';
 import { RecipientRole } from '@prisma/client';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { LucideChevronDown, LucideChevronUp } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { match } from 'ts-pattern';
 
 import { useEmbedSigningContext } from '~/components/embed/embed-signing-context';
@@ -16,8 +17,11 @@ import { useRequiredEnvelopeSigningContext } from './envelope-signing-provider';
 
 export const DocumentSigningMobileWidget = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const widgetDetailsId = useId();
+  const shouldReduceMotion = useReducedMotion();
+  const { t } = useLingui();
 
-  const { hidePoweredBy = true } = useEmbedSigningContext() || {};
+  const { hidePoweredBy = true, isEmbed = false } = useEmbedSigningContext() || {};
 
   const { recipientFieldsRemaining, recipient, requiredRecipientFields } = useRequiredEnvelopeSigningContext();
 
@@ -31,19 +35,33 @@ export const DocumentSigningMobileWidget = () => {
   }, []);
 
   return (
-    <div className="pointer-events-none fixed right-0 bottom-0 left-0 z-50 flex justify-center px-2 pb-2 sm:px-4 sm:pb-6">
+    <div
+      className={cn(
+        'pointer-events-none fixed right-0 bottom-0 left-0 z-50 flex justify-center px-2 pb-2 sm:px-4 sm:pb-6',
+        !isEmbed && 'pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:pb-[max(1.5rem,env(safe-area-inset-bottom))]',
+      )}
+    >
       <div className="pointer-events-auto w-full max-w-[760px]">
-        <div className="overflow-hidden rounded-xl border border-border bg-card shadow-2xl">
+        <div
+          className={cn(
+            'border border-border shadow-2xl',
+            isEmbed
+              ? 'overflow-hidden rounded-xl bg-card'
+              : 'max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-2xl bg-popover text-popover-foreground',
+          )}
+        >
           {/* Main Header Bar */}
-          <div className="flex items-center justify-between gap-4 p-4">
-            <div className="flex-1">
-              <div className="flex items-center gap-3">
+          <div className={cn('flex items-center justify-between p-4', isEmbed ? 'gap-4' : 'gap-2 sm:gap-4')}>
+            <div className="min-w-0 flex-1">
+              <div className={cn('flex items-center', isEmbed ? 'gap-3' : 'gap-2 sm:gap-3')}>
                 {recipient.role !== RecipientRole.VIEWER && (
                   <Button
                     variant="outline"
                     onClick={() => setIsExpanded(!isExpanded)}
-                    className="flex h-8 w-8 items-center justify-center"
-                    aria-label={isExpanded ? 'Collapse' : 'Expand'}
+                    className="flex h-8 w-8 shrink-0 items-center justify-center"
+                    aria-label={isExpanded ? t`Hide signing details` : t`Show signing details`}
+                    aria-expanded={isExpanded}
+                    aria-controls={isExpanded ? widgetDetailsId : undefined}
                   >
                     {isExpanded ? (
                       <LucideChevronDown className="h-5 w-5 flex-shrink-0 text-muted-foreground" />
@@ -54,7 +72,7 @@ export const DocumentSigningMobileWidget = () => {
                 )}
 
                 <div>
-                  <h2 className="font-semibold text-foreground text-lg">
+                  <h2 className={cn('font-semibold text-foreground', isEmbed ? 'text-lg' : 'text-base')}>
                     {match(recipient.role)
                       .with(RecipientRole.VIEWER, () => <Trans>View Document</Trans>)
                       .with(RecipientRole.SIGNER, () => <Trans>Sign Document</Trans>)
@@ -63,7 +81,7 @@ export const DocumentSigningMobileWidget = () => {
                       .otherwise(() => null)}
                   </h2>
 
-                  <p className="-mt-0.5 text-muted-foreground text-sm">
+                  <p className={cn('text-muted-foreground', isEmbed ? '-mt-0.5 text-sm' : 'mt-0.5 text-xs')}>
                     {recipientFieldsRemaining.length === 0 ? (
                       match(recipient.role)
                         .with(RecipientRole.VIEWER, () => <Trans>Please mark as viewed to complete</Trans>)
@@ -91,11 +109,11 @@ export const DocumentSigningMobileWidget = () => {
           {/* Progress Bar */}
           {recipient.role !== RecipientRole.VIEWER && recipient.role !== RecipientRole.ASSISTANT && (
             <div className="px-4 pb-3">
-              <div className="relative h-[4px] rounded-md bg-muted">
+              <div className="relative h-1 overflow-hidden rounded-full bg-muted">
                 <motion.div
-                  layout="size"
-                  layoutId="document-signing-mobile-widget-progress-bar"
-                  className="absolute inset-y-0 left-0 bg-primary"
+                  layout={shouldReduceMotion ? false : 'size'}
+                  layoutId={shouldReduceMotion ? undefined : 'document-signing-mobile-widget-progress-bar'}
+                  className="absolute inset-y-0 left-0 rounded-full bg-primary"
                   style={{
                     width: `${requiredRecipientFields.length === 0 ? 100 : 100 - (100 / requiredRecipientFields.length) * (recipientFieldsRemaining.length ?? 0)}%`,
                   }}
@@ -106,7 +124,10 @@ export const DocumentSigningMobileWidget = () => {
 
           {/* Expandable Content */}
           {isExpanded && (
-            <div className="slide-in-from-bottom-2 animate-in border-border border-t p-4 duration-200">
+            <div
+              id={widgetDetailsId}
+              className="slide-in-from-bottom-2 animate-in border-border border-t p-4 duration-200 motion-reduce:animate-none"
+            >
               <EnvelopeSignerForm />
 
               {!hidePoweredBy && (

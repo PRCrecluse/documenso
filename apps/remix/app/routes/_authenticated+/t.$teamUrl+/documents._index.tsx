@@ -1,17 +1,19 @@
 import { useSessionStorage } from '@documenso/lib/client-only/hooks/use-session-storage';
+import { STATS_COUNT_CAP } from '@documenso/lib/constants/document';
 import { SKIP_QUERY_BATCH_META } from '@documenso/lib/constants/trpc';
-import { formatAvatarUrl } from '@documenso/lib/utils/avatars';
 import { formatDocumentsPath } from '@documenso/lib/utils/teams';
 import { ExtendedDocumentStatus } from '@documenso/prisma/types/extended-document-status';
 import { trpc } from '@documenso/trpc/react';
 import type { TFindDocumentsInternalResponse } from '@documenso/trpc/server/document-router/find-documents-internal.types';
-import { Avatar, AvatarFallback, AvatarImage } from '@documenso/ui/primitives/avatar';
+import { cn } from '@documenso/ui/lib/utils';
 import { Button } from '@documenso/ui/primitives/button';
 import type { RowSelectionState } from '@documenso/ui/primitives/data-table';
+import { Skeleton } from '@documenso/ui/primitives/skeleton';
 import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { EnvelopeType, FolderType, type DocumentStatus as PrismaDocumentStatus } from '@prisma/client';
-import { XIcon } from 'lucide-react';
+import { CircleCheckIcon, Clock3Icon, FilePenLineIcon, FilesIcon, XIcon } from 'lucide-react';
 import { useQueryStates } from 'nuqs';
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
@@ -25,7 +27,8 @@ import {
 import { EnvelopesBulkMoveDialog } from '~/components/dialogs/envelopes-bulk-move-dialog';
 import { DocumentSearch } from '~/components/general/document/document-search';
 import { EnvelopeDropZoneWrapper } from '~/components/general/envelope/envelope-drop-zone-wrapper';
-import { FolderGrid } from '~/components/general/folder/folder-grid';
+import { FolderGrid, FolderGridActions } from '~/components/general/folder/folder-grid';
+import { WorkspacePageHeader } from '~/components/general/workspace-page-header';
 import { DocumentsTable } from '~/components/tables/documents-table';
 import { DocumentsTableEmptyState } from '~/components/tables/documents-table-empty-state';
 import { DocumentsTablePeriodFilter } from '~/components/tables/documents-table-period-filter';
@@ -76,17 +79,6 @@ export default function DocumentsPage() {
   const selectedEnvelopeIds = useMemo(() => {
     return Object.keys(rowSelection).filter((id) => rowSelection[id]);
   }, [rowSelection]);
-
-  const [stats, setStats] = useState<TFindDocumentsInternalResponse['stats']>({
-    [ExtendedDocumentStatus.DRAFT]: 0,
-    [ExtendedDocumentStatus.PENDING]: 0,
-    [ExtendedDocumentStatus.COMPLETED]: 0,
-    [ExtendedDocumentStatus.REJECTED]: 0,
-    [ExtendedDocumentStatus.CANCELLED]: 0,
-    [ExtendedDocumentStatus.EXPIRED]: 0,
-    [ExtendedDocumentStatus.INBOX]: 0,
-    [ExtendedDocumentStatus.ALL]: 0,
-  });
 
   const [findDocumentSearchParams, setFindDocumentSearchParams] = useQueryStates(documentsSearchParams, {
     history: 'push',
@@ -170,65 +162,76 @@ export default function DocumentsPage() {
     });
   };
 
-  useEffect(() => {
-    if (data?.stats) {
-      setStats(data.stats);
-    }
-  }, [data?.stats]);
+  const selectedStatus = findDocumentSearchParams.status ?? ExtendedDocumentStatus.ALL;
 
   return (
     <EnvelopeDropZoneWrapper type={EnvelopeType.DOCUMENT}>
-      <div className="mx-auto w-full max-w-screen-xl px-4 md:px-8">
-        <FolderGrid type={FolderType.DOCUMENT} parentId={folderId ?? null} />
+      <div className="mx-auto w-full max-w-screen-xl px-3 md:px-6">
+        <div className="workspace-frame rounded-2xl border sm:rounded-3xl">
+          <WorkspacePageHeader
+            eyebrow={team.name}
+            title={<Trans>Documents</Trans>}
+            description={<Trans>Manage drafts, track signatures, and find completed agreements.</Trans>}
+            actions={<FolderGridActions type={FolderType.DOCUMENT} parentId={folderId ?? null} />}
+          />
 
-        <div className="mt-8 flex flex-row items-center">
-          <Avatar className="mr-3 h-12 w-12 border-2 border-white border-solid dark:border-border">
-            {team.avatarImageId && <AvatarImage src={formatAvatarUrl(team.avatarImageId)} />}
-            <AvatarFallback className="text-muted-foreground text-xs">{team.name.slice(0, 1)}</AvatarFallback>
-          </Avatar>
+          <div className="space-y-7 px-5 py-6 sm:px-8 sm:py-8 lg:px-10">
+            <DocumentCountSummary
+              stats={data?.stats}
+              selectedStatus={selectedStatus}
+              onSelect={(status) => {
+                void setFindDocumentSearchParams({
+                  status: status === ExtendedDocumentStatus.ALL ? null : status,
+                  page: null,
+                });
+              }}
+            />
 
-          <h1 className="font-semibold text-2xl leading-tight tracking-tight md:text-3xl">
-            <Trans>Documents</Trans>
-          </h1>
-        </div>
+            <FolderGrid type={FolderType.DOCUMENT} parentId={folderId ?? null} />
 
-        <div className="mt-8 flex flex-wrap items-center gap-x-2 gap-y-4">
-          <div className="w-56">
-            <DocumentSearch />
-          </div>
+            <section aria-labelledby="documents-list-heading">
+              <h2 id="documents-list-heading" className="mb-3 font-semibold text-lg tracking-tight">
+                <Trans>Document list</Trans>
+              </h2>
 
-          <DocumentsTableStatusFilter stats={stats} />
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="w-full sm:w-56">
+                  <DocumentSearch />
+                </div>
 
-          {team && <DocumentsTableSenderFilter teamId={team.id} />}
+                <DocumentsTableStatusFilter stats={data?.stats} />
 
-          <DocumentsTablePeriodFilter />
+                {team && <DocumentsTableSenderFilter teamId={team.id} />}
 
-          {hasActiveFilters && (
-            <Button variant="ghost" className="px-2 text-muted-foreground lg:px-3" onClick={onResetFilters}>
-              <Trans>Reset</Trans>
-              <XIcon className="ml-1 h-4 w-4" />
-            </Button>
-          )}
-        </div>
+                <DocumentsTablePeriodFilter />
 
-        <div className="mt-8">
-          <div>
-            {data && data.count === 0 ? (
-              <DocumentsTableEmptyState status={findDocumentSearchParams.status ?? ExtendedDocumentStatus.ALL} />
-            ) : (
-              <DocumentsTable
-                data={data}
-                isLoading={isLoading}
-                isLoadingError={isLoadingError}
-                onMoveDocument={(envelopeId) => {
-                  setDocumentToMove(envelopeId);
-                  setIsMovingDocument(true);
-                }}
-                enableSelection
-                rowSelection={rowSelection}
-                onRowSelectionChange={setRowSelection}
-              />
-            )}
+                {hasActiveFilters && (
+                  <Button variant="ghost" className="px-2 text-muted-foreground lg:px-3" onClick={onResetFilters}>
+                    <Trans>Reset</Trans>
+                    <XIcon className="ml-1 h-4 w-4" />
+                  </Button>
+                )}
+              </div>
+
+              <div className="mt-4">
+                {data && data.count === 0 ? (
+                  <DocumentsTableEmptyState status={selectedStatus} />
+                ) : (
+                  <DocumentsTable
+                    data={data}
+                    isLoading={isLoading}
+                    isLoadingError={isLoadingError}
+                    onMoveDocument={(envelopeId) => {
+                      setDocumentToMove(envelopeId);
+                      setIsMovingDocument(true);
+                    }}
+                    enableSelection
+                    rowSelection={rowSelection}
+                    onRowSelectionChange={setRowSelection}
+                  />
+                )}
+              </div>
+            </section>
           </div>
         </div>
 
@@ -302,3 +305,61 @@ export default function DocumentsPage() {
     </EnvelopeDropZoneWrapper>
   );
 }
+
+type DocumentCountSummaryProps = {
+  stats?: TFindDocumentsInternalResponse['stats'];
+  selectedStatus: ExtendedDocumentStatus;
+  onSelect: (status: ExtendedDocumentStatus) => void;
+};
+
+const DocumentCountSummary = ({ stats, selectedStatus, onSelect }: DocumentCountSummaryProps) => {
+  const { _, i18n } = useLingui();
+
+  const numberFormat = new Intl.NumberFormat(i18n.locale);
+
+  return (
+    <fieldset className="min-w-0">
+      <legend className="sr-only">{_(msg`Filter by document status`)}</legend>
+
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
+        {DOCUMENT_STATUS_CARDS.map(({ status, label, icon: Icon }) => {
+          const count = stats?.[status];
+          const isSelected = selectedStatus === status;
+
+          return (
+            <button
+              key={status}
+              type="button"
+              aria-pressed={isSelected}
+              onClick={() => onSelect(status)}
+              className={cn(
+                'flex min-w-0 flex-col gap-3 rounded-xl border bg-popover p-3 text-start transition-colors hover:border-primary/40 hover:bg-accent sm:p-4',
+                isSelected && 'border-primary/30 bg-accent',
+              )}
+            >
+              <span className="flex min-w-0 items-start gap-2 font-medium text-muted-foreground text-sm">
+                <Icon aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-documenso dark:text-documenso-300" />
+                <span className="min-w-0 break-words">{_(label)}</span>
+              </span>
+              {count === undefined ? (
+                <Skeleton aria-hidden="true" className="h-7 w-8" />
+              ) : (
+                <span className="font-semibold text-2xl tabular-nums leading-7 tracking-tight sm:text-3xl">
+                  {numberFormat.format(count)}
+                  {count >= STATS_COUNT_CAP ? '+' : ''}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+    </fieldset>
+  );
+};
+
+const DOCUMENT_STATUS_CARDS = [
+  { status: ExtendedDocumentStatus.ALL, label: msg`All documents`, icon: FilesIcon },
+  { status: ExtendedDocumentStatus.DRAFT, label: msg`Drafts`, icon: FilePenLineIcon },
+  { status: ExtendedDocumentStatus.PENDING, label: msg`Pending`, icon: Clock3Icon },
+  { status: ExtendedDocumentStatus.COMPLETED, label: msg`Completed`, icon: CircleCheckIcon },
+];

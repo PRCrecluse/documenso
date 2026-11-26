@@ -61,6 +61,18 @@ msgstr "“{title}”已成功删除"
 msgid "\"{title}\" has been successfully hidden"
 msgstr "“{title}”已成功隐藏"
 
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "“Documenso has streamlined our digital signing process, making it faster, secure, and incredibly user-friendly. It's been a game-changer for our team, partners, and customers!”"
+msgstr "“Documenso 简化了我们的数字签署流程，让签署更快、更安全，而且非常易用。对我们的团队、合作伙伴和客户来说，这是一次突破！”"
+
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "“Documenso is awesome - easy to use & understand. The source code is open!! If I'm confused by any documentation, I can directly read the code to understand what is happening underneath. The team ships fast and feature improvements are always coming!”"
+msgstr "“Documenso 很棒，简单易用，也很好理解。它的源代码是开放的！如果对文档有疑问，我可以直接读代码，了解背后的运行原理。团队发布更新很快，也一直在改进功能！”"
+
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "“It has been great working with Documenso! The team built an amazing product fitting our needs. They really get what it means to build for enterprise and keep shipping amazing stuff that makes our life easier.”"
+msgstr "“与 Documenso 合作非常愉快！他们的团队打造了一款出色的产品，满足了我们的需求。他们真正懂得企业产品该怎么做，也不断推出出色的功能，让我们的工作更轻松。”"
+
 #: apps/remix/app/components/forms/email-preferences-form.tsx
 msgid "\"Team Name\" has invited you to sign \"example document\"."
 msgstr "“Team Name”已邀请您签署“example document”。"
@@ -1027,6 +1039,14 @@ msgstr "1 个月"
 msgid "12 months"
 msgstr "12 个月"
 
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "21 CFR Part 11"
+msgstr "21 CFR Part 11"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "21 CFR Part 11 controls require an Enterprise license and configuration."
+msgstr "21 CFR Part 11 所要求的控制措施需要企业版许可证及相应配置。"
+
 #: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
 msgid "2FA"
 msgstr "2FA"
@@ -1125,6 +1145,10 @@ msgstr "6 个月"
 msgid "7 days"
 msgstr "7 天"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "A clear signing experience"
+msgstr "简洁明了的签署体验"
+
 #: apps/remix/app/components/forms/password.tsx
 msgid "A code is required"
 msgstr ""
@@ -1211,6 +1235,14 @@ msgstr "有新成员已加入您的组织 {organisationName}"
 #: apps/remix/app/routes/_unauthenticated+/check-email.tsx
 msgid "A password reset email has been sent, if you have an account you should see it in your inbox shortly."
 msgstr "如果你拥有账号，重置密码邮件已发送，很快就会出现在你的收件箱中。"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "A planned community store for finding and sharing document templates."
+msgstr "计划推出社区模板商店，供大家查找和分享文档模板。"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "A planned Stripe integration for collecting payments alongside signing."
+msgstr "计划集成 Stripe，在签署流程中收款。"
 
 #: packages/email/template-components/template-recipient-removed-by-admin.tsx
 #: packages/lib/jobs/definitions/emails/send-admin-recipient-removed-emails.handler.ts
@@ -1323,6 +1355,10 @@ msgstr "访问已禁用"
 #: apps/remix/app/components/dialogs/team-inherit-member-enable-dialog.tsx
 msgid "Access enabled"
 msgstr "访问已启用"
+
+#: apps/remix/app/routes/_unauthenticated+/signin.tsx
+msgid "Access your documents and pending signatures."
+msgstr "查看您的文档和待签署事项。"
 
 #: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
 #: apps/remix/app/components/general/org-menu-switcher.tsx
@@ -1466,7 +1502,7 @@ msgstr "有效订阅"
 
 #: apps/remix/app/components/tables/admin-document-recipient-item-table.tsx
 msgid "Activity"
-msgstr ""
+msgstr "活动记录"
 
 #: apps/remix/app/components/dialogs/team-email-add-dialog.tsx
 #: apps/remix/app/components/general/document/document-attachments-popover.tsx
@@ -2557,6 +2593,10 @@ msgstr "头像已更新"
 msgid "Awaiting email confirmation"
 msgstr "正在等待邮箱确认"
 
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Awaiting signature"
+msgstr "待签署"
+
 #: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
 #: apps/remix/app/components/dialogs/team-group-create-dialog.tsx
 #: apps/remix/app/components/dialogs/team-member-create-dialog.tsx
@@ -2752,6 +2792,10 @@ msgstr "品牌 URL"
 msgid "Browser"
 msgstr "浏览器"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Build on top"
+msgstr "在 Documenso 上开发"
+
 #: apps/remix/app/components/general/document/document-recipient-link-copy-dialog.tsx
 msgid "Bulk Copy"
 msgstr "批量复制"
@@ -2815,6 +2859,14 @@ msgstr ""
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
 msgid "By using the electronic signature feature, you are consenting to conduct transactions and receive disclosures electronically. You acknowledge that your electronic signature on documents is binding and that you accept the terms outlined in the documents you are signing."
 msgstr "使用电子签名功能，即表示你同意以电子方式进行交易并接收披露文件。你确认你在文档上的电子签名具有约束力，并接受所签署文档中列明的条款。"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Can I cancel a document after sending it?"
+msgstr "文档发出后可以取消吗？"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Can I connect Documenso to my other tools?"
+msgstr "可以将 Documenso 与其他工具连接吗？"
 
 #: packages/ui/components/recipient/recipient-role-select.tsx
 msgid "Can prepare"
@@ -3054,6 +3106,10 @@ msgstr "字符限制"
 msgid "Charts"
 msgstr "图表"
 
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Check a completed PDF’s digital signature in a compatible reader and review the signing audit trail."
+msgstr "在兼容的阅读器中验证已完成 PDF 的数字签名，并查看签署审计记录。"
+
 #: apps/remix/app/components/forms/password-setup-request-button.tsx
 #: apps/remix/app/components/forms/password-setup-request.tsx
 msgid "Check your email"
@@ -3231,13 +3287,29 @@ msgstr "客户端密钥为必填项"
 msgid "Close"
 msgstr "关闭"
 
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "Co-Founder & CEO, Vial Inc."
+msgstr "Vial Inc. 联合创始人兼首席执行官"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Collaborate in shared teams and control who can see sensitive documents with roles and visibility settings."
+msgstr "在团队中协作，通过角色和可见性设置控制谁可以查看敏感文档。"
+
 #: apps/remix/app/components/general/document-signing/document-signing-page-view-v2.tsx
 msgid "Collapse sidebar"
 msgstr "折叠侧边栏"
 
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Collect signatures and keep an audit trail in one workspace, open source under AGPL-3.0."
+msgstr "在同一个工作区收集签名并保留审计记录。Documenso 按 AGPL-3.0 许可证开源。"
+
 #: apps/remix/app/components/forms/editor/editor-content-generic-field-forms.tsx
 msgid "Color"
 msgstr ""
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Coming soon"
+msgstr "即将推出"
 
 #: apps/remix/app/components/general/admin-email-blocklist-section.tsx
 msgid "Comma-separated list of email domains to block from signing up."
@@ -3246,6 +3318,10 @@ msgstr "用逗号分隔的邮箱域名列表，这些域名将被禁止注册。
 #: apps/remix/app/components/embed/authoring/configure-document-advanced-settings.tsx
 msgid "Communication"
 msgstr "通信"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Community support is available through GitHub and Discord. Hosted plans and enterprise licenses may include direct support."
+msgstr "您可以通过 GitHub 和 Discord 获得社区支持。托管方案和企业版许可证可能包含直接支持。"
 
 #: apps/remix/app/components/general/settings-upsell/branding-upsell.tsx
 msgid "Company details"
@@ -3449,6 +3525,10 @@ msgstr "确认邮箱"
 msgid "Confirmation email sent"
 msgstr "确认邮件已发送"
 
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "Connect your existing workflows through Zapier, or embed signing in the framework you already use."
+msgstr "通过 Zapier 连接现有工作流，或在您当前使用的框架中嵌入签署功能。"
+
 #: apps/remix/app/routes/embed+/auth+/popup.tsx
 msgid "Connecting to the embed..."
 msgstr ""
@@ -3603,6 +3683,10 @@ msgstr "控制签署文档时允许使用哪些类型的签名。"
 msgid "Controls which team members can view and access this document. The document owner and assigned recipients will always have access."
 msgstr ""
 
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "COO, Prisma Inc."
+msgstr "Prisma Inc. 首席运营官"
+
 #: apps/remix/app/components/general/document/document-recipient-link-copy-dialog.tsx
 #: packages/ui/primitives/document-flow/add-subject.tsx
 msgid "Copied"
@@ -3693,6 +3777,10 @@ msgstr ""
 msgid "Could not connect to the Documenso embed. Close this window and try again."
 msgstr ""
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Couldn't find your answer?"
+msgstr "还没找到答案？"
+
 #: apps/remix/app/components/general/organisation-usage-reset-button.tsx
 msgid "Counter reset."
 msgstr "计数器已重置。"
@@ -3763,9 +3851,17 @@ msgstr "创建一个组织以开始使用。"
 msgid "Create and manage API tokens. See our <0>documentation</0> for more information."
 msgstr ""
 
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Create and manage teams"
+msgstr "创建和管理团队"
+
 #: apps/remix/app/components/dialogs/template-use-dialog.tsx
 msgid "Create and send"
 msgstr "创建并发送"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Create and send documents, track signing progress, and retrieve signed PDFs from your application."
+msgstr "直接在您的应用中创建和发送文档、跟踪签署进度，并获取已签署的 PDF。"
 
 #: apps/remix/app/components/dialogs/token-create-dialog.tsx
 msgid "Create API token"
@@ -3915,6 +4011,10 @@ msgstr "创建你的账号，开始使用最先进的文档签署功能。"
 #: apps/remix/app/components/forms/signup.tsx
 msgid "Create your account and start using state-of-the-art document signing. Open and beautiful signing is within your grasp."
 msgstr "创建你的账号，开始使用最先进的文档签署功能。开放且优雅的签署体验触手可及。"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Create, send, and sign documents"
+msgstr "创建、发送和签署文档"
 
 #: apps/remix/app/components/dialogs/public-profile-template-manage-dialog.tsx
 #: apps/remix/app/components/general/document/document-page-view-information.tsx
@@ -4549,6 +4649,10 @@ msgstr "直接链接模板包含一个动态收件人占位符。任何获得此
 msgid "Direct links associated with templates will be removed"
 msgstr "与模板关联的直接链接将被移除"
 
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Direct Links guide"
+msgstr "直接链接指南"
+
 #: apps/remix/app/components/dialogs/template-direct-link-dialog.tsx
 msgid "Direct template link deleted"
 msgstr "直接模板链接已删除"
@@ -4646,6 +4750,14 @@ msgstr "DNS 记录"
 #: apps/remix/app/routes/_unauthenticated+/team.verify.email.$token.tsx
 msgid "Do not proceed if you are unsure about this request."
 msgstr ""
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Documenso API"
+msgstr "Documenso API"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Documenso digitally signs PDFs with certificates and records signing activity in an audit trail. You can also configure how recipients authenticate before accessing or signing a document."
+msgstr "Documenso 使用证书为 PDF 加上数字签名，并在审计记录中保留签署活动。您还可以设置收件人在访问或签署文档前的身份验证方式。"
 
 #: apps/remix/app/components/general/admin-license-card.tsx
 msgid "Documenso License"
@@ -4879,6 +4991,10 @@ msgstr "文档语言"
 #: apps/remix/app/components/tables/templates-table.tsx
 msgid "Document Limit Exceeded!"
 msgstr "文档数量超出限制！"
+
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents._index.tsx
+msgid "Document list"
+msgstr "文档列表"
 
 #: apps/remix/app/routes/_authenticated+/admin+/stats.tsx
 msgid "Document metrics"
@@ -5311,6 +5427,10 @@ msgstr "草稿文档"
 msgid "Drafted Documents"
 msgstr "草稿文档数量"
 
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents._index.tsx
+msgid "Drafts"
+msgstr "草稿"
+
 #: packages/ui/primitives/document-dropzone.tsx
 msgid "Drag & drop your document here."
 msgstr "将您的文档拖放到此处。"
@@ -5723,6 +5843,10 @@ msgstr ""
 #: apps/remix/app/routes/_authenticated+/settings+/security.sessions.tsx
 msgid "Embed sessions"
 msgstr ""
+
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "Embedded signing"
+msgstr "嵌入式签署"
 
 #: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
 msgid "Embedding, 5 members included and more"
@@ -6168,6 +6292,10 @@ msgstr "所有人都已签署"
 msgid "Everyone has signed! You will receive an email copy of the signed document."
 msgstr "所有人都已签署！您将收到一份已签署文档的电子邮件副本。"
 
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Example agreement with a completed signature and a pending signature request"
+msgstr "示例协议，一处签名已完成，另一处等待签署"
+
 #: packages/ui/components/document/document-visibility-select.tsx
 msgid "Examples"
 msgstr ""
@@ -6218,6 +6346,18 @@ msgstr ""
 #: apps/remix/app/components/general/document-signing/access-auth-2fa-form.tsx
 msgid "Expires in {0}"
 msgstr "将在 {0} 后过期"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Explore integrations"
+msgstr "了解集成方式"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Explore team permissions"
+msgstr "了解团队权限"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Explore templates"
+msgstr "了解模板"
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-settings-dialog.tsx
 #: packages/ui/primitives/document-flow/add-settings.tsx
@@ -6375,6 +6515,10 @@ msgstr "失败：{failedCount}"
 msgid "Fair use limit exceeded"
 msgstr "已超出合理使用限制"
 
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "FAQ"
+msgstr "常见问题"
+
 #: apps/remix/app/components/forms/subscription-claim-form.tsx
 #: apps/remix/app/components/tables/admin-claims-table.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
@@ -6491,9 +6635,17 @@ msgstr "填写详细信息以创建新的订阅声明。"
 msgid "Fill Opacity"
 msgstr ""
 
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents._index.tsx
+msgid "Filter by document status"
+msgstr "按文档状态筛选"
+
 #: apps/remix/app/routes/_authenticated+/admin+/email-domains._index.tsx
 msgid "Filter by status"
 msgstr "按状态筛选"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Find out how Documenso handles signing, data, integrations, and support."
+msgstr "了解 Documenso 的签署流程、数据处理、集成方式和支持选项。"
 
 #: apps/remix/app/components/forms/branding-preferences-form.tsx
 msgid "Focus ring colour."
@@ -6537,7 +6689,7 @@ msgstr "文件夹更新成功"
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents.folders._index.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/templates.folders._index.tsx
 msgid "Folders"
-msgstr ""
+msgstr "文件夹"
 
 #: apps/remix/app/components/forms/editor/editor-field-initials-form.tsx
 msgid "Font Family"
@@ -6557,6 +6709,10 @@ msgstr ""
 #: packages/ui/primitives/document-flow/field-items-advanced-settings/text-field.tsx
 msgid "Font Size"
 msgstr "字体大小"
+
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Footer navigation"
+msgstr "页脚导航"
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
 msgid "For any questions regarding this disclosure, electronic signatures, or any related process, please contact us at: <0>{SUPPORT_EMAIL}</0>"
@@ -6621,6 +6777,10 @@ msgstr "免费签名设置"
 msgid "French"
 msgstr "法语"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Frequently asked questions"
+msgstr "常见问题"
+
 #: apps/remix/app/components/tables/admin-email-transports-table.tsx
 msgid "From"
 msgstr "发件人"
@@ -6632,6 +6792,14 @@ msgstr "发件地址"
 #: apps/remix/app/components/forms/email-transport-form.tsx
 msgid "From name"
 msgstr "发件人名称"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "From the first draft to the final signature"
+msgstr "从起草到完成签署"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Full name"
+msgstr "全名"
 
 #: apps/remix/app/components/embed/embed-direct-template-client-page.tsx
 #: apps/remix/app/components/embed/embed-document-signing-page-v1.tsx
@@ -6674,6 +6842,18 @@ msgstr "生成链接"
 #: packages/lib/constants/i18n.ts
 msgid "German"
 msgstr "德语"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Get paid"
+msgstr "收款"
+
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Get started"
+msgstr "开始使用"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Give recipients a straightforward path from reviewing a document to signing it."
+msgstr "让收件人轻松完成从查看到签署文档的流程。"
 
 #: apps/remix/app/components/general/settings-upsell/sso-portal-upsell.tsx
 msgid "Give your members a dedicated single sign-on portal. The SSO portal is available on the Enterprise plan."
@@ -6934,6 +7114,11 @@ msgstr ""
 msgid "Hide license key"
 msgstr "隐藏许可证密钥"
 
+#: apps/remix/app/components/general/document-signing/document-signing-mobile-widget.tsx
+#: apps/remix/app/components/general/document-signing/document-signing-page-view-v1.tsx
+msgid "Hide signing details"
+msgstr "隐藏签署详情"
+
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-content-drag-drop.tsx
 #: packages/lib/utils/envelope-content-translations.ts
 msgid "Highlight"
@@ -6969,9 +7154,25 @@ msgstr "水平"
 msgid "Host"
 msgstr "主机"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Host it your way"
+msgstr "选择适合您的托管方式"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "How does Documenso protect personal data?"
+msgstr "Documenso 如何保护个人数据？"
+
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-settings-dialog.tsx
 msgid "How long recipients have to complete this document after it is sent. Uses the team default when set to inherit."
 msgstr "设置此文档在发送后，收件人可完成签署的时间长度。当设置为继承时，将使用团队默认值。"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "How PDF verification works"
+msgstr "了解 PDF 验证原理"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "How secure is Documenso?"
+msgstr "Documenso 的安全性如何？"
 
 #: apps/remix/app/components/forms/signin.tsx
 #: apps/remix/app/components/forms/signup.tsx
@@ -7111,6 +7312,10 @@ msgstr "重要：这意味着什么"
 msgid "Imprint"
 msgstr ""
 
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "In progress"
+msgstr "进行中"
+
 #: apps/remix/app/components/tables/user-billing-organisations-table.tsx
 #: packages/lib/constants/billing.ts
 msgctxt "Subscription status"
@@ -7242,6 +7447,10 @@ msgstr "已插入"
 #: apps/remix/app/routes/_authenticated+/admin+/stats.tsx
 msgid "Instance Stats"
 msgstr "实例统计"
+
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "Integrations"
+msgstr "集成"
 
 #: apps/remix/app/components/forms/2fa/view-recovery-codes-dialog.tsx
 msgid "Invalid code. Please try again."
@@ -7554,6 +7763,10 @@ msgstr "上次验证时间"
 msgid "Last Year"
 msgstr "去年"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Learn about data protection"
+msgstr "了解数据保护"
+
 #: apps/remix/app/components/forms/subscription-claim-form.tsx
 #: apps/remix/app/components/general/admin-license-card.tsx
 #: apps/remix/app/components/general/organisations/organisation-quota-banner.tsx
@@ -7589,6 +7802,14 @@ msgstr "左对齐"
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
 msgid "Legality of Electronic Signatures"
 msgstr "电子签名的合法性"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Let people open and sign a reusable document from a direct link."
+msgstr "让收件人通过直接链接打开并签署基于模板的文档。"
+
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "Let users sign without leaving your application."
+msgstr "让用户直接在您的应用中完成签署。"
 
 #: apps/remix/app/components/forms/editor/editor-field-generic-field-forms.tsx
 msgid "Letter spacing"
@@ -7690,6 +7911,10 @@ msgstr "关联时间"
 #: apps/remix/app/components/general/document/document-edit-form.tsx
 msgid "Links Generated"
 msgstr "链接已生成"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "List templates"
+msgstr "列出模板"
 
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.webhooks._index.tsx
 msgid "Listening to"
@@ -7807,9 +8032,17 @@ msgstr "管理直接链接"
 msgid "Manage documents"
 msgstr "管理文档"
 
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents._index.tsx
+msgid "Manage drafts, track signatures, and find completed agreements."
+msgstr "管理草稿、跟踪签署进度并查找已完成的协议。"
+
 #: apps/remix/app/routes/_authenticated+/settings+/security._index.tsx
 msgid "Manage linked accounts"
 msgstr "管理关联账户"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Manage members"
+msgstr "管理成员"
 
 #: apps/remix/app/routes/_authenticated+/admin+/organisation-insights.$id.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
@@ -8150,6 +8383,10 @@ msgstr "移动到文件夹"
 msgid "Multiple access methods can be selected."
 msgstr "可以选择多种访问方式。"
 
+#: apps/remix/app/components/general/landing-workspace-preview.tsx
+msgid "Mutual NDA"
+msgstr "双向保密协议"
+
 #: apps/remix/app/components/dialogs/folder-create-dialog.tsx
 msgid "My Folder"
 msgstr "我的文件夹"
@@ -8206,11 +8443,11 @@ msgstr "姓名"
 
 #: apps/remix/app/components/general/folder/folder-sort-dropdown.tsx
 msgid "Name (A-Z)"
-msgstr ""
+msgstr "名称（A–Z）"
 
 #: apps/remix/app/components/general/folder/folder-sort-dropdown.tsx
 msgid "Name (Z-A)"
-msgstr ""
+msgstr "名称（Z–A）"
 
 #: apps/remix/app/components/dialogs/sign-field-name-dialog.tsx
 msgid "Name is required"
@@ -8282,7 +8519,7 @@ msgstr "新密码"
 
 #: apps/remix/app/components/general/folder/folder-sort-dropdown.tsx
 msgid "Newest first"
-msgstr ""
+msgstr "最新优先"
 
 #: apps/remix/app/components/dialogs/team-group-create-dialog.tsx
 #: apps/remix/app/components/dialogs/team-member-create-dialog.tsx
@@ -8561,6 +8798,10 @@ msgstr ""
 msgid "No teams yet"
 msgstr "还没有团队"
 
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/templates._index.tsx
+msgid "No templates yet"
+msgstr "暂无模板"
+
 #: apps/remix/app/components/general/webhook-multiselect-combobox.tsx
 msgid "No triggers available"
 msgstr "没有可用的触发器"
@@ -8679,7 +8920,7 @@ msgstr "关闭"
 
 #: apps/remix/app/components/general/folder/folder-sort-dropdown.tsx
 msgid "Oldest first"
-msgstr ""
+msgstr "最早优先"
 
 #: apps/remix/app/components/general/admin-global-settings-section.tsx
 msgid "On"
@@ -8788,6 +9029,18 @@ msgstr ""
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl._index.tsx
 msgid "Open menu"
 msgstr "打开菜单"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Open source by design"
+msgstr "开放源码"
+
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Open-source document signing."
+msgstr "开源文档签署。"
+
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Open-source e-signatures"
+msgstr "开源电子签名"
 
 #: apps/remix/app/components/general/stack-avatars-with-tooltip.tsx
 msgid "Opened"
@@ -9092,6 +9345,10 @@ msgstr "已付费"
 msgctxt "Partially signed document (adjective)"
 msgid "Partial"
 msgstr "部分签署"
+
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Partnership agreement"
+msgstr "合作协议"
 
 #: apps/remix/app/components/forms/signin.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
@@ -9616,6 +9873,10 @@ msgstr "带示例数据的预格式化 CSV 模板。"
 msgid "Preferences"
 msgstr "偏好设置"
 
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Prepare agreements, collect signatures, and track every document from one workspace."
+msgstr "在同一个工作区准备协议、收集签名，并跟踪每份文档。"
+
 #: apps/remix/app/components/forms/email-preferences-form.tsx
 #: apps/remix/app/components/general/envelope-editor/envelope-editor.tsx
 msgid "Preview"
@@ -9651,6 +9912,11 @@ msgstr "主要操作颜色。"
 msgid "Primary Foreground"
 msgstr "主前景色"
 
+#: apps/remix/app/components/general/app-nav-desktop.tsx
+#: apps/remix/app/components/general/app-nav-mobile.tsx
+msgid "Primary navigation"
+msgstr "主导航"
+
 #: apps/remix/app/components/forms/signup.tsx
 #: apps/remix/app/components/general/public-legal-links.tsx
 msgid "Privacy Policy"
@@ -9678,6 +9944,11 @@ msgstr "继续"
 msgid "Processing document"
 msgstr "正在处理文档"
 
+#: apps/remix/app/components/general/landing-page.tsx
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Product"
+msgstr "产品"
+
 #: apps/remix/app/components/general/app-command-menu.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/profile.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/profile.tsx
@@ -9702,6 +9973,10 @@ msgstr "个人资料已更新"
 #: apps/remix/app/components/embed/multisign/multi-sign-document-list.tsx
 msgid "Progress"
 msgstr "进度"
+
+#: apps/remix/app/components/general/landing-workspace-preview.tsx
+msgid "Project scope"
+msgstr "项目范围"
 
 #: apps/remix/app/routes/_authenticated+/settings+/security.linked-accounts.tsx
 msgid "Provider"
@@ -9797,9 +10072,33 @@ msgstr "阅读我们的文档，开始使用 Documenso。"
 msgid "Read Status"
 msgstr "阅读状态"
 
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Read the API reference"
+msgstr "查看 API 参考文档"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Read the document sending guide"
+msgstr "查看文档发送指南"
+
 #: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
 msgid "Read the full <0>signature disclosure</0>."
 msgstr "阅读完整的<0>签名披露</0>。"
+
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "Read the Prisma story"
+msgstr "阅读 Prisma 客户案例"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Read the security policy"
+msgstr "查看安全政策"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Read the source, follow changes in public, and contribute to the project."
+msgstr "阅读源代码，关注公开的更新，并参与项目开发。"
+
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "Read the Vial story"
+msgstr "阅读 Vial 客户案例"
 
 #: apps/remix/app/components/dialogs/ai-field-detection-dialog.tsx
 #: apps/remix/app/components/dialogs/ai-recipient-detection-dialog.tsx
@@ -9809,6 +10108,10 @@ msgstr "正在读取您的文档"
 #: apps/remix/app/components/general/document/document-page-view-recipients.tsx
 msgid "Ready"
 msgstr "就绪"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Ready to send your next agreement?"
+msgstr "准备好发送下一份协议了吗？"
 
 #: apps/remix/app/components/dialogs/admin-recipient-delete-dialog.tsx
 #: apps/remix/app/routes/_internal+/[__htmltopdf]+/certificate.tsx
@@ -9845,6 +10148,10 @@ msgstr "签署此字段需要重新验证身份"
 #: apps/remix/app/components/general/envelope-signing/envelope-signing-csc-status.tsx
 msgid "Reauthorise and retry"
 msgstr "重新授权并重试"
+
+#: apps/remix/app/routes/_authenticated+/inbox.tsx
+msgid "Received documents"
+msgstr "收到的文档"
 
 #: packages/ui/components/recipient/recipient-role-select.tsx
 msgid "Receives copy"
@@ -10547,6 +10854,14 @@ msgstr "返回登录"
 msgid "Return to templates"
 msgstr "返回模板列表"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Reusable templates"
+msgstr "可复用模板"
+
+#: apps/remix/app/routes/_authenticated+/inbox.tsx
+msgid "Review and respond to documents people have sent you."
+msgstr "查看并处理他人发送给您的文档。"
+
 #: packages/email/templates/organisation-account-link-confirmation.tsx
 msgid "Review request"
 msgstr "审查请求"
@@ -10611,6 +10926,10 @@ msgstr ""
 msgid "Rows per page"
 msgstr "每页行数"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Run Documenso on your own infrastructure or use the hosted service."
+msgstr "在自己的基础设施上部署 Documenso，或使用托管服务。"
+
 #: apps/remix/app/components/forms/editor/editor-field-initials-form.tsx
 msgid "Sans-Serif"
 msgstr ""
@@ -10645,6 +10964,18 @@ msgstr "保存更改"
 #: packages/lib/client-only/providers/envelope-editor-provider.tsx
 msgid "Save failed"
 msgstr "保存失败"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Save frequently used documents, fields, and recipient roles so the next agreement is ready faster."
+msgstr "保存常用文档、字段和收件人角色，更快地准备下一份协议。"
+
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/templates._index.tsx
+msgid "Save reusable documents for agreements you send often."
+msgstr "将经常发送的协议保存为可重复使用的模板。"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Save signing roles and fields in a reusable template. Share a Direct Link to collect signatures without knowing recipient emails in advance."
+msgstr "将签署角色和字段保存到可复用的模板中。分享直接链接即可收集签名，无需提前获取收件人的邮箱。"
 
 #: packages/ui/primitives/template-flow/add-template-fields.tsx
 msgid "Save Template"
@@ -10707,6 +11038,10 @@ msgstr "按组织名称搜索"
 msgid "Search by organisation name, URL or ID"
 msgstr "按组织名称、URL 或 ID 搜索"
 
+#: apps/remix/app/components/general/document/document-search.tsx
+msgid "Search documents"
+msgstr "搜索文档"
+
 #: apps/remix/app/components/general/app-command-menu.tsx
 msgid "Search documents, users, organisations…"
 msgstr ""
@@ -10760,8 +11095,12 @@ msgid "Search teams…"
 msgstr ""
 
 #: apps/remix/app/components/general/template/template-search.tsx
+msgid "Search templates"
+msgstr "搜索模板"
+
+#: apps/remix/app/components/general/template/template-search.tsx
 msgid "Search templates..."
-msgstr ""
+msgstr "搜索模板..."
 
 #: apps/remix/app/components/general/app-command-menu.tsx
 msgid "Search themes…"
@@ -10787,9 +11126,25 @@ msgstr "安全活动"
 msgid "See Documentation"
 msgstr "查看文档"
 
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "See how signing works"
+msgstr "了解签署流程"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "See support options"
+msgstr "查看支持选项"
+
 #: apps/remix/app/routes/_authenticated+/admin+/documents.$id.tsx
 msgid "See the background jobs tab for the status"
 msgstr "状态请查看后台作业选项卡"
+
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "See the original testimonial"
+msgstr "查看原始评价"
+
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "See the workspace"
+msgstr "查看工作区"
 
 #: apps/remix/app/components/general/document-signing/document-signing-dropdown-field.tsx
 #: packages/ui/primitives/document-flow/field-content.tsx
@@ -11037,6 +11392,14 @@ msgstr "使用此传输方式发送测试电子邮件以验证配置。"
 msgid "Send a test webhook with sample data to verify your integration is working correctly."
 msgstr "发送带有示例数据的测试 Webhook，以验证集成是否正常工作。"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Send agreements faster and choose how signing fits into your product or team."
+msgstr "更快地发送协议，并选择适合您产品或团队的签署方式。"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Send agreements quickly"
+msgstr "快速发送协议"
+
 #: apps/remix/app/components/forms/send-confirmation-email.tsx
 msgid "Send confirmation email"
 msgstr "发送确认邮件"
@@ -11051,6 +11414,10 @@ msgstr "发送文档"
 #: packages/ui/primitives/document-flow/send-document-action-dialog.tsx
 msgid "Send Document"
 msgstr "发送文档"
+
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Send documents for signing."
+msgstr "发送待签文档。"
 
 #: apps/remix/app/components/general/settings-upsell/email-domains-upsell.tsx
 msgid "Send documents from your own domain. Email domains are available on the Enterprise plan."
@@ -11104,6 +11471,10 @@ msgstr "发送测试"
 #: apps/remix/app/components/dialogs/email-transport-send-test-dialog.tsx
 msgid "Send Test Email"
 msgstr "发送测试邮件"
+
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Send, sign, and track your documents"
+msgstr "发送、签署和跟踪您的文档"
 
 #: apps/remix/app/components/tables/documents-table-sender-filter.tsx
 #: apps/remix/app/components/tables/documents-table.tsx
@@ -11174,6 +11545,14 @@ msgstr "设置密码"
 msgid "Set Password"
 msgstr "设置密码"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Set up digital signing for your team or build it into your own product."
+msgstr "为团队启用电子签署，或将它集成到您自己的产品中。"
+
+#: apps/remix/app/routes/_unauthenticated+/signup.tsx
+msgid "Set up your account to send and sign documents."
+msgstr "创建账号以发送和签署文档。"
+
 #: apps/remix/app/components/embed/authoring/configure-document-view.tsx
 msgid "Set up your document properties and recipient information"
 msgstr "设置文档属性和收件人信息"
@@ -11219,6 +11598,10 @@ msgstr ""
 msgid "Share"
 msgstr "分享"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Share a signing link"
+msgstr "分享签署链接"
+
 #: apps/remix/app/components/general/document/document-page-view-dropdown.tsx
 #: apps/remix/app/components/tables/documents-table-action-dropdown.tsx
 msgid "Share Signing Card"
@@ -11231,6 +11614,10 @@ msgstr "分享链接"
 #: packages/ui/components/document/document-share-button.tsx
 msgid "Share your signing experience!"
 msgstr "分享您的签署体验！"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Shared documents"
+msgstr "共享文档"
 
 #: apps/remix/app/components/tables/admin-document-recipient-item-table.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.public-profile.tsx
@@ -11266,6 +11653,11 @@ msgstr ""
 #: apps/remix/app/components/general/admin-license-card.tsx
 msgid "Show license key"
 msgstr "显示许可证密钥"
+
+#: apps/remix/app/components/general/document-signing/document-signing-mobile-widget.tsx
+#: apps/remix/app/components/general/document-signing/document-signing-page-view-v1.tsx
+msgid "Show signing details"
+msgstr "显示签署详情"
 
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.public-profile.tsx
 msgid "Show templates in your public profile for your audience to sign and get started quickly"
@@ -11351,6 +11743,11 @@ msgstr "签署字段"
 #: apps/remix/app/components/forms/signup.tsx
 msgid "Sign Here"
 msgstr "在此签名"
+
+#: apps/remix/app/components/general/landing-page.tsx
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Sign in"
+msgstr "登录"
 
 #: apps/remix/app/components/forms/signin.tsx
 #: apps/remix/app/components/forms/signin.tsx
@@ -11454,6 +11851,10 @@ msgstr "使用 OIDC 注册"
 #: packages/ui/primitives/template-flow/add-template-fields.tsx
 msgid "Signature"
 msgstr "签名"
+
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Signature collected"
+msgstr "已收到签名"
 
 #: apps/remix/app/routes/_internal+/[__htmltopdf]+/certificate.tsx
 #: packages/lib/server-only/pdf/render-certificate.ts
@@ -11594,6 +11995,10 @@ msgstr ""
 #: packages/ui/primitives/template-flow/add-template-placeholder-recipients.tsx
 msgid "Signing order is enabled."
 msgstr "签署顺序已启用。"
+
+#: apps/remix/app/components/general/auth-page.tsx
+msgid "Signing preview"
+msgstr "签署预览"
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-settings-dialog.tsx
 msgid "Signing Reminders"
@@ -11828,28 +12233,33 @@ msgstr "抱歉，我们未能下载证书。请稍后再试。"
 
 #: apps/remix/app/components/general/folder/folder-sort-dropdown.tsx
 msgid "Sort"
-msgstr ""
+msgstr "排序"
 
 #: apps/remix/app/components/general/folder/folder-sort-dropdown.tsx
 msgid "Sort by <0>Name (A-Z)</0>"
-msgstr ""
+msgstr "按<0>名称（A–Z）</0>排序"
 
 #: apps/remix/app/components/general/folder/folder-sort-dropdown.tsx
 msgid "Sort by <0>Name (Z-A)</0>"
-msgstr ""
+msgstr "按<0>名称（Z–A）</0>排序"
 
 #: apps/remix/app/components/general/folder/folder-sort-dropdown.tsx
 msgid "Sort by <0>Newest first</0>"
-msgstr ""
+msgstr "按<0>最新优先</0>排序"
 
 #: apps/remix/app/components/general/folder/folder-sort-dropdown.tsx
 msgid "Sort by <0>Oldest first</0>"
-msgstr ""
+msgstr "按<0>最早优先</0>排序"
 
 #: apps/remix/app/components/general/template/template-page-view-documents-table.tsx
 #: apps/remix/app/components/tables/team-members-table.tsx
 msgid "Source"
 msgstr "来源"
+
+#: apps/remix/app/components/general/landing-page.tsx
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Source code"
+msgstr "源代码"
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.sso.tsx
 msgid "Space-separated list of domains. Leave empty to allow all domains."
@@ -12134,6 +12544,10 @@ msgstr "系统要求"
 msgid "System Theme"
 msgstr "系统主题"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Talk to us"
+msgstr "联系我们"
+
 #: apps/remix/app/components/dialogs/admin-swap-subscription-dialog.tsx
 msgid "Target Organisation"
 msgstr "目标组织"
@@ -12282,6 +12696,10 @@ msgstr "团队角色"
 msgid "Team Role"
 msgstr "团队角色"
 
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Team settings"
+msgstr "团队设置"
+
 #: apps/remix/app/components/general/settings-scope-breadcrumb.tsx
 #: apps/remix/app/components/general/unified-settings-sidebar.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings._layout.tsx
@@ -12385,6 +12803,10 @@ msgstr "模板 ID（旧版）"
 msgid "Template is using legacy field insertion"
 msgstr "模板正在使用旧版字段插入方式"
 
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/templates._index.tsx
+msgid "Template library"
+msgstr "模板库"
+
 #: apps/remix/app/components/dialogs/envelope-rename-dialog.tsx
 msgid "Template Renamed"
 msgstr "模板已重命名"
@@ -12400,6 +12822,10 @@ msgstr "模板已保存"
 #: apps/remix/app/components/general/envelope-editor/envelope-editor.tsx
 msgid "Template Settings"
 msgstr "模板设置"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Template Store"
+msgstr "模板商店"
 
 #: packages/ui/primitives/template-flow/add-template-settings.tsx
 msgid "Template title"
@@ -12437,6 +12863,10 @@ msgstr ""
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/templates.folders._index.tsx
 msgid "Templates"
 msgstr "模板"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Templates and Direct Links"
+msgstr "模板与直接链接"
 
 #: apps/remix/app/components/dialogs/envelopes-bulk-delete-dialog.tsx
 msgid "Templates deleted"
@@ -13759,6 +14189,10 @@ msgstr "注册为 Documenso 用户的签署人总数"
 msgid "Total Users"
 msgstr "用户总数"
 
+#: apps/remix/app/components/general/landing-page.tsx
+msgid "Track every agreement."
+msgstr "跟踪每份协议。"
+
 #: apps/remix/app/components/dialogs/team-delete-dialog.tsx
 msgid "Transfer documents to a different team"
 msgstr "将文档转移到其他团队"
@@ -13782,6 +14216,10 @@ msgstr "传输类型在创建后无法更改。"
 #: apps/remix/app/components/dialogs/email-transport-update-dialog.tsx
 msgid "Transport updated."
 msgstr "传输已更新。"
+
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "Trigger automations when documents are sent, signed, or completed."
+msgstr "在文档发送、签署或完成时触发自动化流程。"
 
 #: apps/remix/app/components/dialogs/webhook-create-dialog.tsx
 #: apps/remix/app/components/dialogs/webhook-edit-dialog.tsx
@@ -14261,6 +14699,14 @@ msgstr "上传自定义文档以替换模板的默认文档"
 msgid "Upload a custom document to use its file name."
 msgstr ""
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Upload a document, add recipients, and send it for signing in a few steps."
+msgstr "上传文档、添加收件人，再发送签署请求，几步即可完成。"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Upload a PDF, place signature fields, and send a signing link. Track each recipient’s progress and download the completed PDF."
+msgstr "上传 PDF，添加签名字段，然后发送签署链接。跟踪每位收件人的进度，并下载已完成的 PDF。"
+
 #: apps/remix/app/components/dialogs/template-bulk-send-dialog.tsx
 msgid "Upload and Process"
 msgstr "上传并处理"
@@ -14378,6 +14824,10 @@ msgstr ""
 msgid "Use API tokens to authenticate with the Documenso API."
 msgstr ""
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Use APIs, webhooks, and embeds to make signing part of your own product."
+msgstr "通过 API、Webhook 和嵌入功能，将签署集成到您自己的产品中。"
+
 #: apps/remix/app/components/forms/2fa/disable-authenticator-app-dialog.tsx
 #: apps/remix/app/components/forms/2fa/two-factor-code-dialog.tsx
 #: apps/remix/app/components/forms/signin.tsx
@@ -14398,6 +14848,10 @@ msgstr "使用模板"
 #: apps/remix/app/components/dialogs/template-use-dialog.tsx
 msgid "Use template name"
 msgstr ""
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Use the API, webhooks, embedded authoring and signing, or Zapier to connect Documenso to your workflow."
+msgstr "通过 API、Webhook、嵌入式编辑与签署，或 Zapier，将 Documenso 连接到您的工作流。"
 
 #: apps/remix/app/components/dialogs/template-use-dialog.tsx
 msgid "Use uploaded file name"
@@ -14520,6 +14974,10 @@ msgstr "验证邮箱"
 #: apps/remix/app/components/general/verify-email-banner.tsx
 msgid "Verify Now"
 msgstr "立即验证"
+
+#: apps/remix/app/components/general/landing-product-features.tsx
+msgid "Verify signed documents"
+msgstr "验证已签署的文档"
 
 #: apps/remix/app/routes/_unauthenticated+/team.verify.email.$token.tsx
 msgid "Verify team email"
@@ -15335,6 +15793,10 @@ msgstr "必须填写 Well-known URL"
 msgid "Were you trying to edit this document instead?"
 msgstr "你是想编辑这份文档吗？"
 
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "What our customers say"
+msgstr "客户怎么说"
+
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl._index.tsx
 msgid "What you can do with teams:"
 msgstr "通过团队您可以完成以下工作："
@@ -15362,6 +15824,10 @@ msgstr "当您签署文档时，我们可以使用已提供的信息自动填写
 msgid "When you use our platform to affix your electronic signature to documents, you are consenting to do so under the Electronic Signatures in Global and National Commerce Act (E-Sign Act) and other applicable laws. This action indicates your agreement to use electronic means to sign documents and receive notifications."
 msgstr "当你使用我们的平台在文档上加盖电子签名时，即表示你在《全球与国家商业电子签名法案》（E-Sign Act）及其他适用法律框架下，同意使用电子方式签署文档并接收通知。此举表明你同意以电子方式完成相关签署和收信。"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Where can I get support?"
+msgstr "在哪里可以获得支持？"
+
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.sso.tsx
 msgid "Whether to enable the SSO portal for your organisation"
 msgstr "是否为您的组织启用 SSO 门户"
@@ -15373,6 +15839,10 @@ msgstr "在等待对方操作期间，你可以创建自己的 Documenso 账号�
 #: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
 msgid "Whitelabeling, unlimited members and more"
 msgstr "白标、自定义域、无限成员等更多功能"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "Why use Documenso?"
+msgstr "为什么选择 Documenso？"
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-fields-page.tsx
 #: packages/ui/primitives/document-flow/field-item.tsx
@@ -15646,6 +16116,10 @@ msgstr "您也可以将此链接复制并粘贴到浏览器中：{confirmationLi
 msgid "You can also copy and paste this link into your browser: {resetPasswordLink} (link expires in 24 hours)"
 msgstr "您也可以将此链接复制并粘贴到浏览器中打开：{resetPasswordLink}（链接将在 24 小时后失效）"
 
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "You can cancel a pending document from the workspace. This stops further signing and notifies recipients that the request was cancelled."
+msgstr "您可以在工作区取消待签署的文档。取消后，收件人无法继续签署，并会收到请求取消的通知。"
+
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.public-profile.tsx
 msgid "You can choose to enable or disable the profile for public view."
 msgstr "您可以选择启用或禁用公开个人资料。"
@@ -15670,6 +16144,10 @@ msgstr "你可以在此管理你的电子邮件偏好。"
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-fields-page.tsx
 msgid "You can only detect fields in draft envelopes"
 msgstr "您只能在草稿信封中检测字段"
+
+#: apps/remix/app/components/general/landing-about-sections.tsx
+msgid "You can review the hosted service’s data handling policies or self-host Documenso to control your infrastructure and storage. Your obligations depend on your deployment and how you use it."
+msgstr "您可以查看托管服务的数据处理政策，也可以自行部署 Documenso，掌控基础设施和存储。您的义务取决于部署和使用方式。"
 
 #: packages/email/templates/confirm-team-email.tsx
 msgid "You can revoke access at any time in your team settings on Documenso <0>here</0>."
@@ -16475,6 +16953,10 @@ msgstr "您的信封已成功分发。"
 #: apps/remix/app/components/dialogs/envelope-redistribute-dialog.tsx
 msgid "Your envelope has been resent successfully."
 msgstr "您的信封已成功重新发送。"
+
+#: apps/remix/app/components/general/landing-social-sections.tsx
+msgid "Your favorite tools work with Documenso"
+msgstr "Documenso 可与您常用的工具配合使用"
 
 #: apps/remix/app/components/general/settings-upsell/branding-upsell.tsx
 msgid "Your logo on signing pages and emails"

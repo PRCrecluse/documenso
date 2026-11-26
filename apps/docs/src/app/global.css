@@ -4,31 +4,31 @@
 
 @theme {
   /* Brand utility colors */
-  --color-documenso: hsl(95.08, 71.08%, 67.45%);
-  --color-documenso-dark: hsl(95.08, 71.08%, 54%);
-  --color-documenso-darker: hsl(95.08, 71.08%, 41%);
+  --color-documenso: hsl(230, 72%, 52%);
+  --color-documenso-dark: hsl(230, 72%, 46%);
+  --color-documenso-darker: hsl(230, 67%, 40%);
 }
 
 :root {
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(222.2222 47.3684% 11.1765%);
-  --card: hsl(0 0% 100%);
-  --card-foreground: hsl(222.2222 47.3684% 11.1765%);
+  --background: hsl(225 40% 98%);
+  --foreground: hsl(230 45% 12%);
+  --card: hsl(228 60% 98%);
+  --card-foreground: hsl(230 45% 12%);
   --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(222.2222 47.3684% 11.1765%);
-  --primary: hsl(95.0847 71.0843% 42.451%);
-  --primary-foreground: hsl(95.6757 72.549% 10%);
-  --secondary: hsl(210 40% 96.0784%);
-  --secondary-foreground: hsl(222.2222 47.3684% 11.1765%);
-  --muted: hsl(210 40% 96.0784%);
-  --muted-foreground: hsl(215.3846 16.318% 46.8627%);
-  --accent: hsl(210 40% 96.0784%);
-  --accent-foreground: hsl(222.2222 47.3684% 11.1765%);
+  --popover-foreground: hsl(230 45% 12%);
+  --primary: hsl(230 72% 52%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(228 40% 95%);
+  --secondary-foreground: hsl(230 45% 12%);
+  --muted: hsl(228 45% 95%);
+  --muted-foreground: hsl(226 16% 40%);
+  --accent: hsl(228 55% 94%);
+  --accent-foreground: hsl(230 45% 12%);
   --destructive: hsl(0 100% 50%);
   --destructive-foreground: hsl(210 40% 98.0392%);
   --border: hsl(214.2857 31.8182% 91.3725%);
   --input: hsl(214.2857 31.8182% 91.3725%);
-  --ring: hsl(95.0847 71.0843% 67.451%);
+  --ring: hsl(230 72% 52%);
   --chart-1: hsl(211.788 101.9718% 78.6759%);
   --chart-2: hsl(217.4076 91.3672% 59.5787%);
   --chart-3: hsl(221.4336 86.3731% 54.0624%);
@@ -48,7 +48,7 @@
     "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --radius: 0.5rem;
+  --radius: 0.875rem;
   --shadow-x: 0;
   --shadow-y: 1px;
   --shadow-blur: 3px;
@@ -68,25 +68,25 @@
 }
 
 .dark {
-  --background: hsl(0 0% 14.902%);
-  --foreground: hsl(0 0% 96.8627%);
-  --card: hsl(0 0% 14.902%);
-  --card-foreground: hsl(0 0% 94.902%);
-  --popover: hsl(0 0% 14.902%);
-  --popover-foreground: hsl(0 0% 90.1961%);
-  --primary: hsl(95.0847 71.0843% 67.451%);
-  --primary-foreground: hsl(95.6757 72.549% 10%);
-  --secondary: hsl(0 0% 23.5294%);
-  --secondary-foreground: hsl(95.0847 71.0843% 67.451%);
-  --muted: hsl(0 0% 23.5294%);
-  --muted-foreground: hsl(0 0% 85.098%);
-  --accent: hsl(0 0% 27.8431%);
-  --accent-foreground: hsl(95.0847 71.0843% 67.451%);
+  --background: hsl(230 42% 8%);
+  --foreground: hsl(220 35% 96%);
+  --card: hsl(228 32% 12%);
+  --card-foreground: hsl(220 30% 96%);
+  --popover: hsl(230 36% 11%);
+  --popover-foreground: hsl(220 30% 94%);
+  --primary: hsl(230 72% 52%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(228 28% 18%);
+  --secondary-foreground: hsl(220 30% 96%);
+  --muted: hsl(228 28% 16%);
+  --muted-foreground: hsl(220 15% 74%);
+  --accent: hsl(228 32% 20%);
+  --accent-foreground: hsl(220 30% 96%);
   --destructive: hsl(0 86.5979% 61.9608%);
   --destructive-foreground: hsl(0 0% 98.0392%);
-  --border: hsl(0 0% 27.8431%);
-  --input: hsl(0 0% 27.8431%);
-  --ring: hsl(95.0847 71.0843% 67.451%);
+  --border: hsl(226 18% 22%);
+  --input: hsl(226 18% 26%);
+  --ring: hsl(230 72% 52%);
   --chart-1: hsl(211.788 101.9718% 78.6759%);
   --chart-2: hsl(217.4076 91.3672% 59.5787%);
   --chart-3: hsl(221.4336 86.3731% 54.0624%);
@@ -106,7 +106,7 @@
     "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --radius: 0.5rem;
+  --radius: 0.875rem;
   --shadow-x: 0;
   --shadow-y: 1px;
   --shadow-blur: 3px;

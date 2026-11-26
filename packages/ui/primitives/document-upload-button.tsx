@@ -84,7 +84,13 @@ export const DocumentUploadButton = ({
   }
 
   return (
-    <Button loading={loading} aria-disabled={disabled} {...getRootProps()} {...props}>
+    <Button
+      variant={internalVersion === '1' ? 'outline' : 'default'}
+      loading={loading}
+      aria-disabled={disabled}
+      {...getRootProps()}
+      {...props}
+    >
       <div className="flex items-center gap-2">
         <input data-testid="document-upload-input" {...getInputProps()} />
         {!loading && <Upload className="h-4 w-4" />}

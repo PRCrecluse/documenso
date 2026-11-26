@@ -25,9 +25,20 @@ export type FolderGridProps = {
   parentId: string | null;
 };
 
+export const FolderGridActions = ({ type, parentId }: FolderGridProps) => {
+  const organisation = useCurrentOrganisation();
+
+  return (
+    <div className="flex shrink-0 flex-wrap items-center gap-2">
+      <EnvelopeUploadButton type={type} folderId={parentId ?? undefined} />
+      {organisation.organisationClaim.flags.allowLegacyEnvelopes && <DocumentUploadButtonLegacy type={type} />}
+      <FolderCreateDialog type={type} />
+    </div>
+  );
+};
+
 export const FolderGrid = ({ type, parentId }: FolderGridProps) => {
   const team = useCurrentTeam();
-  const organisation = useCurrentOrganisation();
 
   const [isMovingFolder, setIsMovingFolder] = useState(false);
   const [folderToMove, setFolderToMove] = useState<TFolderWithSubfolders | null>(null);
@@ -69,13 +80,13 @@ export const FolderGrid = ({ type, parentId }: FolderGridProps) => {
 
   return (
     <div>
-      <div className="mb-4 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      {parentId && (
         <div
-          className="flex flex-1 items-center font-medium text-muted-foreground text-sm hover:text-muted-foreground/80"
+          className="mb-4 flex flex-wrap items-center gap-y-1 font-medium text-muted-foreground text-sm"
           data-testid="folder-grid-breadcrumbs"
         >
-          <Link to={formatRootPath()} className="flex items-center">
-            <HomeIcon className="mr-2 h-4 w-4" />
+          <Link to={formatRootPath()} className="flex items-center hover:text-foreground">
+            <HomeIcon aria-hidden="true" className="mr-2 h-4 w-4" />
             <Trans>Home</Trans>
           </Link>
 
@@ -88,28 +99,21 @@ export const FolderGrid = ({ type, parentId }: FolderGridProps) => {
           ) : (
             foldersData?.breadcrumbs.map((folder) => (
               <div key={folder.id} className="flex items-center">
-                <span className="px-3">/</span>
-                <Link to={formatBreadCrumbPath(folder.id)} className="flex items-center">
-                  <FolderIcon className="mr-2 h-4 w-4" />
-                  <span>{folder.name}</span>
+                <span aria-hidden="true" className="px-3">
+                  /
+                </span>
+                <Link to={formatBreadCrumbPath(folder.id)} className="flex min-w-0 items-center hover:text-foreground">
+                  <FolderIcon aria-hidden="true" className="mr-2 h-4 w-4 shrink-0" />
+                  <span className="break-all">{folder.name}</span>
                 </Link>
               </div>
             ))
           )}
         </div>
+      )}
 
-        <div className="flex gap-4 sm:flex-row sm:justify-end">
-          <EnvelopeUploadButton type={type} folderId={parentId || undefined} />
-
-          {/* If you delete this, delete the component as well. */}
-          {organisation.organisationClaim.flags.allowLegacyEnvelopes && <DocumentUploadButtonLegacy type={type} />}
-
-          <FolderCreateDialog type={type} />
-        </div>
-      </div>
-
-      <div className="mt-10 mb-4 flex items-center justify-between gap-4">
-        <h2 className="flex items-baseline gap-2 font-semibold text-base">
+      <div className="mb-3 flex items-center justify-between gap-4">
+        <h2 className="flex items-baseline gap-2 font-semibold text-lg tracking-tight">
           <Trans>Folders</Trans>
 
           {isPending ? (
@@ -148,7 +152,7 @@ export const FolderGrid = ({ type, parentId }: FolderGridProps) => {
           <FolderCreateDialog
             type={type}
             trigger={
-              <button>
+              <button type="button" className="rounded-xl text-start">
                 <FolderCardEmpty type={type} />
               </button>
             }

@@ -4,16 +4,15 @@ import { loadRecipientBrandingByTeamId } from '@documenso/lib/server-only/brandi
 import { getDocumentAndSenderByToken } from '@documenso/lib/server-only/document/get-document-by-token';
 import { isRecipientAuthorized } from '@documenso/lib/server-only/document/is-recipient-authorized';
 import { getRecipientByToken } from '@documenso/lib/server-only/recipient/get-recipient-by-token';
-import { Badge } from '@documenso/ui/primitives/badge';
 import { Button } from '@documenso/ui/primitives/button';
 import { Trans } from '@lingui/react/macro';
 import { TimerOffIcon } from 'lucide-react';
 import { Link } from 'react-router';
 
 import { DocumentSigningAuthPageView } from '~/components/general/document-signing/document-signing-auth-page';
+import { SigningStatusPanel } from '~/components/general/document-signing/signing-status-panel';
 import { RecipientBranding } from '~/components/general/recipient-branding';
 import { useCspNonce } from '~/utils/nonce';
-import { truncateTitle } from '~/utils/truncate-title';
 
 import type { Route } from './+types/expired';
 
@@ -89,36 +88,27 @@ export default function ExpiredSigningPage({ loaderData }: Route.ComponentProps)
   return (
     <>
       <RecipientBranding branding={branding} cspNonce={cspNonce} />
-      <div className="flex flex-col items-center pt-24 lg:pt-36 xl:pt-44">
-        <Badge variant="neutral" size="default" title={title} className="mb-6 rounded-xl border bg-transparent">
-          {truncateTitle(title ?? '')}
-        </Badge>
+      <SigningStatusPanel
+        title={<Trans>Signing Deadline Expired</Trans>}
+        documentTitle={title}
+        icon={<TimerOffIcon className="size-6 text-orange-700 dark:text-orange-300" />}
+        className="my-8 sm:my-16"
+      >
+        <p className="mt-4 max-w-lg text-muted-foreground text-sm leading-relaxed">
+          <Trans>
+            The signing deadline for this document has passed. Please contact the document owner if you need a new copy
+            to sign.
+          </Trans>
+        </p>
 
-        <div className="flex flex-col items-center">
-          <div className="flex items-center gap-x-4">
-            <TimerOffIcon className="h-10 w-10 text-orange-500" />
-
-            <h2 className="max-w-[35ch] text-center font-semibold text-2xl leading-normal md:text-3xl lg:text-4xl">
-              <Trans>Signing Deadline Expired</Trans>
-            </h2>
-          </div>
-
-          <p className="mt-6 max-w-[60ch] text-center text-muted-foreground text-sm">
-            <Trans>
-              The signing deadline for this document has passed. Please contact the document owner if you need a new
-              copy to sign.
-            </Trans>
-          </p>
-
-          {user && (
-            <Button className="mt-6" asChild>
-              <Link to={`/`}>
-                <Trans>Return Home</Trans>
-              </Link>
-            </Button>
-          )}
-        </div>
-      </div>
+        {user && (
+          <Button className="mt-6" asChild>
+            <Link to="/">
+              <Trans>Return Home</Trans>
+            </Link>
+          </Button>
+        )}
+      </SigningStatusPanel>
     </>
   );
 }

@@ -20,6 +20,7 @@ import { Link, redirect, useSearchParams } from 'react-router';
 
 import { SignInForm } from '~/components/forms/signin';
 import { SIGNUP_ERROR_MESSAGES } from '~/components/forms/signup';
+import { AuthPage } from '~/components/general/auth-page';
 import { appMetaTags } from '~/utils/meta';
 
 import type { Route } from './+types/signin';
@@ -115,47 +116,41 @@ export default function SignIn({ loaderData }: Route.ComponentProps) {
     );
   }
 
+  const signupHref = returnTo ? `/signup?returnTo=${encodeURIComponent(returnTo)}` : '/signup';
+
   return (
-    <div className="w-screen max-w-lg px-4">
-      <div className="z-10 rounded-xl border border-border bg-neutral-100 p-6 dark:bg-background">
-        {signupError && (
-          <Alert variant="destructive" className="mb-4">
-            <AlertDescription>{_(signupError)}</AlertDescription>
-          </Alert>
-        )}
+    <AuthPage
+      title={<Trans>Sign in to your account</Trans>}
+      description={<Trans>Access your documents and pending signatures.</Trans>}
+    >
+      {signupError && (
+        <Alert variant="destructive" className="mb-4">
+          <AlertDescription>{_(signupError)}</AlertDescription>
+        </Alert>
+      )}
 
-        <h1 className="font-semibold text-2xl">
-          <Trans>Sign in to your account</Trans>
-        </h1>
+      <SignInForm
+        isEmailPasswordSigninEnabled={isEmailPasswordSigninEnabled}
+        isGoogleSSOEnabled={isGoogleSSOEnabled}
+        isMicrosoftSSOEnabled={isMicrosoftSSOEnabled}
+        isOIDCSSOEnabled={isOIDCSSOEnabled}
+        oidcProviderLabel={oidcProviderLabel}
+        returnTo={returnTo}
+      />
 
-        <p className="mt-2 text-muted-foreground text-sm">
-          <Trans>Welcome back, we are lucky to have you.</Trans>
+      {isSignupEnabled && (
+        <p className="mt-6 border-t pt-5 text-center text-muted-foreground text-sm">
+          <Trans>
+            Don't have an account?{' '}
+            <Link
+              to={signupHref}
+              className="rounded-sm font-medium text-documenso-700 underline-offset-4 hover:underline dark:text-documenso-300"
+            >
+              Sign up
+            </Link>
+          </Trans>
         </p>
-        <hr className="-mx-6 my-4" />
-
-        <SignInForm
-          isEmailPasswordSigninEnabled={isEmailPasswordSigninEnabled}
-          isGoogleSSOEnabled={isGoogleSSOEnabled}
-          isMicrosoftSSOEnabled={isMicrosoftSSOEnabled}
-          isOIDCSSOEnabled={isOIDCSSOEnabled}
-          oidcProviderLabel={oidcProviderLabel}
-          returnTo={returnTo}
-        />
-
-        {isSignupEnabled && (
-          <p className="mt-6 text-center text-muted-foreground text-sm">
-            <Trans>
-              Don't have an account?{' '}
-              <Link
-                to={returnTo ? `/signup?returnTo=${encodeURIComponent(returnTo)}` : '/signup'}
-                className="text-documenso-700 duration-200 hover:opacity-70"
-              >
-                Sign up
-              </Link>
-            </Trans>
-          </p>
-        )}
-      </div>
-    </div>
+      )}
+    </AuthPage>
   );
 }

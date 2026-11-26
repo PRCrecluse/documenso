@@ -88,16 +88,20 @@ export const AppNavMobile = ({ isMenuOpen, onMenuOpenChange }: AppNavMobileProps
 
   return (
     <Sheet open={isMenuOpen} onOpenChange={onMenuOpenChange}>
-      <SheetContent className="flex w-full max-w-[350px] flex-col">
-        <Link to="/" onClick={handleMenuItemClick}>
+      <SheetContent className="flex w-full max-w-[350px] flex-col rounded-l-3xl">
+        <Link
+          to="/"
+          onClick={handleMenuItemClick}
+          className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        >
           <img src={LogoImage} alt="Documenso Logo" className="dark:invert" width={170} height={25} />
         </Link>
 
-        <div className="mt-8 flex w-full flex-col items-start gap-y-4">
+        <nav className="mt-8 flex w-full flex-col items-stretch gap-y-2" aria-label={t`Primary navigation`}>
           {menuNavigationLinks.map(({ href, text }) => (
             <Link
               key={href}
-              className="flex items-center gap-2 font-semibold text-2xl text-foreground hover:text-foreground/80"
+              className="flex items-center gap-2 rounded-full px-4 py-2.5 font-semibold text-foreground text-lg hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               to={href}
               onClick={() => handleMenuItemClick()}
             >
@@ -111,12 +115,13 @@ export const AppNavMobile = ({ isMenuOpen, onMenuOpenChange }: AppNavMobileProps
           ))}
 
           <button
-            className="font-semibold text-2xl text-foreground hover:text-foreground/80"
+            type="button"
+            className="rounded-full px-4 py-2.5 text-left font-semibold text-foreground text-lg hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             onClick={async () => authClient.signOut()}
           >
             <Trans>Sign Out</Trans>
           </button>
-        </div>
+        </nav>
 
         <div className="mt-auto flex w-full flex-col space-y-4 self-end">
           <div className="w-fit">

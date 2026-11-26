@@ -79,6 +79,7 @@ export const EnvelopeEditor = () => {
     envelope,
     editorConfig,
     isDocument,
+    isEmbedded,
     isTemplate,
     relativePath,
     navigateToStep,
@@ -87,7 +88,7 @@ export const EnvelopeEditor = () => {
     resetForms,
   } = useCurrentEnvelopeEditor();
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const {
     general: { minimizeLeftSidebar, allowUploadAndRecipientStep, allowAddFieldsStep, allowPreviewStep },
@@ -175,15 +176,17 @@ export const EnvelopeEditor = () => {
   const currentStepData = envelopeEditorSteps.find((step) => step.id === searchParamsStep) || envelopeEditorSteps[0];
 
   return (
-    <div className="h-screen w-screen bg-envelope-editor-background">
+    <div className={cn('h-screen w-screen bg-envelope-editor-background', !isEmbedded && 'surface-wash')}>
       <EnvelopeEditorHeader />
 
       {/* Main Content Area */}
       <div className="flex h-[calc(100vh-4rem)] w-screen">
         {/* Left Section - Step Navigation */}
         <div
-          className={cn('flex w-80 flex-shrink-0 flex-col overflow-y-auto border-border border-r bg-background py-4', {
+          className={cn('flex w-80 flex-shrink-0 flex-col overflow-y-auto border-border border-r py-4', {
             'w-14': minimizeLeftSidebar,
+            'bg-popover': !isEmbedded,
+            'bg-background': isEmbedded,
           })}
         >
           {/* Left section step selector. */}
@@ -253,7 +256,7 @@ export const EnvelopeEditor = () => {
           )}
 
           <div
-            className={cn('space-y-3', {
+            className={cn('grid gap-2', {
               'px-4': !minimizeLeftSidebar,
               'mt-4 flex flex-col items-center': minimizeLeftSidebar,
             })}
@@ -267,40 +270,28 @@ export const EnvelopeEditor = () => {
                   key={step.id}
                   data-testid={`envelope-editor-step-${step.id}`}
                   type="button"
+                  aria-current={isActive ? 'step' : undefined}
+                  aria-label={minimizeLeftSidebar ? t(step.title) : undefined}
                   className={cn(
-                    `cursor-pointer rounded-lg text-left transition-colors ${
-                      isActive
-                        ? 'border border-green-200 bg-green-50 dark:border-green-500/20 dark:bg-green-500/10'
-                        : 'border border-gray-200 hover:bg-gray-50 dark:border-gray-400/20 dark:hover:bg-gray-400/10'
-                    }`,
-                    {
-                      'p-3': !minimizeLeftSidebar,
-                    },
+                    'rounded-xl border text-start transition-colors',
+                    isActive ? 'border-ring/35 bg-accent' : 'hover:bg-muted/60',
+                    !minimizeLeftSidebar && 'p-3',
                   )}
                   onClick={() => void navigateToStep(step.id as EnvelopeEditorStep)}
                 >
-                  <div className="flex items-center space-x-3">
+                  <div className="flex items-center gap-3">
                     <div
-                      className={`rounded border p-2 ${
-                        isActive
-                          ? 'border-green-200 bg-green-50 dark:border-green-500/20 dark:bg-green-500/10'
-                          : 'border-gray-100 bg-gray-100 dark:border-gray-400/20 dark:bg-gray-400/10'
-                      }`}
+                      className={cn(
+                        'shrink-0 rounded-lg p-2 text-muted-foreground',
+                        isActive ? 'bg-primary/10 text-foreground' : 'bg-muted',
+                      )}
                     >
-                      <Icon className={`h-4 w-4 ${isActive ? 'text-green-600' : 'text-gray-600'}`} />
+                      <Icon aria-hidden="true" className="h-4 w-4" />
                     </div>
 
                     {!minimizeLeftSidebar && (
                       <div>
-                        <div
-                          className={`font-medium text-sm ${
-                            isActive
-                              ? 'text-green-900 dark:text-green-400'
-                              : 'text-foreground dark:text-muted-foreground'
-                          }`}
-                        >
-                          {t(step.title)}
-                        </div>
+                        <div className="font-medium text-foreground text-sm">{t(step.title)}</div>
                         <div className="text-muted-foreground text-xs">{t(step.description)}</div>
                       </div>
                     )}

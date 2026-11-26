@@ -1,16 +1,14 @@
 import { useSessionStorage } from '@documenso/lib/client-only/hooks/use-session-storage';
 import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
 import { FolderType } from '@documenso/lib/types/folder-type';
-import { formatAvatarUrl } from '@documenso/lib/utils/avatars';
 import { formatDocumentsPath, formatTemplatesPath } from '@documenso/lib/utils/teams';
 import { trpc } from '@documenso/trpc/react';
-import { Avatar, AvatarFallback, AvatarImage } from '@documenso/ui/primitives/avatar';
 import { Button } from '@documenso/ui/primitives/button';
 import type { RowSelectionState } from '@documenso/ui/primitives/data-table';
 import { msg } from '@lingui/core/macro';
 import { Trans } from '@lingui/react/macro';
 import { EnvelopeType, OrganisationType } from '@prisma/client';
-import { Bird, XIcon } from 'lucide-react';
+import { FilesIcon, XIcon } from 'lucide-react';
 import { useQueryStates } from 'nuqs';
 import { useMemo, useState } from 'react';
 import { useParams } from 'react-router';
@@ -18,8 +16,9 @@ import { useParams } from 'react-router';
 import { EnvelopesBulkDeleteDialog } from '~/components/dialogs/envelopes-bulk-delete-dialog';
 import { EnvelopesBulkMoveDialog } from '~/components/dialogs/envelopes-bulk-move-dialog';
 import { EnvelopeDropZoneWrapper } from '~/components/general/envelope/envelope-drop-zone-wrapper';
-import { FolderGrid } from '~/components/general/folder/folder-grid';
+import { FolderGrid, FolderGridActions } from '~/components/general/folder/folder-grid';
 import { TemplateSearch } from '~/components/general/template/template-search';
+import { WorkspacePageHeader } from '~/components/general/workspace-page-header';
 import { EnvelopesTableBulkActionBar } from '~/components/tables/envelopes-table-bulk-action-bar';
 import { TemplatesTable } from '~/components/tables/templates-table';
 import { TemplatesTableOwnerFilter } from '~/components/tables/templates-table-owner-filter';
@@ -107,69 +106,75 @@ export default function TemplatesPage() {
 
   return (
     <EnvelopeDropZoneWrapper type={EnvelopeType.TEMPLATE}>
-      <div className="mx-auto max-w-screen-xl px-4 md:px-8">
-        {!isOrgView && <FolderGrid type={FolderType.TEMPLATE} parentId={folderId ?? null} />}
+      <div className="mx-auto w-full max-w-screen-xl px-3 md:px-6">
+        <div className="workspace-frame rounded-2xl border sm:rounded-3xl">
+          <WorkspacePageHeader
+            eyebrow={team.name}
+            title={<Trans>Templates</Trans>}
+            description={<Trans>Save reusable documents for agreements you send often.</Trans>}
+            actions={!isOrgView && <FolderGridActions type={FolderType.TEMPLATE} parentId={folderId ?? null} />}
+          />
 
-        <div className="mt-8">
-          <div className="flex flex-row items-center">
-            <Avatar className="mr-3 h-12 w-12 border-2 border-white border-solid dark:border-border">
-              {team.avatarImageId && <AvatarImage src={formatAvatarUrl(team.avatarImageId)} />}
-              <AvatarFallback className="text-muted-foreground text-xs">{team.name.slice(0, 1)}</AvatarFallback>
-            </Avatar>
+          <div className="space-y-7 px-5 py-6 sm:px-8 sm:py-8 lg:px-10">
+            {!isOrgView && <FolderGrid type={FolderType.TEMPLATE} parentId={folderId ?? null} />}
 
-            <h1 className="font-semibold text-2xl leading-tight tracking-tight md:text-3xl">
-              <Trans>Templates</Trans>
-            </h1>
-          </div>
+            <section aria-labelledby="template-library-heading">
+              <h2 id="template-library-heading" className="mb-3 font-semibold text-lg tracking-tight">
+                <Trans>Template library</Trans>
+              </h2>
 
-          <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-4">
-            <div className="w-56">
-              <TemplateSearch />
-            </div>
-
-            {showOrgFilter && <TemplatesTableViewFilter />}
-
-            {!isOrgView && <TemplatesTableOwnerFilter teamId={team.id} />}
-
-            {hasActiveFilters && (
-              <Button variant="ghost" className="px-2 text-muted-foreground lg:px-3" onClick={onResetFilters}>
-                <Trans>Reset</Trans>
-                <XIcon className="ml-1 h-4 w-4" />
-              </Button>
-            )}
-          </div>
-
-          <div className="mt-8">
-            {activeQuery.data && activeQuery.data.count === 0 && !isSearchingOrFiltering ? (
-              <div className="flex h-96 flex-col items-center justify-center gap-y-4 text-muted-foreground/60">
-                <Bird className="h-12 w-12" strokeWidth={1.5} />
-
-                <div className="text-center">
-                  <h3 className="font-semibold text-foreground text-lg">
-                    <Trans>We're all empty</Trans>
-                  </h3>
-
-                  <p className="mt-2 max-w-[50ch] text-muted-foreground [text-wrap:pretty]">
-                    {isOrgView ? (
-                      <Trans>No organisation templates are shared with your team yet.</Trans>
-                    ) : (
-                      <Trans>You have not yet created any templates. To create a template please upload one.</Trans>
-                    )}
-                  </p>
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="w-full sm:w-56">
+                  <TemplateSearch />
                 </div>
+
+                {showOrgFilter && <TemplatesTableViewFilter />}
+
+                {!isOrgView && <TemplatesTableOwnerFilter teamId={team.id} />}
+
+                {hasActiveFilters && (
+                  <Button variant="ghost" className="px-2 text-muted-foreground lg:px-3" onClick={onResetFilters}>
+                    <Trans>Reset</Trans>
+                    <XIcon className="ml-1 h-4 w-4" />
+                  </Button>
+                )}
               </div>
-            ) : (
-              <TemplatesTable
-                data={activeQuery.data}
-                isLoading={activeQuery.isLoading}
-                isLoadingError={activeQuery.isLoadingError}
-                documentRootPath={documentRootPath}
-                templateRootPath={templateRootPath}
-                enableSelection={!isOrgView}
-                rowSelection={isOrgView ? {} : rowSelection}
-                onRowSelectionChange={isOrgView ? undefined : setRowSelection}
-              />
-            )}
+
+              <div className="mt-4">
+                {activeQuery.data && activeQuery.data.count === 0 && !isSearchingOrFiltering ? (
+                  <div className="flex min-h-48 flex-col items-center justify-center gap-3 rounded-xl border border-dashed bg-muted/30 px-5 py-8 text-muted-foreground">
+                    <div className="rounded-xl bg-accent p-3 text-documenso dark:text-documenso-300">
+                      <FilesIcon aria-hidden="true" className="h-5 w-5" />
+                    </div>
+
+                    <div className="text-center">
+                      <h3 className="font-semibold text-foreground">
+                        <Trans>No templates yet</Trans>
+                      </h3>
+
+                      <p className="mt-1 max-w-[50ch] text-muted-foreground text-sm [text-wrap:pretty]">
+                        {isOrgView ? (
+                          <Trans>No organisation templates are shared with your team yet.</Trans>
+                        ) : (
+                          <Trans>You have not yet created any templates. To create a template please upload one.</Trans>
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <TemplatesTable
+                    data={activeQuery.data}
+                    isLoading={activeQuery.isLoading}
+                    isLoadingError={activeQuery.isLoadingError}
+                    documentRootPath={documentRootPath}
+                    templateRootPath={templateRootPath}
+                    enableSelection={!isOrgView}
+                    rowSelection={isOrgView ? {} : rowSelection}
+                    onRowSelectionChange={isOrgView ? undefined : setRowSelection}
+                  />
+                )}
+              </div>
+            </section>
           </div>
         </div>
 

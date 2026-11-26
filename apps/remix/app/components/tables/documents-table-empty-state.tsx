@@ -1,7 +1,7 @@
 import { ExtendedDocumentStatus } from '@documenso/prisma/types/extended-document-status';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
-import { Bird, CheckCircle2, TimerOff, XCircle } from 'lucide-react';
+import { CheckCircle2, FilesIcon, TimerOff, XCircle } from 'lucide-react';
 import { match } from 'ts-pattern';
 
 export type DocumentsTableEmptyStateProps = { status: ExtendedDocumentStatus };
@@ -42,7 +42,7 @@ export const DocumentsTableEmptyState = ({ status }: DocumentsTableEmptyStatePro
     .with(ExtendedDocumentStatus.ALL, () => ({
       title: msg`We're all empty`,
       message: msg`You have not yet created or received any documents. To create a document please upload one.`,
-      icon: Bird,
+      icon: FilesIcon,
     }))
     .otherwise(() => ({
       title: msg`Nothing to do`,
@@ -52,15 +52,17 @@ export const DocumentsTableEmptyState = ({ status }: DocumentsTableEmptyStatePro
 
   return (
     <div
-      className="flex h-60 flex-col items-center justify-center gap-y-4 text-muted-foreground/60"
+      className="flex min-h-48 flex-col items-center justify-center gap-3 rounded-xl border border-dashed bg-muted/30 px-5 py-8 text-muted-foreground"
       data-testid="empty-document-state"
     >
-      <Icon className="h-12 w-12" strokeWidth={1.5} />
+      <div className="rounded-xl bg-accent p-3 text-documenso dark:text-documenso-300">
+        <Icon aria-hidden="true" className="h-5 w-5" />
+      </div>
 
       <div className="text-center">
-        <h3 className="font-semibold text-lg">{_(title)}</h3>
+        <h3 className="font-semibold text-foreground">{_(title)}</h3>
 
-        <p className="mt-2 max-w-[60ch]">{_(message)}</p>
+        <p className="mt-1 max-w-[60ch] text-sm">{_(message)}</p>
       </div>
     </div>
   );

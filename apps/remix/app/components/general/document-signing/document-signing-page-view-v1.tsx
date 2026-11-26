@@ -21,7 +21,7 @@ import { DocumentReadOnlyFields } from '@documenso/ui/components/document/docume
 import { Button } from '@documenso/ui/primitives/button';
 import { Card, CardContent } from '@documenso/ui/primitives/card';
 import { ElementVisible } from '@documenso/ui/primitives/element-visible';
-import { Trans } from '@lingui/react/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import type { Field, Recipient } from '@prisma/client';
 import { FieldType, RecipientRole } from '@prisma/client';
 import { LucideChevronDown, LucideChevronUp } from 'lucide-react';
@@ -82,6 +82,7 @@ export const DocumentSigningPageViewV1 = ({
   branding,
 }: DocumentSigningPageViewV1Props) => {
   const { documentData, documentMeta } = document;
+  const { t } = useLingui();
 
   const { derivedRecipientAccessAuth, user: authUser } = useRequiredDocumentSigningAuthContext();
 
@@ -147,107 +148,106 @@ export const DocumentSigningPageViewV1 = ({
 
   return (
     <DocumentSigningRecipientProvider recipient={recipient} targetSigner={targetSigner}>
-      <div className="mx-auto w-full max-w-screen-xl sm:px-6">
-        {hasCustomBrandingLogo && (
-          <img
-            src={`/api/branding/logo/team/${document.teamId}`}
-            alt={`${document.team.name}'s Logo`}
-            className="mb-4 h-12 w-12 md:mb-2"
-          />
-        )}
-        <h1
-          className="block max-w-[20rem] truncate font-semibold text-2xl sm:mt-4 md:max-w-[30rem] md:text-3xl"
-          title={document.title}
-        >
-          {document.title}
-        </h1>
+      <div className="mx-auto w-full max-w-screen-xl pb-24 sm:px-6 md:pb-0">
+        <header className="rounded-2xl border bg-popover px-4 py-5 text-popover-foreground sm:px-6 sm:py-6">
+          {hasCustomBrandingLogo && (
+            <img
+              src={`/api/branding/logo/team/${document.teamId}`}
+              alt={`${document.team.name}'s Logo`}
+              className="mb-4 h-8 w-auto max-w-40 object-contain"
+            />
+          )}
+          <h1 className="break-words font-semibold text-2xl tracking-tight md:text-4xl" title={document.title}>
+            {document.title}
+          </h1>
 
-        <div className="mt-1.5 flex flex-wrap items-center justify-between gap-y-2 sm:mt-2.5 sm:gap-y-0">
-          <div className="max-w-[50ch]">
-            <span className="text-muted-foreground">
-              {match(recipient.role)
-                .with(RecipientRole.VIEWER, () =>
-                  includeSenderDetails ? (
-                    <Trans>
-                      <span className="truncate" title={senderName}>
-                        {senderName} {senderEmail}
-                      </span>{' '}
-                      on behalf of "{document.team?.name}" has invited you to view this document
-                    </Trans>
-                  ) : (
-                    <Trans>
-                      <span className="truncate" title={senderName}>
-                        {senderName} {senderEmail}
-                      </span>{' '}
-                      has invited you to view this document
-                    </Trans>
-                  ),
-                )
-                .with(RecipientRole.SIGNER, () =>
-                  includeSenderDetails ? (
-                    <Trans>
-                      <span className="truncate" title={senderName}>
-                        {senderName} {senderEmail}
-                      </span>{' '}
-                      on behalf of "{document.team?.name}" has invited you to sign this document
-                    </Trans>
-                  ) : (
-                    <Trans>
-                      <span className="truncate" title={senderName}>
-                        {senderName} {senderEmail}
-                      </span>{' '}
-                      has invited you to sign this document
-                    </Trans>
-                  ),
-                )
-                .with(RecipientRole.APPROVER, () =>
-                  includeSenderDetails ? (
-                    <Trans>
-                      <span className="truncate" title={senderName}>
-                        {senderName} {senderEmail}
-                      </span>{' '}
-                      on behalf of "{document.team?.name}" has invited you to approve this document
-                    </Trans>
-                  ) : (
-                    <Trans>
-                      <span className="truncate" title={senderName}>
-                        {senderName} {senderEmail}
-                      </span>{' '}
-                      has invited you to approve this document
-                    </Trans>
-                  ),
-                )
-                .with(RecipientRole.ASSISTANT, () =>
-                  includeSenderDetails ? (
-                    <Trans>
-                      <span className="truncate" title={senderName}>
-                        {senderName} {senderEmail}
-                      </span>{' '}
-                      on behalf of "{document.team?.name}" has invited you to assist this document
-                    </Trans>
-                  ) : (
-                    <Trans>
-                      <span className="truncate" title={senderName}>
-                        {senderName} {senderEmail}
-                      </span>{' '}
-                      has invited you to assist this document
-                    </Trans>
-                  ),
-                )
-                .otherwise(() => null)}
-            </span>
+          <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
+            <div className="max-w-[65ch] break-words text-sm leading-relaxed">
+              <span className="text-muted-foreground">
+                {match(recipient.role)
+                  .with(RecipientRole.VIEWER, () =>
+                    includeSenderDetails ? (
+                      <Trans>
+                        <span className="truncate" title={senderName}>
+                          {senderName} {senderEmail}
+                        </span>{' '}
+                        on behalf of "{document.team?.name}" has invited you to view this document
+                      </Trans>
+                    ) : (
+                      <Trans>
+                        <span className="truncate" title={senderName}>
+                          {senderName} {senderEmail}
+                        </span>{' '}
+                        has invited you to view this document
+                      </Trans>
+                    ),
+                  )
+                  .with(RecipientRole.SIGNER, () =>
+                    includeSenderDetails ? (
+                      <Trans>
+                        <span className="truncate" title={senderName}>
+                          {senderName} {senderEmail}
+                        </span>{' '}
+                        on behalf of "{document.team?.name}" has invited you to sign this document
+                      </Trans>
+                    ) : (
+                      <Trans>
+                        <span className="truncate" title={senderName}>
+                          {senderName} {senderEmail}
+                        </span>{' '}
+                        has invited you to sign this document
+                      </Trans>
+                    ),
+                  )
+                  .with(RecipientRole.APPROVER, () =>
+                    includeSenderDetails ? (
+                      <Trans>
+                        <span className="truncate" title={senderName}>
+                          {senderName} {senderEmail}
+                        </span>{' '}
+                        on behalf of "{document.team?.name}" has invited you to approve this document
+                      </Trans>
+                    ) : (
+                      <Trans>
+                        <span className="truncate" title={senderName}>
+                          {senderName} {senderEmail}
+                        </span>{' '}
+                        has invited you to approve this document
+                      </Trans>
+                    ),
+                  )
+                  .with(RecipientRole.ASSISTANT, () =>
+                    includeSenderDetails ? (
+                      <Trans>
+                        <span className="truncate" title={senderName}>
+                          {senderName} {senderEmail}
+                        </span>{' '}
+                        on behalf of "{document.team?.name}" has invited you to assist this document
+                      </Trans>
+                    ) : (
+                      <Trans>
+                        <span className="truncate" title={senderName}>
+                          {senderName} {senderEmail}
+                        </span>{' '}
+                        has invited you to assist this document
+                      </Trans>
+                    ),
+                  )
+                  .otherwise(() => null)}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-x-4">
+              <DocumentSigningAttachmentsPopover envelopeId={document.envelopeId} token={recipient.token} />
+              <DocumentSigningRejectDialog documentId={document.id} token={recipient.token} />
+            </div>
           </div>
+        </header>
 
-          <div className="flex items-center gap-x-4">
-            <DocumentSigningAttachmentsPopover envelopeId={document.envelopeId} token={recipient.token} />
-            <DocumentSigningRejectDialog documentId={document.id} token={recipient.token} />
-          </div>
-        </div>
-
-        <div className="relative mt-4 flex w-full flex-col gap-x-6 gap-y-8 sm:mt-8 md:flex-row lg:gap-x-8 lg:gap-y-0">
-          <div className="flex-1">
-            <Card className="rounded-xl before:rounded-xl" gradient>
-              <CardContent className="p-2">
+        <div className="relative mt-4 flex w-full flex-col gap-4 sm:mt-6 md:flex-row lg:gap-6">
+          <div className="min-w-0 flex-1">
+            <Card className="bg-muted">
+              <CardContent className="p-2 sm:p-4">
                 <PDFViewerLazy
                   key={document.envelopeItems[0]?.id}
                   data={getDocumentDataUrlForPdfViewer({
@@ -269,16 +269,16 @@ export const DocumentSigningPageViewV1 = ({
             className="group/document-widget fixed bottom-6 left-0 z-50 h-fit max-h-[calc(100dvh-2rem)] w-full flex-shrink-0 px-4 md:sticky md:top-4 md:bottom-[unset] md:z-auto md:w-[350px] md:px-0"
             data-expanded={isExpanded || undefined}
           >
-            <div className="flex w-full flex-col rounded-xl border border-border bg-widget px-4 py-4 md:py-6">
+            <div className="flex max-h-[inherit] w-full flex-col overflow-y-auto rounded-2xl border bg-popover px-4 py-4 text-popover-foreground shadow-lg md:p-6 md:shadow-sm">
               <div className="flex items-center justify-between gap-x-2">
-                <h3 className="font-semibold text-foreground text-xl md:text-2xl">
+                <h2 className="font-semibold text-foreground text-xl tracking-tight md:text-2xl">
                   {match(recipient.role)
                     .with(RecipientRole.VIEWER, () => <Trans>View Document</Trans>)
                     .with(RecipientRole.SIGNER, () => <Trans>Sign Document</Trans>)
                     .with(RecipientRole.APPROVER, () => <Trans>Approve Document</Trans>)
                     .with(RecipientRole.ASSISTANT, () => <Trans>Assist Document</Trans>)
                     .otherwise(() => null)}
-                </h3>
+                </h2>
 
                 {match({ hasPendingFields, isExpanded, role: recipient.role })
                   .with(
@@ -308,19 +308,23 @@ export const DocumentSigningPageViewV1 = ({
                   .with({ isExpanded: true }, () => (
                     <Button
                       variant="outline"
-                      className="h-8 w-8 bg-background p-0 md:hidden dark:bg-foreground"
+                      className="h-8 w-8 p-0 md:hidden"
+                      aria-label={t`Hide signing details`}
+                      aria-expanded={true}
                       onClick={() => setIsExpanded(false)}
                     >
-                      <LucideChevronDown className="h-5 w-5 text-muted-foreground dark:text-background" />
+                      <LucideChevronDown className="h-5 w-5 text-muted-foreground" />
                     </Button>
                   ))
                   .otherwise(() => (
                     <Button
                       variant="outline"
-                      className="h-8 w-8 bg-background p-0 md:hidden dark:bg-foreground"
+                      className="h-8 w-8 p-0 md:hidden"
+                      aria-label={t`Show signing details`}
+                      aria-expanded={false}
                       onClick={() => setIsExpanded(true)}
                     >
-                      <LucideChevronUp className="h-5 w-5 text-muted-foreground dark:text-background" />
+                      <LucideChevronUp className="h-5 w-5 text-muted-foreground" />
                     </Button>
                   ))}
               </div>
@@ -335,7 +339,7 @@ export const DocumentSigningPageViewV1 = ({
                     .otherwise(() => null)}
                 </p>
 
-                <hr className="mt-4 mb-8 border-border" />
+                <hr className="mt-4 mb-5 border-border" />
               </div>
 
               <div className="-mx-2 hidden px-2 group-data-[expanded]/document-widget:block md:block">

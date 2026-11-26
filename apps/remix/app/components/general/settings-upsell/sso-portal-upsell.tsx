@@ -158,7 +158,7 @@ const RedirectScene = () => {
           animate={{ rotate: 360 }}
           transition={{ duration: 0.95, repeat: Number.POSITIVE_INFINITY, ease: 'linear' }}
           className="absolute inset-0 rounded-full border-2"
-          style={{ borderTopColor: '#A2E771' }}
+          style={{ borderTopColor: '#2C4ADD' }}
         />
 
         <div className="flex h-[34px] w-[34px] items-center justify-center rounded-full bg-muted">
@@ -188,7 +188,7 @@ const RedirectScene = () => {
 };
 
 /**
- * Scene 3: signed in, with an expanding pulse ring, a popping green circle,
+ * Scene 3: signed in, with an expanding pulse ring, a popping accent circle,
  * a drawn checkmark and the signed-in member's email.
  */
 const SuccessScene = () => {
@@ -202,7 +202,7 @@ const SuccessScene = () => {
           animate={{ scale: 2.1, opacity: 0 }}
           transition={{ duration: 1.1, ease: 'easeOut' }}
           className="absolute inset-0 rounded-full border-2"
-          style={{ borderColor: '#A2E771' }}
+          style={{ borderColor: '#2C4ADD' }}
         />
 
         <motion.div

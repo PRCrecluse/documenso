@@ -75,3 +75,40 @@
     --font-noto: "Noto Sans", "Noto Sans Korean", "Noto Sans Japanese", "Noto Sans Chinese";
   }
 }
+
+.workspace-frame {
+  border-color: hsl(var(--border) / 0.7);
+  background-color: hsl(var(--muted) / 0.35);
+}
+
+.workspace-masthead {
+  border-bottom: 1px solid hsl(var(--border) / 0.7);
+  border-radius: inherit;
+  border-end-start-radius: 0;
+  border-end-end-radius: 0;
+  background-color: hsl(var(--popover));
+}
+
+@media (width < 640px) {
+  .workspace-masthead-actions :is(button, a) {
+    padding-inline: 0.625rem;
+  }
+}
+
+.workspace-table {
+  border-color: hsl(var(--border) / 0.7);
+  background-color: hsl(var(--popover));
+}
+
+.workspace-table > div {
+  border-radius: inherit;
+}
+
+.workspace-table thead {
+  background-color: hsl(var(--muted) / 0.65);
+}
+
+.workspace-table thead th {
+  height: 2.5rem;
+  white-space: nowrap;
+}

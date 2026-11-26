@@ -2,10 +2,13 @@ import { getRootHref } from '@documenso/lib/utils/params';
 import { trpc } from '@documenso/trpc/react';
 import { cn } from '@documenso/ui/lib/utils';
 import { Button } from '@documenso/ui/primitives/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@documenso/ui/primitives/tooltip';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { ReadStatus } from '@prisma/client';
 import { InboxIcon, MenuIcon, SearchIcon } from 'lucide-react';
 import { type HTMLAttributes, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router';
+import { Link, NavLink, useParams } from 'react-router';
 
 import { BrandingLogo } from '~/components/general/branding-logo';
 
@@ -20,11 +23,12 @@ export type HeaderProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 export const Header = ({ className, fullWidth = false, ...props }: HeaderProps) => {
+  const { _ } = useLingui();
   const params = useParams();
 
   const [isCommandMenuOpen, setIsCommandMenuOpen] = useState(false);
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const { data: unreadCountData } = trpc.document.inbox.getCount.useQuery(
     {
@@ -37,69 +41,93 @@ export const Header = ({ className, fullWidth = false, ...props }: HeaderProps) 
 
   useEffect(() => {
     const onScroll = () => {
-      setScrollY(window.scrollY);
+      setIsScrolled(window.scrollY > 5);
     };
 
-    window.addEventListener('scroll', onScroll);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
-    <header
-      className={cn(
-        'sticky top-0 z-[60] flex h-16 w-full items-center border-b border-b-transparent bg-background/95 backdrop-blur duration-200 supports-backdrop-blur:bg-background/60',
-        (scrollY > 5 || fullWidth) && 'border-b-border',
-        className,
-      )}
-      {...props}
-    >
+    <header className={cn('sticky top-0 z-[60] px-3 pt-3 md:px-6', className)} {...props}>
       <div
         className={cn(
-          'mx-auto flex w-full items-center justify-between gap-x-4 px-4 md:justify-normal',
-          fullWidth ? 'md:px-6' : 'max-w-screen-xl md:px-8',
+          'mx-auto flex min-h-14 w-full items-center justify-between gap-2 rounded-2xl border border-border/70 bg-popover px-3 md:grid md:min-h-16 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-4 md:px-8 lg:px-10',
+          isScrolled && 'shadow-sm',
+          !fullWidth && 'max-w-[77rem]',
         )}
         data-testid="app-header-container"
       >
-        <Link
-          to={getRootHref(params)}
-          className="hidden rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:inline"
-        >
-          <BrandingLogo className="h-6 w-auto" />
+        <Link to={getRootHref(params)} aria-label="Documenso" className="shrink-0 justify-self-start rounded-md">
+          <BrandingLogo aria-hidden="true" className="h-4 w-auto sm:h-5" />
         </Link>
 
-        <AppNavDesktop setIsCommandMenuOpen={setIsCommandMenuOpen} />
+        <AppNavDesktop />
 
-        <Button asChild variant="outline" className="relative hidden h-10 w-10 rounded-lg md:flex">
-          <Link to="/inbox" className="relative block h-10 w-10">
-            <InboxIcon className="h-5 w-5 flex-shrink-0 text-muted-foreground transition-colors hover:text-foreground" />
+        <div className="col-start-3 flex min-w-0 items-center justify-end gap-1.5">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                type="button"
+                variant="ghost"
+                className={utilityButtonClassName}
+                aria-label={_(msg`Search`)}
+                aria-keyshortcuts="Control+K Meta+K"
+                aria-haspopup="dialog"
+                onClick={() => setIsCommandMenuOpen(true)}
+              >
+                <SearchIcon aria-hidden="true" className="size-[1.125rem] shrink-0" />
+              </Button>
+            </TooltipTrigger>
+
+            <TooltipContent side="bottom" className="flex items-center gap-2">
+              {_(msg`Search`)}
+              <kbd className="rounded bg-muted px-1 py-0.5 font-sans text-xs">Ctrl / ⌘ + K</kbd>
+            </TooltipContent>
+          </Tooltip>
+
+          <NavLink
+            to="/inbox"
+            className={cn(
+              utilityButtonClassName,
+              'relative hidden items-center justify-center transition-colors hover:bg-accent aria-[current=page]:bg-accent md:flex',
+            )}
+            aria-label={_(msg`Inbox`)}
+          >
+            <InboxIcon aria-hidden="true" className="size-[1.125rem]" />
 
             {unreadCountData && unreadCountData.count > 0 && (
-              <span className="absolute -top-1.5 -right-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1 font-semibold text-primary-foreground text-xs tabular-nums leading-none">
+              <span className="absolute -end-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 font-semibold text-[0.625rem] text-primary-foreground tabular-nums leading-none">
                 {unreadCountData.count > 99 ? '99+' : unreadCountData.count}
               </span>
             )}
-          </Link>
-        </Button>
+          </NavLink>
 
-        <div className="md:ml-4">
-          <OrgMenuSwitcher />
+          <div className="min-w-0 rounded-xl [&:has(:focus-visible)]:ring-2 [&:has(:focus-visible)]:ring-ring [&>button]:max-w-full">
+            <OrgMenuSwitcher />
+          </div>
+
+          <Button
+            type="button"
+            variant="ghost"
+            className={cn(utilityButtonClassName, 'md:hidden')}
+            aria-label={_(msg`Open menu`)}
+            aria-expanded={isHamburgerMenuOpen}
+            aria-haspopup="dialog"
+            onClick={() => setIsHamburgerMenuOpen(true)}
+          >
+            <MenuIcon aria-hidden="true" className="size-5 shrink-0" />
+          </Button>
         </div>
 
-        <div className="flex flex-row items-center space-x-4 md:hidden">
-          <button onClick={() => setIsCommandMenuOpen(true)}>
-            <SearchIcon className="h-6 w-6 text-muted-foreground" />
-          </button>
+        <AppCommandMenu open={isCommandMenuOpen} onOpenChange={setIsCommandMenuOpen} />
 
-          <button onClick={() => setIsHamburgerMenuOpen(true)}>
-            <MenuIcon className="h-6 w-6 text-muted-foreground" />
-          </button>
-
-          <AppCommandMenu open={isCommandMenuOpen} onOpenChange={setIsCommandMenuOpen} />
-
-          <AppNavMobile isMenuOpen={isHamburgerMenuOpen} onMenuOpenChange={setIsHamburgerMenuOpen} />
-        </div>
+        <AppNavMobile isMenuOpen={isHamburgerMenuOpen} onMenuOpenChange={setIsHamburgerMenuOpen} />
       </div>
     </header>
   );
 };
+
+const utilityButtonClassName = 'h-9 w-9 shrink-0 rounded-full bg-muted/80 p-0 text-foreground';

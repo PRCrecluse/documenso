@@ -476,12 +476,13 @@ model Envelope {
   internalVersion         Int
   useLegacyFieldInsertion Boolean @default(false)
 
-  envelopeItems EnvelopeItem[]
-  recipients    Recipient[]
-  fields        Field[]
-  contents      EnvelopeContent[]
-  shareLinks    DocumentShareLink[]
-  auditLogs     DocumentAuditLog[]
+  envelopeItems           EnvelopeItem[]
+  recipients              Recipient[]
+  fields                  Field[]
+  contents                EnvelopeContent[]
+  shareLinks              DocumentShareLink[]
+  auditLogs               DocumentAuditLog[]
+  agentDocumentCopyShares AgentDocumentCopyShare[]
 
   // Envelope settings
   authOptions Json? /// [DocumentAuthOptions] @zod.custom.use(ZDocumentAuthOptionsSchema)
@@ -861,6 +862,19 @@ model DocumentShareLink {
   envelope Envelope @relation(fields: [envelopeId], references: [id], onDelete: Cascade)
 
   @@unique([envelopeId, email])
+}
+
+model AgentDocumentCopyShare {
+  envelopeId       String
+  recipientEmail   String
+  teamId           Int
+  requestedByUserId Int
+  createdAt        DateTime  @default(now())
+  acceptedAt       DateTime?
+
+  envelope Envelope @relation(fields: [envelopeId], references: [id], onDelete: Cascade)
+
+  @@id([envelopeId, recipientEmail])
 }
 
 enum OrganisationType {

@@ -1,4 +1,5 @@
 import { mapSecondaryIdToDocumentId } from '@documenso/lib/utils/envelope';
+import { cn } from '@documenso/ui/lib/utils';
 import { Badge } from '@documenso/ui/primitives/badge';
 import { Button } from '@documenso/ui/primitives/button';
 import {
@@ -24,40 +25,64 @@ import { DocumentSigningRejectDialog } from '../document-signing/document-signin
 import { useRequiredEnvelopeSigningContext } from '../document-signing/envelope-signing-provider';
 import { EnvelopeSignerCompleteDialog } from './envelope-signing-complete-dialog';
 
-export const EnvelopeSignerHeader = () => {
+export const EnvelopeSignerHeader = ({ isSidebarCollapsed }: { isSidebarCollapsed: boolean }) => {
   const { envelopeData, envelope, recipientFieldsRemaining, recipient } = useRequiredEnvelopeSigningContext();
 
   const isEmbedSigning = useEmbedSigningContext() !== null;
   const hasCustomBrandingLogo = envelopeData.settings.brandingEnabled && Boolean(envelopeData.settings.brandingLogo);
 
   return (
-    <nav className="embed--DocumentWidgetHeader flex max-w-screen flex-row justify-between border-border border-b bg-background px-4 py-3 md:px-6">
+    <nav
+      className={cn(
+        'embed--DocumentWidgetHeader flex max-w-screen justify-between border-border border-b px-4 py-3 md:px-6',
+        isEmbedSigning
+          ? 'bg-background/90 shadow-[0_10px_30px_-24px_hsl(230_45%_20%/0.8)] backdrop-blur-md'
+          : 'min-h-16 shrink-0 items-center gap-3 bg-popover text-popover-foreground md:gap-6',
+      )}
+    >
       {/* Left side - Logo and title */}
-      <div className="flex min-w-0 flex-1 items-center space-x-2 md:w-auto md:flex-none">
+      <div
+        className={cn(
+          'flex min-w-0 flex-1 items-center',
+          isEmbedSigning ? 'space-x-2 md:w-auto md:flex-none' : 'gap-2 sm:gap-4',
+        )}
+      >
         {!isEmbedSigning &&
           (hasCustomBrandingLogo ? (
             <img
               src={`/api/branding/logo/team/${envelope.teamId}`}
               alt={`${envelope.team.name}'s Logo`}
-              className="h-6 w-auto flex-shrink-0"
+              className="h-6 w-auto max-w-24 shrink-0 object-contain sm:max-w-40"
             />
           ) : (
-            <Link to="/" className="flex-shrink-0">
-              <BrandingLogo className="hidden h-6 w-auto md:block" />
-              <BrandingLogoIcon className="h-6 w-auto md:hidden" />
+            <Link to="/" className="shrink-0 rounded text-foreground" aria-label="Documenso">
+              <BrandingLogo className="hidden h-5 w-auto sm:block" aria-hidden="true" />
+              <BrandingLogoIcon className="h-6 w-auto sm:hidden" aria-hidden="true" />
             </Link>
           ))}
 
-        <h1 title={envelope.title} className="min-w-0 truncate font-semibold text-base text-foreground md:hidden">
-          {envelope.title}
-        </h1>
+        {!isEmbedSigning && <Separator orientation="vertical" className="h-6" />}
 
-        {!isEmbedSigning && <Separator orientation="vertical" className="hidden h-6 md:block" />}
+        {isEmbedSigning && (
+          <h1 title={envelope.title} className="min-w-0 truncate font-semibold text-base text-foreground md:hidden">
+            {envelope.title}
+          </h1>
+        )}
 
-        <div className="hidden items-center space-x-2 md:flex">
-          <h1 className="whitespace-nowrap font-medium text-foreground text-sm">{envelope.title}</h1>
+        <div
+          className={cn(isEmbedSigning ? 'hidden items-center space-x-2 md:flex' : 'flex min-w-0 items-center gap-3')}
+        >
+          <h1
+            title={envelope.title}
+            className={cn(
+              'text-foreground text-sm',
+              isEmbedSigning ? 'whitespace-nowrap font-medium' : 'truncate font-semibold sm:text-base',
+            )}
+          >
+            {envelope.title}
+          </h1>
 
-          <Badge>
+          <Badge className="hidden shrink-0 md:inline-flex" variant={isEmbedSigning ? 'default' : 'neutral'}>
             {match(recipient.role)
               .with(RecipientRole.VIEWER, () => <Trans>Viewer</Trans>)
               .with(RecipientRole.SIGNER, () => <Trans>Signer</Trans>)
@@ -69,10 +94,12 @@ export const EnvelopeSignerHeader = () => {
       </div>
 
       {/* Right side - Desktop content */}
-      <div className="hidden items-center space-x-2 lg:flex">
-        <p className="mr-2 flex-shrink-0 text-muted-foreground text-sm">
-          <Plural one="1 Field Remaining" other="# Fields Remaining" value={recipientFieldsRemaining.length} />
-        </p>
+      <div className={cn('hidden items-center lg:flex', isEmbedSigning ? 'space-x-2' : 'shrink-0 gap-3')}>
+        {(isEmbedSigning || isSidebarCollapsed) && (
+          <p className={cn('text-muted-foreground text-sm', isEmbedSigning && 'mr-2 flex-shrink-0')} aria-live="polite">
+            <Plural one="1 Field Remaining" other="# Fields Remaining" value={recipientFieldsRemaining.length} />
+          </p>
+        )}
 
         <EnvelopeSignerCompleteDialog />
       </div>

@@ -9,7 +9,6 @@ import { DataTable } from '@documenso/ui/primitives/data-table';
 import { DataTablePagination } from '@documenso/ui/primitives/data-table-pagination';
 import { Skeleton } from '@documenso/ui/primitives/skeleton';
 import { TableCell } from '@documenso/ui/primitives/table';
-import { useToast } from '@documenso/ui/primitives/use-toast';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
@@ -115,6 +114,7 @@ export const InboxTable = () => {
   return (
     <div className="relative">
       <DataTable
+        className="workspace-table rounded-xl"
         columns={columns}
         data={results.data}
         perPage={results.perPage}
@@ -193,7 +193,6 @@ export type InboxTableActionButtonProps = {
 
 export const InboxTableActionButton = ({ row }: InboxTableActionButtonProps) => {
   const { user } = useSession();
-  const { toast } = useToast();
   const { _ } = useLingui();
 
   const recipient = row.recipients.find((recipient) => recipient.email === user.email);

@@ -6,7 +6,7 @@ import { Button } from '@documenso/ui/primitives/button';
 import { Separator } from '@documenso/ui/primitives/separator';
 import { Plural, Trans, useLingui } from '@lingui/react/macro';
 import { EnvelopeType, RecipientRole } from '@prisma/client';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import {
   ArrowLeftIcon,
   BanIcon,
@@ -67,6 +67,11 @@ export const DocumentSigningPageViewV2 = () => {
 
   const { t } = useLingui();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+  const fieldProgress =
+    requiredRecipientFields.length === 0
+      ? 100
+      : 100 * (1 - recipientFieldsRemaining.length / requiredRecipientFields.length);
 
   /**
    * The total remaining fields remaining for the current recipient or selected assistant recipient.
@@ -82,7 +87,13 @@ export const DocumentSigningPageViewV2 = () => {
   }, [recipientFieldsRemaining, selectedAssistantRecipientFields, currentEnvelopeItem]);
 
   return (
-    <div className="min-h-screen w-screen bg-gray-50 dark:bg-background">
+    <div
+      className={cn(
+        isEmbed
+          ? 'min-h-screen w-screen bg-[hsl(226_50%_96%)] dark:bg-background'
+          : 'flex h-dvh w-full flex-col overflow-hidden bg-background',
+      )}
+    >
       <SignFieldEmailDialog.Root />
       <SignFieldTextDialog.Root />
       <SignFieldNumberDialog.Root />
@@ -92,15 +103,17 @@ export const DocumentSigningPageViewV2 = () => {
       <SignFieldSignatureDialog.Root />
       <SignFieldCheckboxDialog.Root />
 
-      <EnvelopeSignerHeader />
+      <EnvelopeSignerHeader isSidebarCollapsed={isSidebarCollapsed} />
 
       {/* Main Content Area */}
-      <div className="flex h-[calc(100vh-4rem)] w-screen">
+      <div className={cn('flex', isEmbed ? 'h-[calc(100vh-4rem)] w-screen' : 'min-h-0 flex-1')}>
         {/* Left Section - Step Navigation */}
         <div
           className={cn(
-            'embed--DocumentWidgetContainer hidden flex-shrink-0 flex-col border-border border-r bg-background transition-[width] duration-300 lg:flex',
+            'embed--DocumentWidgetContainer hidden flex-shrink-0 flex-col border-border border-r transition-[width] duration-300 motion-reduce:transition-none lg:flex',
+            isEmbed ? 'bg-background' : 'bg-popover text-popover-foreground',
             isSidebarCollapsed ? 'w-12' : 'w-80',
+            !isEmbed && !isSidebarCollapsed && 'xl:w-[22rem]',
           )}
         >
           {isSidebarCollapsed && (
@@ -116,45 +129,65 @@ export const DocumentSigningPageViewV2 = () => {
             </div>
           )}
 
-          <div className={cn('flex flex-1 flex-col overflow-hidden py-4', isSidebarCollapsed && 'invisible w-0')}>
-            <div className="px-4">
-              <h3 className="flex items-end justify-between font-semibold text-foreground text-sm">
-                {match(recipient.role)
-                  .with(RecipientRole.VIEWER, () => <Trans>View Document</Trans>)
-                  .with(RecipientRole.SIGNER, () => <Trans>Sign Document</Trans>)
-                  .with(RecipientRole.APPROVER, () => <Trans>Approve Document</Trans>)
-                  .with(RecipientRole.ASSISTANT, () => <Trans>Assist Document</Trans>)
-                  .otherwise(() => null)}
+          <div
+            className={cn(
+              'flex flex-1 flex-col py-4',
+              isEmbed ? 'overflow-hidden' : 'min-h-0 overflow-y-auto lg:py-6',
+              isSidebarCollapsed && 'invisible w-0',
+            )}
+          >
+            <div className={cn(isEmbed ? 'px-4' : 'px-5 lg:px-6')}>
+              <div className="flex items-start justify-between gap-2">
+                <h2 className={cn('font-semibold text-foreground', isEmbed ? 'text-sm' : 'text-xl tracking-tight')}>
+                  {match(recipient.role)
+                    .with(RecipientRole.VIEWER, () => <Trans>View Document</Trans>)
+                    .with(RecipientRole.SIGNER, () => <Trans>Sign Document</Trans>)
+                    .with(RecipientRole.APPROVER, () => <Trans>Approve Document</Trans>)
+                    .with(RecipientRole.ASSISTANT, () => <Trans>Assist Document</Trans>)
+                    .otherwise(() => null)}
+                </h2>
 
-                <div className="ml-2 flex items-center gap-1">
-                  <span className="rounded border bg-muted/50 px-2 py-0.5 text-muted-foreground text-xs">
-                    <Plural
-                      value={recipientFieldsRemaining.length}
-                      one="1 Field Remaining"
-                      other="# Fields Remaining"
-                    />
-                  </span>
+                <div className="flex items-center gap-1">
+                  {isEmbed && (
+                    <span className="rounded border bg-muted/50 px-2 py-0.5 text-muted-foreground text-xs">
+                      <Plural
+                        value={recipientFieldsRemaining.length}
+                        one="1 Field Remaining"
+                        other="# Fields Remaining"
+                      />
+                    </span>
+                  )}
 
                   <Button
                     variant="ghost"
-                    className="h-7 w-7 p-0"
+                    className="h-7 w-7 shrink-0 p-0"
                     aria-label={t`Collapse sidebar`}
                     onClick={() => setIsSidebarCollapsed(true)}
                   >
                     <PanelLeftCloseIcon className="h-4 w-4" />
                   </Button>
                 </div>
-              </h3>
+              </div>
 
-              <div className="relative my-4 h-[4px] rounded-md bg-muted">
-                <motion.div
-                  layout="size"
-                  layoutId="document-flow-container-step"
-                  className="absolute inset-y-0 left-0 bg-primary"
-                  style={{
-                    width: `${requiredRecipientFields.length === 0 ? 100 : 100 - (100 / requiredRecipientFields.length) * (recipientFieldsRemaining.length ?? 0)}%`,
-                  }}
-                />
+              <div className={cn(isEmbed ? 'my-4' : 'mt-4 rounded-xl border bg-muted/50 p-3.5')}>
+                {!isEmbed && (
+                  <p className="mb-2.5 font-medium text-muted-foreground text-xs" aria-live="polite">
+                    <Plural
+                      value={recipientFieldsRemaining.length}
+                      one="1 Field Remaining"
+                      other="# Fields Remaining"
+                    />
+                  </p>
+                )}
+
+                <div className={cn('relative h-1 overflow-hidden rounded-full', isEmbed ? 'bg-muted' : 'bg-border')}>
+                  <motion.div
+                    layout={shouldReduceMotion ? false : 'size'}
+                    layoutId={shouldReduceMotion ? undefined : 'document-flow-container-step'}
+                    className="absolute inset-y-0 left-0 rounded-full bg-primary"
+                    style={{ width: `${fieldProgress}%` }}
+                  />
+                </div>
               </div>
 
               <div className="embed--DocumentWidgetContent mt-6 space-y-3">
@@ -162,14 +195,14 @@ export const DocumentSigningPageViewV2 = () => {
               </div>
             </div>
 
-            <Separator className="my-6" />
+            <Separator className="my-6 shrink-0" />
 
             {/* Quick Actions. */}
             {!isDirectTemplate && (
-              <div className="embed--Actions space-y-3 px-4">
-                <h4 className="font-semibold text-foreground text-sm">
+              <div className={cn('embed--Actions', isEmbed ? 'space-y-3 px-4' : 'space-y-1 px-5 lg:px-6')}>
+                <h3 className={cn('font-semibold text-foreground text-sm', !isEmbed && 'mb-2.5')}>
                   <Trans>Actions</Trans>
-                </h4>
+                </h3>
 
                 <DocumentSigningAttachmentsPopover
                   envelopeId={envelope.id}
@@ -223,10 +256,10 @@ export const DocumentSigningPageViewV2 = () => {
               </div>
             )}
 
-            <div className="embed--DocumentWidgetFooter mt-auto">
+            <div className={cn('embed--DocumentWidgetFooter mt-auto', !isEmbed && 'pt-6')}>
               {/* Footer of left sidebar. */}
               {!isEmbed && (
-                <div className="px-4">
+                <div className="px-5 lg:px-6">
                   <Button asChild variant="ghost" className="w-full justify-start">
                     <Link to="/">
                       <ArrowLeftIcon className="mr-2 h-4 w-4" />
@@ -236,13 +269,17 @@ export const DocumentSigningPageViewV2 = () => {
                 </div>
               )}
 
-              {!isEmbed && <PublicLegalLinks className="mt-4 justify-start px-4 pt-4" />}
+              {!isEmbed && <PublicLegalLinks className="mt-4 justify-start px-5 pt-4 lg:px-6" />}
             </div>
           </div>
         </div>
 
         <div
-          className="embed--DocumentContainer min-w-0 flex-1 overflow-x-auto overflow-y-auto"
+          className={cn(
+            'embed--DocumentContainer min-w-0 flex-1 overflow-x-auto overflow-y-auto',
+            !isEmbed &&
+              'bg-muted [background-image:linear-gradient(to_bottom,hsl(var(--primary)/0.08),transparent_19rem)]',
+          )}
           ref={scrollableContainerRef}
         >
           <div className="flex flex-col">
@@ -252,7 +289,12 @@ export const DocumentSigningPageViewV2 = () => {
             )}
 
             {/* Document View */}
-            <div className="embed--DocumentViewer flex flex-col items-center justify-center p-2 sm:mt-4 sm:p-4">
+            <div
+              className={cn(
+                'embed--DocumentViewer flex flex-col items-center justify-center',
+                isEmbed ? 'p-2 sm:mt-4 sm:p-4' : 'p-2 sm:p-6 lg:p-8',
+              )}
+            >
               {currentEnvelopeItem ? (
                 <EnvelopePdfViewer
                   key={currentEnvelopeItem.id}

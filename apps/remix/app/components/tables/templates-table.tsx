@@ -261,6 +261,7 @@ export const TemplatesTable = ({
       )}
 
       <DataTable
+        className="workspace-table rounded-xl"
         columns={columns}
         data={results.data}
         perPage={results.perPage}
@@ -309,7 +310,7 @@ export const TemplatesTable = ({
       </DataTable>
 
       {isPending && (
-        <div className="absolute inset-0 flex items-center justify-center bg-white/50">
+        <div className="absolute inset-0 flex items-center justify-center bg-background/50">
           <Loader className="h-8 w-8 animate-spin text-gray-500" />
         </div>
       )}
