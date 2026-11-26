@@ -1,3 +1,4 @@
+import { RecipientRole } from '@prisma/client';
 import { z } from 'zod';
 
 import { ZRequestMetadataSchema } from '../../../universal/extract-request-metadata';
@@ -10,6 +11,15 @@ const SEND_SIGNING_EMAIL_JOB_DEFINITION_SCHEMA = z.object({
   documentId: z.number(),
   recipientId: z.number(),
   requestMetadata: ZRequestMetadataSchema.optional(),
+  expectedRecipient: z
+    .object({
+      id: z.number(),
+      email: z.string(),
+      role: z.nativeEnum(RecipientRole),
+      envelopeAuthOptions: z.unknown(),
+      recipientAuthOptions: z.unknown(),
+    })
+    .optional(),
 });
 
 export type TSendSigningEmailJobDefinition = z.infer<typeof SEND_SIGNING_EMAIL_JOB_DEFINITION_SCHEMA>;

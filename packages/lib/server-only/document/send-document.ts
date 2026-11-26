@@ -1,3 +1,5 @@
+import { isDeepStrictEqual } from 'node:util';
+
 import { AdminRuleEngine } from '@documenso/ee/server-only/admin-rules/admin-rule-engine';
 import type {
   AdminRuleEventEnvelope,
@@ -10,7 +12,7 @@ import type { ApiRequestMetadata } from '@documenso/lib/universal/extract-reques
 import { createDocumentAuditLogData } from '@documenso/lib/utils/document-audit-logs';
 import { prisma } from '@documenso/prisma';
 import { checkboxValidationSigns } from '@documenso/ui/primitives/document-flow/field-items-advanced-settings/constants';
-import type { DocumentData, DocumentMeta, Envelope, EnvelopeItem, Field, Recipient } from '@prisma/client';
+import type { DocumentData, DocumentMeta, Envelope, EnvelopeItem, Field, Prisma, Recipient } from '@prisma/client';
 import {
   DocumentSigningOrder,
   DocumentStatus,
@@ -46,7 +48,11 @@ import { type EnvelopeIdOptions, mapSecondaryIdToDocumentId } from '../../utils/
 import { assertEnvelopeContentLimits, getContentsMissingImages } from '../../utils/envelope-content';
 import { toCheckboxCustomText, toRadioCustomText } from '../../utils/fields';
 import { getRecipientsInActiveSigningStep } from '../../utils/recipient-groups';
-import { getRecipientsWithMissingFields, isRecipientEmailValidForSending } from '../../utils/recipients';
+import {
+  getRecipientsWithMissingFields,
+  isRecipientEmailValidForSending,
+  isRecipientExpired,
+} from '../../utils/recipients';
 import { loadContentImages } from '../data-content/load-content-images';
 import { getEnvelopeWhereInput } from '../envelope/get-envelope-by-id';
 import {
@@ -70,6 +76,10 @@ export type SendDocumentOptions = {
    */
   bypassAdminRules?: boolean;
   requestMetadata: ApiRequestMetadata;
+  requireDraftRecipient?: Pick<Recipient, 'id' | 'email' | 'role'> & {
+    envelopeAuthOptions: Envelope['authOptions'];
+    recipientAuthOptions: Recipient['authOptions'];
+  };
 };
 
 export const sendDocument = async ({
@@ -79,6 +89,7 @@ export const sendDocument = async ({
   sendEmail,
   bypassAdminRules,
   requestMetadata,
+  requireDraftRecipient,
 }: SendDocumentOptions) => {
   // One lookup for both the disabled check and the sender the admin rules see.
   const sender = await prisma.user.findFirst({
@@ -170,6 +181,10 @@ export const sendDocument = async ({
 
   if (!envelope) {
     throw new Error('Document not found');
+  }
+
+  if (requireDraftRecipient) {
+    assertRequiredDraftRecipient(envelope, teamId, requireDraftRecipient);
   }
 
   if (envelope.recipients.length === 0) {
@@ -272,8 +287,21 @@ export const sendDocument = async ({
 
   const recipientsToNotify = getSigningRequestRecipients({ envelope, sendEmail });
 
+  if (requireDraftRecipient && recipientsToNotify.length !== 1) {
+    throw new AppError(AppErrorCode.INVALID_REQUEST, { userMessage: 'Document invitations are disabled.' });
+  }
+
   if (!bypassAdminRules) {
-    await assertAdminRulesAllowSend({ envelope, sender, recipientsToNotify, requestMetadata });
+    const { emailsDisabled } = await assertAdminRulesAllowSend({
+      envelope,
+      sender,
+      recipientsToNotify,
+      requestMetadata,
+    });
+
+    if (requireDraftRecipient && emailsDisabled) {
+      throw new AppError(AppErrorCode.INVALID_REQUEST, { userMessage: 'Team email delivery is disabled.' });
+    }
   }
 
   // The items are only pointed at the rendered copies inside the transaction
@@ -308,6 +336,8 @@ export const sendDocument = async ({
     // rendered items have to be committed here before sealing.
     if (envelope.status === DocumentStatus.DRAFT) {
       await prisma.$transaction(async (tx) => {
+        await lockDraftEnvelope(tx, envelope.id);
+
         await commitRenderedEnvelopeItems(tx, {
           envelopeId: envelope.id,
           contents: envelope.contents,
@@ -377,6 +407,27 @@ export const sendDocument = async ({
   }
 
   const updatedEnvelope = await prisma.$transaction(async (tx) => {
+    if (envelope.status === DocumentStatus.DRAFT) {
+      await lockDraftEnvelope(tx, envelope.id);
+    }
+
+    if (requireDraftRecipient) {
+      // Normal recipient creation also locks the envelope. Lock its existing recipient rows to
+      // prevent an edit or deletion from invalidating the prepared invitation during this commit.
+      await tx.$queryRaw`SELECT "id" FROM "Recipient" WHERE "envelopeId" = ${envelope.id} FOR UPDATE`;
+
+      const current = await tx.envelope.findUnique({
+        where: { id: envelope.id },
+        include: { documentMeta: true, recipients: true },
+      });
+
+      if (!current) {
+        throw new AppError(AppErrorCode.NOT_FOUND, { userMessage: 'Document not found.' });
+      }
+
+      assertRequiredDraftRecipient(current, teamId, requireDraftRecipient);
+    }
+
     if (envelope.status === DocumentStatus.DRAFT) {
       await commitRenderedEnvelopeItems(tx, {
         envelopeId: envelope.id,
@@ -471,6 +522,7 @@ export const sendDocument = async ({
           documentId: legacyDocumentId,
           recipientId: recipient.id,
           requestMetadata: requestMetadata?.requestMetadata,
+          expectedRecipient: requireDraftRecipient,
         },
       });
     }),
@@ -484,6 +536,61 @@ export const sendDocument = async ({
   });
 
   return updatedEnvelope;
+};
+
+const lockDraftEnvelope = async (tx: Prisma.TransactionClient, envelopeId: string) => {
+  // A second send can have loaded DRAFT before the first one commits. Check the state under the
+  // lock before writing audit logs or handing off the notification jobs.
+  const [current] = await tx.$queryRaw<Pick<Envelope, 'status'>[]>`
+    SELECT "status"::text AS "status" FROM "Envelope" WHERE "id" = ${envelopeId} FOR UPDATE
+  `;
+
+  if (!current) {
+    throw new AppError(AppErrorCode.NOT_FOUND, { userMessage: 'Document not found.' });
+  }
+
+  if (current.status !== DocumentStatus.DRAFT) {
+    throw new AppError(AppErrorCode.ALREADY_EXISTS, { userMessage: 'The document is no longer a draft.' });
+  }
+};
+
+const assertRequiredDraftRecipient = (
+  envelope: Pick<Envelope, 'status' | 'teamId' | 'deletedAt' | 'authOptions'> & {
+    recipients: Recipient[];
+    documentMeta: DocumentMeta;
+  },
+  teamId: number,
+  expected: NonNullable<SendDocumentOptions['requireDraftRecipient']>,
+) => {
+  if (envelope.teamId !== teamId || envelope.deletedAt) {
+    throw new AppError(AppErrorCode.NOT_FOUND, { userMessage: 'Document not found.' });
+  }
+
+  if (envelope.status !== DocumentStatus.DRAFT) {
+    throw new AppError(AppErrorCode.ALREADY_EXISTS, { userMessage: 'The document is no longer a draft.' });
+  }
+
+  const recipient = envelope.recipients[0];
+
+  if (
+    envelope.recipients.length !== 1 ||
+    recipient.id !== expected.id ||
+    recipient.email.toLowerCase() !== expected.email ||
+    recipient.role !== expected.role ||
+    recipient.sendStatus !== SendStatus.NOT_SENT ||
+    recipient.signingStatus !== SigningStatus.NOT_SIGNED ||
+    isRecipientExpired(recipient) ||
+    !isDeepStrictEqual(envelope.authOptions, expected.envelopeAuthOptions) ||
+    !isDeepStrictEqual(recipient.authOptions, expected.recipientAuthOptions)
+  ) {
+    throw new AppError(AppErrorCode.INVALID_REQUEST, {
+      userMessage: 'The prepared recipient or signing settings changed. Check the draft in Documenso before sharing.',
+    });
+  }
+
+  if (!extractDerivedDocumentEmailSettings(envelope.documentMeta).recipientSigningRequest) {
+    throw new AppError(AppErrorCode.INVALID_REQUEST, { userMessage: 'Document invitations are disabled.' });
+  }
 };
 
 type SigningRequestRecipient = Pick<Recipient, 'role' | 'signingOrder' | 'signingStatus' | 'sendStatus'>;
@@ -552,22 +659,24 @@ export const assertAdminRulesAllowSend = async ({
     requestSource: requestMetadata.source,
   });
 
-  await adminRuleEngine.runAndAssert({ trigger: 'DOCUMENT_SENT', envelope, sender });
+  const documentRuleResult = await adminRuleEngine.runAndAssert({ trigger: 'DOCUMENT_SENT', envelope, sender });
 
   // Recipients without an email address aren't emailed, so the "Email sent" rules leave them out.
   const recipientsToEmail = recipientsToNotify.filter((recipient) => isRecipientEmailValidForSending(recipient));
 
   if (recipientsToEmail.length === 0) {
-    return;
+    return { emailsDisabled: documentRuleResult.hasDisabledEmails };
   }
 
-  await adminRuleEngine.runAndAssert({
+  const emailRuleResult = await adminRuleEngine.runAndAssert({
     trigger: 'EMAIL_SENT',
     envelope,
     sender,
     emailType: 'signing_request',
     recipients: recipientsToEmail,
   });
+
+  return { emailsDisabled: documentRuleResult.hasDisabledEmails || emailRuleResult.hasDisabledEmails };
 };
 
 const injectFormValuesIntoDocument = async (

@@ -25,6 +25,7 @@ import type { RequestIdVariables } from 'hono/request-id';
 import { requestId } from 'hono/request-id';
 import type { Logger } from 'pino';
 
+import { agentRoute } from './api/agent/route';
 import { aiRoute } from './api/ai/route';
 import { downloadRoute } from './api/download/download';
 import { filesRoute } from './api/files/files';
@@ -129,6 +130,9 @@ app.route('/api/files', filesRoute);
 // AI route.
 app.use('/api/ai/*', aiRateLimitMiddleware);
 app.route('/api/ai', aiRoute);
+
+app.use('/api/agent/*', apiV2RateLimitMiddleware);
+app.route('/api/agent', agentRoute);
 
 // CSC OAuth routes (mounted from @documenso/ee).
 app.route('/api/csc', csc);

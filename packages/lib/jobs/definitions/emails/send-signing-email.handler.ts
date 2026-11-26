@@ -1,6 +1,8 @@
+import { isDeepStrictEqual } from 'node:util';
+
 import { AdminRuleEngine } from '@documenso/ee/server-only/admin-rules/admin-rule-engine';
 import DocumentInviteEmailTemplate from '@documenso/email/templates/document-invite';
-import { isRecipientEmailValidForSending } from '@documenso/lib/utils/recipients';
+import { isRecipientEmailValidForSending, isRecipientExpired } from '@documenso/lib/utils/recipients';
 import { prisma } from '@documenso/prisma';
 import { msg } from '@lingui/core/macro';
 import {
@@ -10,6 +12,7 @@ import {
   OrganisationType,
   RecipientRole,
   SendStatus,
+  SigningStatus,
 } from '@prisma/client';
 import { createElement } from 'react';
 
@@ -31,7 +34,7 @@ import type { JobRunIO } from '../../client/_internal/job';
 import type { TSendSigningEmailJobDefinition } from './send-signing-email';
 
 export const run = async ({ payload, io }: { payload: TSendSigningEmailJobDefinition; io: JobRunIO }) => {
-  const { userId, documentId, recipientId, requestMetadata } = payload;
+  const { userId, documentId, recipientId, requestMetadata, expectedRecipient } = payload;
 
   const [user, envelope, recipient] = await Promise.all([
     prisma.user.findFirstOrThrow({
@@ -82,6 +85,23 @@ export const run = async ({ payload, io }: { payload: TSendSigningEmailJobDefini
   ]);
 
   const { documentMeta, team } = envelope;
+
+  if (
+    expectedRecipient &&
+    (recipient.envelopeId !== envelope.id ||
+      recipient.id !== expectedRecipient.id ||
+      recipient.email.toLowerCase() !== expectedRecipient.email ||
+      recipient.role !== expectedRecipient.role ||
+      recipient.sendStatus !== SendStatus.NOT_SENT ||
+      recipient.signingStatus !== SigningStatus.NOT_SIGNED ||
+      isRecipientExpired(recipient) ||
+      !isDeepStrictEqual(envelope.authOptions, expectedRecipient.envelopeAuthOptions) ||
+      !isDeepStrictEqual(recipient.authOptions, expectedRecipient.recipientAuthOptions))
+  ) {
+    io.logger.info('Agent invitation skipped because its prepared recipient or signing settings changed.');
+
+    return;
+  }
 
   if (recipient.role === RecipientRole.CC) {
     return;
